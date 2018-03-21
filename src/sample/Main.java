@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,12 +13,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
 import javafx.scene.text.*;
-
-import javafx.util.Duration;
 
 import java.io.FileInputStream;
 
@@ -27,29 +21,39 @@ import java.io.FileInputStream;
 public class Main extends Application {
     private static Font titleFont;
     private static Font subTitle;
-    private static Font subFont = new Font("Consolas", 37.333333 * 1.5);
-    private static Font smallFont = new Font ("Consolas", 30);
     private static Font popFont;
+    private static Font subFont = new Font("Consolas", 37.333333 * 1.5); //these two fonts are windows exclusive, sorry
+    private static Font smallFont = new Font ("Consolas", 30);
+
+    //these four static variables contain the customizable aspect of the game and the score. Things that change often
     private static Color p1;
     private static Color p2;
     private static int p1S;
     private static int p2S;
 
     public void start(Stage primaryStage) throws Exception{
+        //since exceptions have to be handled, have to be assigned here
         titleFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),106.66667 * 1.5);
         subTitle = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),42.6666667 * 1.5);
         popFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),30);
-        p1 = Color.rgb(255,0,0);
-        p2 = Color.rgb(0,176,240);
+        //these two variables here are for testing purpose only, will be assigned during the customize screen
+        p1 = Color.rgb(25,255,40);
+        p2 = Color.rgb(255,252,25);
         primaryStage.setTitle("Loading...");
         primaryStage.setResizable(false);
+        //following block is for testing purposes only. Normally, game would start on the main menu.
         //primaryStage.setScene(customizeBike());
-        primaryStage.setScene(results("Liam", p2)); //second variable lets the screen know who won
+        //primaryStage.setScene(mainMenu());
+        primaryStage.setScene(results("Liam")); //second variable lets the screen know who won
         //primaryStage.setScene(credits());
         primaryStage.show();
+        //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
-        
-        int input;
+
+
+
+        //following is unused code for testing, feel free to delete this or make it work
+        //int input;
         //System.out.println("1 : Customise bikes, 2: Game Screen, 3: Main, 4: quit");
         //Scanner kb = new Scanner(System.in);
         //input = kb.nextInt();
@@ -72,10 +76,9 @@ public class Main extends Application {
 //            primaryStage.show();
 //        }
     }
-    public Scene mainMenu() {
+    public Scene mainMenu() { //this is where the game should start. Shows the main menu and options
         Text title = new Text("Tron.");
         title.setFont(titleFont);
-        title.setTextAlignment(TextAlignment.valueOf("CENTER"));
         title.setFill(Paint.valueOf("WHITE"));
 
         Text option1 = new Text("start");//this will need to be changed
@@ -87,11 +90,12 @@ public class Main extends Application {
         Text option3 = new Text("quit");//this will need to be changed
         option3.setFont(subFont);
         option3.setFill(Paint.valueOf("WHITE"));
-        VBox optionsLayout = new VBox(10);
-        VBox layout = new VBox(30);
+
+        VBox optionsLayout = new VBox(10); //contains the text options
+        VBox layout = new VBox(30); //overall layout
         optionsLayout.getChildren().addAll(option1,option2,option3);
-        optionsLayout.setAlignment(Pos.CENTER);
         layout.getChildren().addAll(title, optionsLayout);
+        layout.setAlignment(Pos.CENTER); //centers all the text
         layout.setLayoutX(180);
         layout.setLayoutY(150);
 
@@ -108,39 +112,80 @@ public class Main extends Application {
         title.setFont(subTitle);
         title.setFill(Paint.valueOf("WHITE"));
         layout.getChildren().add(title);
+
+        layout.getChildren().addAll(playerRow("player 1 :", 0), playerRow("player 2 :", 2));
+
         Rectangle selectedColorP1 = new Rectangle(812,375 - 250);
         selectedColorP1.setFill(p1);
         selectedColorP1.setY(250);
         Rectangle selectedColorP2 = new Rectangle(812,375-250);
         selectedColorP2.setFill(p2);
         selectedColorP2.setY(375);
-        layout.getChildren().addAll(playerRow("player 1 :", 0), playerRow("player 2 :", 2));
 
         Rectangle startButton = new Rectangle(600, 125);
         startButton.setFill(Paint.valueOf("RED"));
-        VBox.setMargin(startButton, new Insets(50,0,0,0));
         layout.getChildren().add(startButton);
+
+        HBox roundSelection = new HBox(15);
+        layout.getChildren().add(3,roundSelection);
+        Text roundText = new Text("rounds:");
+        roundText.setFont(smallFont);
+        roundText.setFill(Paint.valueOf("WHITE"));
+        roundSelection.getChildren().add(roundText);
+        roundText.setTextAlignment(TextAlignment.CENTER);
+        HBox rects = new HBox(10);
+        Rectangle option1 = new Rectangle(50,50, Paint.valueOf("RED"));
+        Rectangle option2 = new Rectangle(50,50, Paint.valueOf("RED"));
+        Rectangle option3 = new Rectangle(50,50, Paint.valueOf("RED"));
+        Rectangle option4 = new Rectangle(50,50, Paint.valueOf("RED"));
+        option2.setFill(Paint.valueOf("GREEN")); //selected option, I want to fix this
+        rects.getChildren().addAll(option1,option2,option3,option4);
+        HBox.setMargin(rects, new Insets(0,0,0,54));
+        roundSelection.getChildren().add(rects);
+
         Text buttonGo = new Text("GO!");
         buttonGo.setFont(subTitle);
         buttonGo.setFill(Paint.valueOf("WHITE"));
         buttonGo.setX(270);
-        buttonGo.setY(650);
-        root.getChildren().addAll(selectedColorP1,selectedColorP2,layout, buttonGo);
+        buttonGo.setY(750 - 50);
+
+        HBox optionText = new HBox(40);
+        Text option1T = new Text(1 + "");
+        Text option3T = new Text(3 + "");
+        Text option5T = new Text(5 + "");
+        Text option7T = new Text(7 + "");
+        option1T.setFont(popFont);
+        option3T.setFont(popFont);
+        option5T.setFont(popFont);
+        option7T.setFont(popFont);
+        option1T.setFill(Color.valueOf("WHITE"));
+        option3T.setFill(Color.valueOf("WHITE"));
+        option5T.setFill(Color.valueOf("WHITE"));
+        option7T.setFill(Color.valueOf("WHITE"));
+        optionText.getChildren().addAll(option1T,option3T,option5T,option7T);
+        optionText.setLayoutX(layout.getLayoutX() + 205);
+        optionText.setLayoutY(roundSelection.getLayoutY() + 530);
+
+
+        root.getChildren().addAll(selectedColorP1,selectedColorP2,layout, buttonGo, optionText);
         return new Scene(root, 800, 800, Paint.valueOf("BLACK"));
     }
     private HBox playerRow(String player, int color){
-        HBox player1 = new HBox(20);
+        HBox root = new HBox(20);
         Text pT = new Text(player);
         pT.setFont(smallFont);
         pT.setFill(Paint.valueOf("WHITE"));
-        player1.getChildren().add(pT);
+        root.getChildren().add(pT);
 
         VBox inputAndColor = new VBox(10);
         TextField p1NameInput = new TextField("Name");
         inputAndColor.getChildren().add(p1NameInput);
 
         HBox colors = new HBox(10);
-        Paint[] allColors = {p1, Paint.valueOf("ORANGE"), p2, Paint.valueOf("GREEN"), Paint.valueOf("Purple")}; //p1 and p2 are only there for demo purposes
+        Color[] allColors = {Color.rgb(255,0,0), Color.rgb(255,252,25), Color.rgb(20,133,204), Color.rgb(255,120,0), Color.rgb(25,255,40) };
+        //testing purposes, will be reassigned based on selection
+        p1 = allColors[1];
+        p2 = allColors[4];
         Rectangle color1 = new Rectangle(50,50);
         color1.setFill(allColors[0]);
         Rectangle color2 = new Rectangle(50,50);
@@ -153,14 +198,14 @@ public class Main extends Application {
         color5.setFill(allColors[4]);
         colors.getChildren().addAll(color1,color2,color3,color4,color5);
         inputAndColor.getChildren().add(colors);
-        player1.getChildren().add(inputAndColor);
+        root.getChildren().add(inputAndColor);
 
 
         //make sure that Paint p1/p2 equal the selected color;
-        return player1;
+        return root;
     }
 
-    public Scene results(String Pwinner, Color winnerC){
+    public Scene results(String Pwinner){
         Group root = new Group();
         Rectangle colorWinner = new Rectangle(0,0,810,280); //little bigger then the bounds since the
         colorWinner.setFill(p1); //color of the winner, will be automatic in the future
@@ -240,6 +285,7 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+
     }
 
 }
