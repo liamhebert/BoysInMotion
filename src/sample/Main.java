@@ -21,10 +21,8 @@ import javafx.scene.text.*;
 
 import javafx.util.Duration;
 
-import java.awt.*;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Scanner;
+
 
 public class Main extends Application {
     private static Font titleFont;
@@ -34,6 +32,8 @@ public class Main extends Application {
     private static Font popFont;
     private static Color p1;
     private static Color p2;
+    private static int p1S;
+    private static int p2S;
 
     public void start(Stage primaryStage) throws Exception{
         titleFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),106.66667 * 1.5);
@@ -43,12 +43,12 @@ public class Main extends Application {
         p2 = Color.rgb(0,176,240);
         primaryStage.setTitle("Loading...");
         primaryStage.setResizable(false);
-        primaryStage.setScene(customizeBike());
-        //primaryStage.setScene(results("Liam", p2)); //second variable lets the screen know who won
+        //primaryStage.setScene(customizeBike());
+        primaryStage.setScene(results("Liam", p2)); //second variable lets the screen know who won
         //primaryStage.setScene(credits());
         primaryStage.show();
         primaryStage.setTitle("results");
-        Thread.sleep(1000);
+        
         int input;
         //System.out.println("1 : Customise bikes, 2: Game Screen, 3: Main, 4: quit");
         //Scanner kb = new Scanner(System.in);
@@ -162,8 +162,8 @@ public class Main extends Application {
 
     public Scene results(String Pwinner, Color winnerC){
         Group root = new Group();
-        Rectangle colorWinner = new Rectangle(0,0,810,280);
-        colorWinner.setFill(winnerC); //color of the winner
+        Rectangle colorWinner = new Rectangle(0,0,810,280); //little bigger then the bounds since the
+        colorWinner.setFill(p1); //color of the winner, will be automatic in the future
         root.getChildren().add(colorWinner);
         VBox display = new VBox(20);
         display.setLayoutX(50);
@@ -174,8 +174,11 @@ public class Main extends Application {
         winner.setFont(subTitle);
         winner.setFill(Paint.valueOf("WHITE"));
         display.getChildren().add(winner);
-
-        HBox score = scoreDisplay(1,3);
+        //for demo purposes, will make this smarter in the future
+        p1S = 2;
+        p2S = 3;
+        //end
+        HBox score = scoreDisplay();
         display.getChildren().add(score);
 
         Text playAgain = new Text("Play again?");
@@ -221,7 +224,7 @@ public class Main extends Application {
         return new Scene(root,1200,800,Paint.valueOf("BLACK"));
     }
 
-    public HBox scoreDisplay(int p1S, int p2S){
+    public HBox scoreDisplay(){
         Text scoreP1 = new Text(p1S + "");
         scoreP1.setFill(p1);
         scoreP1.setFont(popFont);
