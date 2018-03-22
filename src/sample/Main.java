@@ -3,12 +3,16 @@ package sample;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Group;
@@ -30,6 +34,8 @@ public class Main extends Application {
     private static Color p2;
     private static int p1S;
     private static int p2S;
+    private static String p1N;
+    private static String p2N;
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
@@ -44,37 +50,12 @@ public class Main extends Application {
         //following block is for testing purposes only. Normally, game would start on the main menu.
         //primaryStage.setScene(customizeBike());
         //primaryStage.setScene(mainMenu());
-        primaryStage.setScene(results("Liam")); //second variable lets the screen know who won
+        //primaryStage.setScene(results()); //second variable lets the screen know who won
         //primaryStage.setScene(credits());
+        primaryStage.setScene(game());
         primaryStage.show();
         //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
-
-
-
-        //following is unused code for testing, feel free to delete this or make it work
-        //int input;
-        //System.out.println("1 : Customise bikes, 2: Game Screen, 3: Main, 4: quit");
-        //Scanner kb = new Scanner(System.in);
-        //input = kb.nextInt();
-//        if (input == 1) {
-//            primaryStage.setTitle("Loading...");
-//            primaryStage.setScene(customizeBike());
-//            primaryStage.setTitle("Customize Bike");
-//            primaryStage.show();
-//        }
-//        else if (input == 2) {
-//            primaryStage.setTitle("Loading...");
-//            //primaryStage.setScene(game());
-//            primaryStage.setTitle("Game");
-//            primaryStage.show();
-//        }
-//        else if (input == 3) {
-//            primaryStage.setTitle("Loading...");
-//            primaryStage.setScene(mainMenu());
-//            primaryStage.setTitle("Main Menu");
-//            primaryStage.show();
-//        }
     }
     public Scene mainMenu() { //this is where the game should start. Shows the main menu and options
         Text title = new Text("Tron.");
@@ -113,7 +94,7 @@ public class Main extends Application {
         title.setFill(Paint.valueOf("WHITE"));
         layout.getChildren().add(title);
 
-        layout.getChildren().addAll(playerRow("player 1 :", 0), playerRow("player 2 :", 2));
+        layout.getChildren().addAll(playerRow("player 1 :"), playerRow("player 2 :"));
 
         Rectangle selectedColorP1 = new Rectangle(812,375 - 250);
         selectedColorP1.setFill(p1);
@@ -170,7 +151,7 @@ public class Main extends Application {
         root.getChildren().addAll(selectedColorP1,selectedColorP2,layout, buttonGo, optionText);
         return new Scene(root, 800, 800, Paint.valueOf("BLACK"));
     }
-    private HBox playerRow(String player, int color){
+    private HBox playerRow(String player){
         HBox root = new HBox(20);
         Text pT = new Text(player);
         pT.setFont(smallFont);
@@ -205,7 +186,7 @@ public class Main extends Application {
         return root;
     }
 
-    public Scene results(String Pwinner){
+    public Scene results(){
         Group root = new Group();
         Rectangle colorWinner = new Rectangle(0,0,810,280); //little bigger then the bounds since the
         colorWinner.setFill(p1); //color of the winner, will be automatic in the future
@@ -214,8 +195,12 @@ public class Main extends Application {
         display.setLayoutX(50);
         display.setLayoutY(200);
         root.getChildren().add(display);
+        Text winner = new Text();
+        if (p1S > p2S)
+            winner.setText(p1N + " Wins!");
+        else
+            winner.setText(p2N + " Wins!");
 
-        Text winner = new Text(Pwinner + " Wins!");
         winner.setFont(subTitle);
         winner.setFill(Paint.valueOf("WHITE"));
         display.getChildren().add(winner);
@@ -283,6 +268,86 @@ public class Main extends Application {
         display.getChildren().addAll(scoreP1,dash,scoreP2);
         return display;
     }
+    public void updateScoreDisplay(HBox scoreDisplay){
+        Text scoreP1 = new Text(p1S + "");
+        scoreP1.setFill(p1);
+        scoreP1.setFont(popFont);
+        Text scoreP2 = new Text(p2S + "");
+        scoreP2.setFill(p2);
+        scoreP2.setFont(popFont);
+        scoreDisplay.getChildren().set(0,scoreP1);
+        scoreDisplay.getChildren().set(2,scoreP2);
+    }
+
+    public Scene game(){
+        Text name1 = new Text("Test");
+        name1.setFont(popFont);
+        name1.setFill(p1);
+        name1.setY(40);
+        name1.setX(150);
+        name1.setTextAlignment(TextAlignment.CENTER);
+        Text name2 = new Text("Test");
+        name2.setFont(popFont);
+        name2.setFill(p2);
+        name2.setY(40);
+        name2.setX(570);
+        name2.setTextAlignment(TextAlignment.CENTER);
+        HBox scoreDisplay = scoreDisplay();
+        scoreDisplay.setLayoutX(350);
+        scoreDisplay.setLayoutY(15);
+        p1S = 1;
+        p2S = 2;
+        updateScoreDisplay(scoreDisplay);
+        Group root = new Group();
+        Path arena = new Path();
+        MoveTo topL = new MoveTo(5,60);
+        LineTo topR = new LineTo(805,60);
+        LineTo botR = new LineTo(805, 805);
+        LineTo botL = new LineTo(5,805);
+        LineTo bTopL = new LineTo(5,60);
+        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
+        arena.setStroke(Paint.valueOf("WHITE"));
+        arena.setStrokeWidth(8);
+        root.getChildren().addAll(arena, scoreDisplay, name1,name2);
+
+        Path player1 = new Path();
+        Path player2 = new Path();
+        player2.setStroke(p2);
+        player2.setStrokeWidth(8);
+        player1.setStroke(p1);
+        player1.setStrokeWidth(8);
+
+        MoveTo startP1 = new MoveTo(200, 390);
+        MoveTo startP2 = new MoveTo(600,390);
+        LineTo start1 = new LineTo(200, 390);
+        LineTo start2 = new LineTo(600, 390);
+        //these lines are for you boys to play with and check for collisions
+        player1.getElements().addAll(startP1,start1);
+        player2.getElements().addAll(startP2,start2);
+
+        root.getChildren().addAll(player1,player2);
+        //root.getChildren().add(printResults(1)); //this would be called with a collision happens, declare winner and update score
+        //updateScoreDisplay(scoreDisplay);
+        return new Scene(root,800,800,Paint.valueOf("BLACK"));
+    }
+
+    public Text printResults(int winner){ //after this is called, winner limit would need to be checked
+        Text pWinner;
+        if (winner == 1){
+            pWinner = new Text(p1N + " Wins!");
+            p1S++;
+        }
+        else {
+            pWinner = new Text(p2N + " Wins!");
+            p2S++;
+        }
+        pWinner.setFont(popFont);
+        pWinner.setFill(Paint.valueOf("WHITE"));
+        pWinner.setX(350);
+        pWinner.setY(400);
+        return pWinner;
+    }
+
     public static void main(String[] args) {
         launch(args);
 
