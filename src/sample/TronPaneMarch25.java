@@ -16,13 +16,17 @@ import java.util.ArrayList;
 public class TronPaneMarch25 extends Pane{
 
     //attributes, also makes rectangle and animation timeline object
-    private double sizeX = 20, sizeY = 60;
+    private double sizeX = 5, sizeY = 5;
     private double recLocX = 50, recLocY = 50;
     private double dx = 0, dy = 1;
     private Rectangle rect = new Rectangle(recLocX, recLocY, sizeX, sizeY);
 
     private ArrayList<Rectangle> rectPath = new ArrayList<Rectangle>();
+    private Rectangle currentTip;
+    private Rectangle currentTail;
+
     private Timeline animation;
+
 
     // private MoveTo move = new MoveTo();
 //    private LineTo line = new LineTo();
@@ -32,10 +36,7 @@ public class TronPaneMarch25 extends Pane{
     public TronPaneMarch25(){
         rect.setFill(Color.BLUE);
         getChildren().add(rect);
-        // move.setX(rect.getX());
-//       move.setY(rect.getY());
-//
-//       path.getElements().add(move);
+        currentTip = rect;
 
         animation = new Timeline(
                 new KeyFrame(Duration.millis(10), e -> movePlayer())
@@ -61,12 +62,28 @@ public class TronPaneMarch25 extends Pane{
             rectPath.add(r);
     }
 
+    public Rectangle addAPixelToPathAndReturnRect(double x, double y){
+
+        Rectangle r = new Rectangle(x, y, 5, 5);
+        r.setFill(Color.BLUE);
+
+        if (!rectPath.contains(r))
+            rectPath.add(r);
+
+        return r;
+    }
+
     public void refreshPathAsChild(){
         for (int i = 0; i < rectPath.size(); i++){
             if (!getChildren().contains(rectPath.get(i))){
                 getChildren().add(rectPath.get(i));
             }
         }
+    }
+
+    public void directionChange(Rectangle pos){
+
+        currentTail = addAPixelToPathAndReturnRect(pos.getX(), pos.getY());
     }
 
     public void setDirection(String d){
@@ -132,11 +149,11 @@ public class TronPaneMarch25 extends Pane{
     protected void movePlayer(){
 
         if (dx == 1 || dx == -1){
-            sizeX = 60;
-            sizeY = 20;
+            sizeX = 5;
+            sizeY = 5;
         } else if (dy == 1 || dy == -1){
-            sizeX = 20;
-            sizeY = 60;
+            sizeX = 5;
+            sizeY = 5;
         }
 
         recLocX += dx;

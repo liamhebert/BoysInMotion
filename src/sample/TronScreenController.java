@@ -19,7 +19,7 @@ public class TronScreenController extends Application{
         scene.setOnMouseReleased(this::processMouseReleased);
         scene.setOnKeyPressed(this::processKeyPress);
 
-        primaryStage.setTitle("Bounce Ball Control");
+        primaryStage.setTitle("TronDemo");
         primaryStage.setScene(scene);
         primaryStage.show();
 
