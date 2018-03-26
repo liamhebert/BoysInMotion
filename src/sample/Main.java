@@ -55,9 +55,9 @@ public class Main extends Application {
         //following block is for testing purposes only. Normally, game would start on the main menu.
         //primaryStage.setScene(customizeBike());
         //primaryStage.setScene(mainMenu());
-        primaryStage.setScene(results());
+        //primaryStage.setScene(results());
         //primaryStage.setScene(credits());
-        //primaryStage.setScene(game());
+        primaryStage.setScene(game());
         primaryStage.show();
         //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
