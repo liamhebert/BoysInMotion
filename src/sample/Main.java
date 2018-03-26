@@ -49,13 +49,13 @@ public class Main extends Application {
         primaryStage.setTitle("Loading...");
         primaryStage.setResizable(false);
         //following block is for testing purposes only. Normally, game would start on the main menu.
-        primaryStage.setScene(customizeBike());
+        //primaryStage.setScene(customizeBike());
         //primaryStage.setScene(mainMenu());
-        //primaryStage.setScene(results());
+        primaryStage.setScene(results());
         //primaryStage.setScene(credits());
         //primaryStage.setScene(game());
         primaryStage.show();
-        primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
+        //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
     }
     public Scene mainMenu() { //this is where the game should start. Shows the main menu and options
@@ -236,7 +236,13 @@ public class Main extends Application {
         Text no = new Text("no");
         no.setFont(smallFont);
         no.setFill(Paint.valueOf("WHITE"));
-        options.getChildren().addAll(yes,no);
+        Rectangle option1 = new Rectangle(80, 50, Paint.valueOf("BLACK"));
+        Rectangle option2 = new Rectangle(80,50, Paint.valueOf("BLACK"));
+        StackPane op1S = new StackPane(option1, yes);
+        StackPane op2S = new StackPane(option2,no);
+
+
+        options.getChildren().addAll(op1S, op2S);
         display.getChildren().add(options);
 
         return new Scene(root, 800,800, Paint.valueOf("BLACK"));
