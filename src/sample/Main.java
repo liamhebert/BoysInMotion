@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -48,13 +49,13 @@ public class Main extends Application {
         primaryStage.setTitle("Loading...");
         primaryStage.setResizable(false);
         //following block is for testing purposes only. Normally, game would start on the main menu.
-        //primaryStage.setScene(customizeBike());
+        primaryStage.setScene(customizeBike());
         //primaryStage.setScene(mainMenu());
-        //primaryStage.setScene(results()); //second variable lets the screen know who won
+        //primaryStage.setScene(results());
         //primaryStage.setScene(credits());
-        primaryStage.setScene(game());
+        //primaryStage.setScene(game());
         primaryStage.show();
-        //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
+        primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
     }
     public Scene mainMenu() { //this is where the game should start. Shows the main menu and options
@@ -71,10 +72,16 @@ public class Main extends Application {
         Text option3 = new Text("quit");//this will need to be changed
         option3.setFont(subFont);
         option3.setFill(Paint.valueOf("WHITE"));
-
-        VBox optionsLayout = new VBox(10); //contains the text options
-        VBox layout = new VBox(30); //overall layout
-        optionsLayout.getChildren().addAll(option1,option2,option3);
+        //normally black, selected would have color
+        Rectangle op1 = new Rectangle(450, 70, Paint.valueOf("RED"));
+        Rectangle op2 = new Rectangle(450, 70, Paint.valueOf("PURPLE"));
+        Rectangle op3 = new Rectangle(450, 70, Paint.valueOf("ORANGE"));
+        StackPane op1S = new StackPane(op1, option1);
+        StackPane op2S = new StackPane(op2, option2);
+        StackPane op3S = new StackPane(op3, option3);
+        VBox optionsLayout = new VBox(5); //contains the text options
+        VBox layout = new VBox(15); //overall layout
+        optionsLayout.getChildren().addAll(op1S, op2S, op3S);
         layout.getChildren().addAll(title, optionsLayout);
         layout.setAlignment(Pos.CENTER); //centers all the text
         layout.setLayoutX(180);
@@ -103,38 +110,33 @@ public class Main extends Application {
         selectedColorP2.setFill(p2);
         selectedColorP2.setY(375);
 
-        Rectangle startButton = new Rectangle(600, 125);
-        startButton.setFill(Paint.valueOf("RED"));
-        layout.getChildren().add(startButton);
+
 
         HBox roundSelection = new HBox(15);
         layout.getChildren().add(3,roundSelection);
         Text roundText = new Text("rounds:");
         roundText.setFont(smallFont);
         roundText.setFill(Paint.valueOf("WHITE"));
+        HBox.setMargin(roundText, new Insets(10,0,0,0));
         roundSelection.getChildren().add(roundText);
-        roundText.setTextAlignment(TextAlignment.CENTER);
+
         HBox rects = new HBox(10);
         Rectangle option1 = new Rectangle(50,50, Paint.valueOf("RED"));
         Rectangle option2 = new Rectangle(50,50, Paint.valueOf("RED"));
         Rectangle option3 = new Rectangle(50,50, Paint.valueOf("RED"));
         Rectangle option4 = new Rectangle(50,50, Paint.valueOf("RED"));
-        option2.setFill(Paint.valueOf("GREEN")); //selected option, I want to fix this
-        rects.getChildren().addAll(option1,option2,option3,option4);
-        HBox.setMargin(rects, new Insets(0,0,0,54));
-        roundSelection.getChildren().add(rects);
-
-        Text buttonGo = new Text("GO!");
-        buttonGo.setFont(subTitle);
-        buttonGo.setFill(Paint.valueOf("WHITE"));
-        buttonGo.setX(270);
-        buttonGo.setY(750 - 50);
-
-        HBox optionText = new HBox(40);
-        Text option1T = new Text(1 + "");
-        Text option3T = new Text(3 + "");
-        Text option5T = new Text(5 + "");
-        Text option7T = new Text(7 + "");
+        Text option1T = new Text("1");
+        Text option3T = new Text("3");
+        Text option5T = new Text("5");
+        Text option7T = new Text("7");
+        StackPane.setMargin(option1T, new Insets(5,0,0,0));
+        StackPane.setMargin(option3T, new Insets(5,0,0,0));
+        StackPane.setMargin(option5T, new Insets(5,0,0,0));
+        StackPane.setMargin(option7T, new Insets(5,0,0,0));
+        StackPane option1S = new StackPane(option1, option1T);
+        StackPane option3S = new StackPane(option2, option3T);
+        StackPane option5S = new StackPane(option3, option5T);
+        StackPane option7S = new StackPane(option4, option7T);
         option1T.setFont(popFont);
         option3T.setFont(popFont);
         option5T.setFont(popFont);
@@ -143,12 +145,22 @@ public class Main extends Application {
         option3T.setFill(Color.valueOf("WHITE"));
         option5T.setFill(Color.valueOf("WHITE"));
         option7T.setFill(Color.valueOf("WHITE"));
-        optionText.getChildren().addAll(option1T,option3T,option5T,option7T);
-        optionText.setLayoutX(layout.getLayoutX() + 205);
-        optionText.setLayoutY(roundSelection.getLayoutY() + 530);
+        option2.setFill(Paint.valueOf("GREEN")); //selected option, I want to fix this
 
+        rects.getChildren().addAll(option1S, option3S, option5S, option7S);
+        HBox.setMargin(rects, new Insets(0,0,0,54));
+        roundSelection.getChildren().add(rects);
 
-        root.getChildren().addAll(selectedColorP1,selectedColorP2,layout, buttonGo, optionText);
+        Text buttonGo = new Text("GO!");
+        buttonGo.setFont(subTitle);
+        buttonGo.setFill(Paint.valueOf("WHITE"));
+        Rectangle startButton = new Rectangle(600, 125);
+        startButton.setFill(Paint.valueOf("RED"));
+        StackPane start = new StackPane(startButton, buttonGo);
+        StackPane.setMargin(buttonGo, new Insets(10,0,0,0));
+        layout.getChildren().add(start);
+
+        root.getChildren().addAll(selectedColorP1,selectedColorP2,layout);
         return new Scene(root, 800, 800, Paint.valueOf("BLACK"));
     }
     private HBox playerRow(String player){
