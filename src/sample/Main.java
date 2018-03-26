@@ -6,6 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -36,6 +38,8 @@ public class Main extends Application {
     private static int p2S;
     private static String p1N;
     private static String p2N;
+
+    private TronPaneMarch25 tronPane = new TronPaneMarch25();//main game pane class
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
@@ -280,55 +284,75 @@ public class Main extends Application {
     }
 
     public Scene game(){
-        Text name1 = new Text("Test");
-        name1.setFont(popFont);
-        name1.setFill(p1);
-        name1.setY(40);
-        name1.setX(150);
-        name1.setTextAlignment(TextAlignment.CENTER);
-        Text name2 = new Text("Test");
-        name2.setFont(popFont);
-        name2.setFill(p2);
-        name2.setY(40);
-        name2.setX(570);
-        name2.setTextAlignment(TextAlignment.CENTER);
-        HBox scoreDisplay = scoreDisplay();
-        scoreDisplay.setLayoutX(350);
-        scoreDisplay.setLayoutY(15);
-        p1S = 1;
-        p2S = 2;
-        updateScoreDisplay(scoreDisplay);
-        Group root = new Group();
-        Path arena = new Path();
-        MoveTo topL = new MoveTo(5,60);
-        LineTo topR = new LineTo(805,60);
-        LineTo botR = new LineTo(805, 805);
-        LineTo botL = new LineTo(5,805);
-        LineTo bTopL = new LineTo(5,60);
-        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
-        arena.setStroke(Paint.valueOf("WHITE"));
-        arena.setStrokeWidth(8);
-        root.getChildren().addAll(arena, scoreDisplay, name1,name2);
+//        Text name1 = new Text("Test");
+//        name1.setFont(popFont);
+//        name1.setFill(p1);
+//        name1.setY(40);
+//        name1.setX(150);
+//        name1.setTextAlignment(TextAlignment.CENTER);
+//        Text name2 = new Text("Test");
+//        name2.setFont(popFont);
+//        name2.setFill(p2);
+//        name2.setY(40);
+//        name2.setX(570);
+//        name2.setTextAlignment(TextAlignment.CENTER);
+//        HBox scoreDisplay = scoreDisplay();
+//        scoreDisplay.setLayoutX(350);
+//        scoreDisplay.setLayoutY(15);
+//        p1S = 1;
+//        p2S = 2;
+//        updateScoreDisplay(scoreDisplay);
+//        Group root = new Group();
+//        Path arena = new Path();
+//        MoveTo topL = new MoveTo(5,60);
+//        LineTo topR = new LineTo(805,60);
+//        LineTo botR = new LineTo(805, 805);
+//        LineTo botL = new LineTo(5,805);
+//        LineTo bTopL = new LineTo(5,60);
+//        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
+//        arena.setStroke(Paint.valueOf("WHITE"));
+//        arena.setStrokeWidth(8);
+//        root.getChildren().addAll(arena, scoreDisplay, name1,name2);
+//
+//        Path player1 = new Path();
+//        Path player2 = new Path();
+//        player2.setStroke(p2);
+//        player2.setStrokeWidth(8);
+//        player1.setStroke(p1);
+//        player1.setStrokeWidth(8);
+//
+//        MoveTo startP1 = new MoveTo(200, 390);
+//        MoveTo startP2 = new MoveTo(600,390);
+//        LineTo start1 = new LineTo(200, 390);
+//        LineTo start2 = new LineTo(600, 390);
+//        //these lines are for you boys to play with and check for collisions
+//        player1.getElements().addAll(startP1,start1);
+//        player2.getElements().addAll(startP2,start2);
+//
+//        root.getChildren().addAll(player1,player2);
+//        //root.getChildren().add(printResults(1)); //this would be called with a collision happens, declare winner and update score
+//        //updateScoreDisplay(scoreDisplay);
+//        return new Scene(root,800,800,Paint.valueOf("BLACK"));
 
-        Path player1 = new Path();
-        Path player2 = new Path();
-        player2.setStroke(p2);
-        player2.setStrokeWidth(8);
-        player1.setStroke(p1);
-        player1.setStrokeWidth(8);
+        Scene scene = new Scene(tronPane, 800, 800);
+        scene.setOnKeyPressed(this::processKeyPress);
+        tronPane.requestFocus();
 
-        MoveTo startP1 = new MoveTo(200, 390);
-        MoveTo startP2 = new MoveTo(600,390);
-        LineTo start1 = new LineTo(200, 390);
-        LineTo start2 = new LineTo(600, 390);
-        //these lines are for you boys to play with and check for collisions
-        player1.getElements().addAll(startP1,start1);
-        player2.getElements().addAll(startP2,start2);
+        return scene;
+    }
 
-        root.getChildren().addAll(player1,player2);
-        //root.getChildren().add(printResults(1)); //this would be called with a collision happens, declare winner and update score
-        //updateScoreDisplay(scoreDisplay);
-        return new Scene(root,800,800,Paint.valueOf("BLACK"));
+    public void processKeyPress(KeyEvent e){
+
+        if (e.getCode() == KeyCode.A){
+            tronPane.setDirectionPlayerOne("l");
+        } else if (e.getCode() == KeyCode.D){
+            tronPane.setDirectionPlayerOne("r");
+        } else if (e.getCode() == KeyCode.LEFT){
+            tronPane.setDirectionPlayerTwo("l");
+        } else if (e.getCode() == KeyCode.RIGHT){
+            tronPane.setDirectionPlayerTwo("r");
+        }
+
     }
 
     public Text printResults(int winner){ //after this is called, winner limit would need to be checked

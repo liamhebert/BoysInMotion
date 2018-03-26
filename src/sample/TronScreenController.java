@@ -36,10 +36,14 @@ public class TronScreenController extends Application{
 
     public void processKeyPress(KeyEvent e){
 
-        if (e.getCode() == KeyCode.LEFT){
-            tronPane.setDirection("l");
+        if (e.getCode() == KeyCode.A){
+            tronPane.setDirectionPlayerOne("l");
+        } else if (e.getCode() == KeyCode.D){
+            tronPane.setDirectionPlayerOne("r");
+        } else if (e.getCode() == KeyCode.LEFT){
+            tronPane.setDirectionPlayerTwo("l");
         } else if (e.getCode() == KeyCode.RIGHT){
-            tronPane.setDirection("r");
+            tronPane.setDirectionPlayerTwo("r");
         }
 
     }
