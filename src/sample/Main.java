@@ -1,11 +1,14 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -19,6 +22,8 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import java.io.FileInputStream;
 
@@ -37,6 +42,7 @@ public class Main extends Application {
     private static int p2S;
     private static String p1N;
     private static String p2N;
+    private Stage stage;
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
@@ -48,10 +54,11 @@ public class Main extends Application {
         p2 = Color.rgb(255,252,25);
         primaryStage.setTitle("Loading...");
         primaryStage.setResizable(false);
+        this.stage = primaryStage;
         //following block is for testing purposes only. Normally, game would start on the main menu.
         //primaryStage.setScene(customizeBike());
-        //primaryStage.setScene(mainMenu());
-        primaryStage.setScene(results());
+        primaryStage.setScene(mainMenu());
+        //primaryStage.setScene(results());
         //primaryStage.setScene(credits());
         //primaryStage.setScene(game());
         primaryStage.show();
@@ -79,6 +86,24 @@ public class Main extends Application {
         StackPane op1S = new StackPane(op1, option1);
         StackPane op2S = new StackPane(op2, option2);
         StackPane op3S = new StackPane(op3, option3);
+        op1S.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setScene(customizeBike());
+            }
+        });
+        op2S.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setScene(credits());
+            }
+        });
+        op3S.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Platform.exit();
+            }
+        });
         VBox optionsLayout = new VBox(5); //contains the text options
         VBox layout = new VBox(15); //overall layout
         optionsLayout.getChildren().addAll(op1S, op2S, op3S);
