@@ -353,7 +353,7 @@ public class Main extends Application {
 //        return new Scene(root,800,800,Paint.valueOf("BLACK"));
 
         Scene scene = new Scene(tronPane, 800, 800);
-        scene.setOnKeyPressed(this::processKeyPress);
+        scene.setOnKeyReleased(this::processKeyPress);
         tronPane.requestFocus();
 
         return scene;
