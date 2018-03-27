@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -58,6 +59,8 @@ public class TronPane extends Pane{
     private String p1N;
     private String p2N;
 
+    private Rectangle topArena, leftArena, bottomArena, rightArena;
+
     Path arena;
 
     private HBox scoreDisplay;
@@ -84,16 +87,32 @@ public class TronPane extends Pane{
         scoreDisplay = scoreDisplay();
         scoreDisplay.setLayoutX(350);
         scoreDisplay.setLayoutY(15);
-        arena = new Path();
-        MoveTo topL = new MoveTo(5,60);
-        LineTo topR = new LineTo(805,60);
-        LineTo botR = new LineTo(805, 805);
-        LineTo botL = new LineTo(5,805);
-        LineTo bTopL = new LineTo(5,60);
-        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
-        arena.setStroke(Paint.valueOf("WHITE"));
-        arena.setStrokeWidth(8);
-        getChildren().addAll(arena, name1,name2, scoreDisplay);
+
+        //Old arena code, as a path not rectangles
+
+
+//        arena = new Path();
+//        MoveTo topL = new MoveTo(5,60);
+//        LineTo topR = new LineTo(805,60);
+//        LineTo botR = new LineTo(805, 805);
+//        LineTo botL = new LineTo(5,805);
+//        LineTo bTopL = new LineTo(5,60);
+//        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
+//        arena.setStroke(Paint.valueOf("WHITE"));
+//        arena.setStrokeWidth(8);
+
+        //new arena code, as rectangles
+        topArena = new Rectangle(5, 60, 800, 8);
+        topArena.setFill(Color.WHITE);
+        bottomArena = new Rectangle(5, 805, 800, 5);
+        bottomArena.setFill(Color.WHITE);
+        rightArena = new Rectangle(805, 60, 8, 800);
+        rightArena.setFill(Color.WHITE);
+        leftArena = new Rectangle(5, 60, 8, 800);
+        leftArena.setFill(Color.WHITE);
+
+        getChildren().addAll(topArena, bottomArena, leftArena, rightArena, name1,name2, scoreDisplay);
+
         //sets up player one and their line
         playerOneRect.setFill(p1);
         playerTwoRect.setFill(p2);
@@ -208,7 +227,55 @@ public class TronPane extends Pane{
             }
         }
 
+        if (playerOneRect.intersects(topArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player one hit the arena wall");
+            getChildren().add(printResults(2));
+            end = true;
+        }
+        if (playerOneRect.intersects(bottomArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player one hit the arena wall");
+            getChildren().add(printResults(2));
+            end = true;
+        }
+        if (playerOneRect.intersects(rightArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player one hit the arena wall");
+            getChildren().add(printResults(2));
+            end = true;
+        }
+        if (playerOneRect.intersects(leftArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player one hit the arena wall");
+            getChildren().add(printResults(2));
+            end = true;
+        }
 
+        if (playerTwoRect.intersects(topArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player two hit the arena wall");
+            getChildren().add(printResults(1));
+            end = true;
+        }
+        if (playerTwoRect.intersects(bottomArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player two hit the arena wall");
+            getChildren().add(printResults(1));
+            end = true;
+        }
+        if (playerTwoRect.intersects(rightArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player two hit the arena wall");
+            getChildren().add(printResults(1));
+            end = true;
+        }
+        if (playerTwoRect.intersects(leftArena.getBoundsInLocal())){
+            pause();
+            System.out.println("Player two hit the arena wall");
+            getChildren().add(printResults(1));
+            end = true;
+        }
         updateScoreDisplay();
 
 
