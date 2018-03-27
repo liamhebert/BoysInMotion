@@ -31,27 +31,12 @@ public class Main extends Application {
     //these four static variables contain the customizable aspect of the game and the score. Things that change often
     private static Color p1;
     private static Color p2;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    private static int p1S;
-    private static int p2S;
-    private static String p1N = "Liam";
-    private static String p2N = "Bob";
 
-
->>>>>>> parent of 1cb9d11... rwesdf
-=======
->>>>>>> parent of c086a99... Merge branch 'master' of https://github.com/liamhebert/BoysInMotion
-=======
     private static int p1S;
     private static int p2S;
     private static String p1N = "Player 1";
     private static String p2N = "Player 2";
 
-
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
@@ -70,7 +55,7 @@ public class Main extends Application {
         //primaryStage.setScene(credits());
         primaryStage.setScene(game());
         primaryStage.show();
-        primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
+        //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
     }
     public Scene mainMenu() { //this is where the game should start. Shows the main menu and options

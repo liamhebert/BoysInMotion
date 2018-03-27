@@ -7,10 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.layout.StackPane;
-<<<<<<< HEAD
+
 import javafx.scene.paint.Color;
-=======
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -29,17 +27,10 @@ public class TronPane extends Pane{
     private double sizeY = 6; //default size of the players
 
     private double playerOneRecLocX = 200, playerOneRecLocY = 390; //start point of player 1
-<<<<<<< HEAD
     private double playerOneDx = 1, playerOneDy = 0;//start direction of player one
 
     private double playerTwoRecLocX = 600, playerTwoRecLocY = 390; //start point of player 2
     private double playerTwoDx = -1, playerTwoDy = 0; //start direction of player two
-=======
-    private double playerOneDx = 0, playerOneDy = 1;//start direction of player one
-
-    private double playerTwoRecLocX = 600, playerTwoRecLocY = 390; //start point of player 2
-    private double playerTwoDx = 0, playerTwoDy = -1; //start direction of player two
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
 
     //player 1 rectangle
     private Rectangle playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
@@ -69,11 +60,7 @@ public class TronPane extends Pane{
     private String p1N;
     private String p2N;
 
-<<<<<<< HEAD
     private Rectangle topArena, leftArena, bottomArena, rightArena;
-
-=======
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
     Path arena;
 
     private HBox scoreDisplay;
@@ -84,21 +71,16 @@ public class TronPane extends Pane{
         this.p1 = p1;
         this.p2 = p2;
         this.popFont = popFont;
-<<<<<<< HEAD
-        Text name1 = new Text("Test");
-=======
+
         Text name1 = new Text("Player 1");
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
+
         name1.setFont(popFont);
         name1.setFill(p1);
         name1.setY(40);
         name1.setX(150);
         name1.setTextAlignment(TextAlignment.CENTER);
-<<<<<<< HEAD
-        Text name2 = new Text("Test");
-=======
+
         Text name2 = new Text("Player 2");
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
         name2.setFont(popFont);
         name2.setFill(p2);
         name2.setY(40);
@@ -108,7 +90,6 @@ public class TronPane extends Pane{
         scoreDisplay = scoreDisplay();
         scoreDisplay.setLayoutX(350);
         scoreDisplay.setLayoutY(15);
-<<<<<<< HEAD
 
         //Old arena code, as a path not rectangles
 
@@ -134,19 +115,6 @@ public class TronPane extends Pane{
         leftArena.setFill(Color.WHITE);
 
         getChildren().addAll(topArena, bottomArena, leftArena, rightArena, name1,name2, scoreDisplay);
-
-=======
-        arena = new Path();
-        MoveTo topL = new MoveTo(5,60);
-        LineTo topR = new LineTo(805,60);
-        LineTo botR = new LineTo(805, 805);
-        LineTo botL = new LineTo(5,805);
-        LineTo bTopL = new LineTo(5,60);
-        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
-        arena.setStroke(Paint.valueOf("WHITE"));
-        arena.setStrokeWidth(8);
-        getChildren().addAll(arena, name1,name2, scoreDisplay);
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
         //sets up player one and their line
         playerOneRect.setFill(p1);
         playerTwoRect.setFill(p2);
@@ -261,7 +229,6 @@ public class TronPane extends Pane{
             }
         }
 
-<<<<<<< HEAD
         if (playerOneRect.intersects(topArena.getBoundsInLocal())){
             pause();
             System.out.println("Player one hit the arena wall");
@@ -311,9 +278,6 @@ public class TronPane extends Pane{
             getChildren().add(printResults(1));
             end = true;
         }
-=======
-
->>>>>>> parent of 8022cf1... Revert "Merge branch 'master' of https://github.com/liamhebert/BoysInMotion"
         updateScoreDisplay();
 
 
