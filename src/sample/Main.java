@@ -1,23 +1,18 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
+
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.text.Font;
+
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
@@ -30,8 +25,8 @@ public class Main extends Application {
     private static Font titleFont;
     private static Font subTitle;
     private static Font popFont;
-    private static Font subFont = new Font("Consolas", 37.333333 * 1.5); //these two fonts are windows exclusive, sorry
-    private static Font smallFont = new Font ("Consolas", 30);
+    private static final Font subFont = new Font("Consolas", 37.333333 * 1.5); //these two fonts are windows exclusive, sorry
+    private static final Font smallFont = new Font ("Consolas", 30);
 
     //these four static variables contain the customizable aspect of the game and the score. Things that change often
     private static Color p1;
@@ -277,102 +272,23 @@ public class Main extends Application {
         return new Scene(root,1200,800,Paint.valueOf("BLACK"));
     }
 
-//    public HBox scoreDisplay(){
-//        Text scoreP1 = new Text(p1S + "");
-//        scoreP1.setFill(p1);
-//        scoreP1.setFont(popFont);
-//        Text scoreP2 = new Text(p2S + "");
-//        scoreP2.setFill(p2);
-//        scoreP2.setFont(popFont);
-//        Text dash = new Text(" - ");
-//        dash.setFill(Paint.valueOf("WHITE"));
-//        dash.setFont(popFont);
-//        HBox display = new HBox(5);
-//        display.getChildren().addAll(scoreP1,dash,scoreP2);
-//        return display;
-//    }
-//    public void updateScoreDisplay(HBox scoreDisplay){
-//        Text scoreP1 = new Text(p1S + "");
-//        scoreP1.setFill(p1);
-//        scoreP1.setFont(popFont);
-//        Text scoreP2 = new Text(p2S + "");
-//        scoreP2.setFill(p2);
-//        scoreP2.setFont(popFont);
-//        scoreDisplay.getChildren().set(0,scoreP1);
-//        scoreDisplay.getChildren().set(2,scoreP2);
-//    }
-
     public Scene game(){
-//        Text name1 = new Text("Test");
-//        name1.setFont(popFont);
-//        name1.setFill(p1);
-//        name1.setY(40);
-//        name1.setX(150);
-//        name1.setTextAlignment(TextAlignment.CENTER);
-//        Text name2 = new Text("Test");
-//        name2.setFont(popFont);
-//        name2.setFill(p2);
-//        name2.setY(40);
-//        name2.setX(570);
-//        name2.setTextAlignment(TextAlignment.CENTER);
-//        HBox scoreDisplay = scoreDisplay();
-//        scoreDisplay.setLayoutX(350);
-//        scoreDisplay.setLayoutY(15);
-//        p1S = 1;
-//        p2S = 2;
-//        updateScoreDisplay(scoreDisplay);
-//        Group root = new Group();
-//        Path arena = new Path();
-//        MoveTo topL = new MoveTo(5,60);
-//        LineTo topR = new LineTo(805,60);
-//        LineTo botR = new LineTo(805, 805);
-//        LineTo botL = new LineTo(5,805);
-//        LineTo bTopL = new LineTo(5,60);
-//        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
-//        arena.setStroke(Paint.valueOf("WHITE"));
-//        arena.setStrokeWidth(8);
-//        root.getChildren().addAll(arena, scoreDisplay, name1,name2);
-
-        //root.getChildren().add(printResults(1)); //this would be called with a collision happens, declare winner and update score
-        //updateScoreDisplay(scoreDisplay);
         TronPane tronPane = new TronPane(popFont,p1N,p2N,p1,p2);//main game pane class
         Scene scene = new Scene(tronPane, 800, 800, Paint.valueOf("BLACK"));
         tronPane.requestFocus();
-        tronPane.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent e) {
-                if (e.getCode() == KeyCode.A){
-                    tronPane.setDirectionPlayerOne("l");
-                } else if (e.getCode() == KeyCode.D){
-                    tronPane.setDirectionPlayerOne("r");
-                } else if (e.getCode() == KeyCode.LEFT){
-                    tronPane.setDirectionPlayerTwo("l");
-                } else if (e.getCode() == KeyCode.RIGHT){
-                    tronPane.setDirectionPlayerTwo("r");
-                }
+        tronPane.setOnKeyReleased(e -> { //lambda, oooooof. This does the same thing as new EventHandler(KeyEvent e)
+            if (e.getCode() == KeyCode.A){
+                tronPane.setDirectionPlayerOne("l");
+            } else if (e.getCode() == KeyCode.D){
+                tronPane.setDirectionPlayerOne("r");
+            } else if (e.getCode() == KeyCode.LEFT){
+                tronPane.setDirectionPlayerTwo("l");
+            } else if (e.getCode() == KeyCode.RIGHT){
+                tronPane.setDirectionPlayerTwo("r");
             }
         });
 
         return scene;
-    }
-
-
-
-    public Text printResults(int winner){ //after this is called, winner limit would need to be checked
-        Text pWinner;
-        if (winner == 1){
-            pWinner = new Text(p1N + " Wins!");
-            p1S++;
-        }
-        else {
-            pWinner = new Text(p2N + " Wins!");
-            p2S++;
-        }
-        pWinner.setFont(popFont);
-        pWinner.setFill(Paint.valueOf("WHITE"));
-        pWinner.setX(350);
-        pWinner.setY(400);
-        return pWinner;
     }
 
     public HBox scoreDisplay(){

@@ -2,11 +2,10 @@ package sample;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.DoubleProperty;
-import javafx.scene.Group;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -21,7 +20,8 @@ import java.util.ArrayList;
 public class TronPane extends Pane{
 
     //attributes, also makes rectangle and animation timeline object
-    private double sizeX = 6, sizeY = 6; //default size of the players
+    private final double sizeX = 6;
+    private double sizeY = 6; //default size of the players
 
     private double playerOneRecLocX = 200, playerOneRecLocY = 390; //start point of player 1
     private double playerOneDx = 1, playerOneDy = 0;//start direction of player one
@@ -43,10 +43,10 @@ public class TronPane extends Pane{
 
 
     //this is our "path" of rectangles, in the form of an arraylist
-    private ArrayList<Rectangle> playerOneRectPath = new ArrayList<Rectangle>();
+    private ArrayList<Rectangle> playerOneRectPath = new ArrayList<>();
 
     //path arraylist for player two
-    private ArrayList<Rectangle> playerTwoRectPath = new ArrayList<Rectangle>();
+    private ArrayList<Rectangle> playerTwoRectPath = new ArrayList<>();
     private Paint p1;
     private Paint p2;
 
@@ -421,11 +421,4 @@ public class TronPane extends Pane{
         return pWinner;
     }
 
-
-
-
-    public void setNames(String p1N, String p2N){
-        this.p1N = p1N;
-        this.p2N = p2N;
-    }
 }
