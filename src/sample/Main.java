@@ -34,6 +34,15 @@ public class Main extends Application {
     private static Font popFont;
     private static Color p1;
     private static Color p2;
+<<<<<<< HEAD
+=======
+    private static int p1S;
+    private static int p2S;
+    private static String p1N = "Liam";
+    private static String p2N = "Bob";
+
+
+>>>>>>> parent of 1cb9d11... rwesdf
 
     public void start(Stage primaryStage) throws Exception{
         titleFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),106.66667 * 1.5);

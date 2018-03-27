@@ -26,10 +26,10 @@ public class TronPane extends Pane{
     private double sizeY = 6; //default size of the players
 
     private double playerOneRecLocX = 200, playerOneRecLocY = 390; //start point of player 1
-    private double playerOneDx = 0, playerOneDy = 1;//start direction of player one
+    private double playerOneDx = 1, playerOneDy = 0;//start direction of player one
 
     private double playerTwoRecLocX = 600, playerTwoRecLocY = 390; //start point of player 2
-    private double playerTwoDx = 0, playerTwoDy = -1; //start direction of player two
+    private double playerTwoDx = -1, playerTwoDy = 0; //start direction of player two
 
     //player 1 rectangle
     private Rectangle playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
@@ -71,13 +71,13 @@ public class TronPane extends Pane{
         this.p1 = p1;
         this.p2 = p2;
         this.popFont = popFont;
-        Text name1 = new Text("Player 1");
+        Text name1 = new Text("Test");
         name1.setFont(popFont);
         name1.setFill(p1);
         name1.setY(40);
         name1.setX(150);
         name1.setTextAlignment(TextAlignment.CENTER);
-        Text name2 = new Text("Player 2");
+        Text name2 = new Text("Test");
         name2.setFont(popFont);
         name2.setFill(p2);
         name2.setY(40);
