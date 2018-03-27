@@ -35,6 +35,7 @@ public class Main extends Application {
     private static Color p1;
     private static Color p2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private static int p1S;
     private static int p2S;
@@ -43,6 +44,8 @@ public class Main extends Application {
 
 
 >>>>>>> parent of 1cb9d11... rwesdf
+=======
+>>>>>>> parent of c086a99... Merge branch 'master' of https://github.com/liamhebert/BoysInMotion
 
     public void start(Stage primaryStage) throws Exception{
         titleFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),106.66667 * 1.5);
