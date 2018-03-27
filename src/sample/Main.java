@@ -54,11 +54,12 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         this.stage = primaryStage;
         //following block is for testing purposes only. Normally, game would start on the main menu.
-        //primaryStage.setScene(customizeBike());
-        primaryStage.setScene(mainMenu());
+        primaryStage.setScene(customizeBike());
+
         //primaryStage.setScene(results());
         //primaryStage.setScene(credits());
         //primaryStage.setScene(game());
+        //primaryStage.setScene(mainMenu());
         primaryStage.show();
         //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
@@ -181,15 +182,15 @@ public class Main extends Application {
         startButton.setFill(Paint.valueOf("RED"));
         StackPane start = new StackPane(startButton, buttonGo);
         StackPane.setMargin(buttonGo, new Insets(10,0,0,0));
+        layout.getChildren().add(start);
+        root.getChildren().addAll(selectedColorP1,selectedColorP2,layout);
         start.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 stage.setScene(game());
             }
         });
-        layout.getChildren().add(start);
 
-        root.getChildren().addAll(selectedColorP1,selectedColorP2,layout);
         return new Scene(root, 800, 800, Paint.valueOf("BLACK"));
     }
     private HBox playerRow(String player){
@@ -302,8 +303,9 @@ public class Main extends Application {
     }
 
     public Scene game(){
+
+        Group test = new Group();
         TronPane tronPane = new TronPane(popFont,p1N,p2N,p1,p2);//main game pane class
-        Scene scene = new Scene(tronPane, 800, 800, Paint.valueOf("BLACK"));
         tronPane.requestFocus();
         tronPane.setOnKeyReleased(e -> { //lambda, oooooof. This does the same thing as new EventHandler(KeyEvent e)
             if (e.getCode() == KeyCode.A){
@@ -316,8 +318,8 @@ public class Main extends Application {
                 tronPane.setDirectionPlayerTwo("r");
             }
         });
-
-        return scene;
+        test.getChildren().add(tronPane);
+        return new Scene(test, 800, 800, Paint.valueOf("BLACK"));
     }
 
     public HBox scoreDisplay(){

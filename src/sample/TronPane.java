@@ -107,7 +107,7 @@ public class TronPane extends Pane{
         //new arena code, as rectangles
         topArena = new Rectangle(5, 60, 800, 8);
         topArena.setFill(Color.WHITE);
-        bottomArena = new Rectangle(5, 805, 800, 5);
+        bottomArena = new Rectangle(5, 805, 800, 8);
         bottomArena.setFill(Color.WHITE);
         rightArena = new Rectangle(805, 60, 8, 800);
         rightArena.setFill(Color.WHITE);
