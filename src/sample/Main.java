@@ -33,8 +33,8 @@ public class Main extends Application {
     private static Color p2;
     private static int p1S;
     private static int p2S;
-    private static String p1N = "Liam";
-    private static String p2N = "Bob";
+    private static String p1N = "Player 1";
+    private static String p2N = "Player 2";
 
 
 
