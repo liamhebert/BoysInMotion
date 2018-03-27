@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -37,10 +38,10 @@ public class Main extends Application {
     private static Color p2;
     private static int p1S;
     private static int p2S;
-    private static String p1N;
-    private static String p2N;
+    private static String p1N = "Liam";
+    private static String p2N = "Bob";
 
-    private TronPaneMarch25 tronPane = new TronPaneMarch25();//main game pane class
+
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
@@ -276,30 +277,30 @@ public class Main extends Application {
         return new Scene(root,1200,800,Paint.valueOf("BLACK"));
     }
 
-    public HBox scoreDisplay(){
-        Text scoreP1 = new Text(p1S + "");
-        scoreP1.setFill(p1);
-        scoreP1.setFont(popFont);
-        Text scoreP2 = new Text(p2S + "");
-        scoreP2.setFill(p2);
-        scoreP2.setFont(popFont);
-        Text dash = new Text(" - ");
-        dash.setFill(Paint.valueOf("WHITE"));
-        dash.setFont(popFont);
-        HBox display = new HBox(5);
-        display.getChildren().addAll(scoreP1,dash,scoreP2);
-        return display;
-    }
-    public void updateScoreDisplay(HBox scoreDisplay){
-        Text scoreP1 = new Text(p1S + "");
-        scoreP1.setFill(p1);
-        scoreP1.setFont(popFont);
-        Text scoreP2 = new Text(p2S + "");
-        scoreP2.setFill(p2);
-        scoreP2.setFont(popFont);
-        scoreDisplay.getChildren().set(0,scoreP1);
-        scoreDisplay.getChildren().set(2,scoreP2);
-    }
+//    public HBox scoreDisplay(){
+//        Text scoreP1 = new Text(p1S + "");
+//        scoreP1.setFill(p1);
+//        scoreP1.setFont(popFont);
+//        Text scoreP2 = new Text(p2S + "");
+//        scoreP2.setFill(p2);
+//        scoreP2.setFont(popFont);
+//        Text dash = new Text(" - ");
+//        dash.setFill(Paint.valueOf("WHITE"));
+//        dash.setFont(popFont);
+//        HBox display = new HBox(5);
+//        display.getChildren().addAll(scoreP1,dash,scoreP2);
+//        return display;
+//    }
+//    public void updateScoreDisplay(HBox scoreDisplay){
+//        Text scoreP1 = new Text(p1S + "");
+//        scoreP1.setFill(p1);
+//        scoreP1.setFont(popFont);
+//        Text scoreP2 = new Text(p2S + "");
+//        scoreP2.setFill(p2);
+//        scoreP2.setFont(popFont);
+//        scoreDisplay.getChildren().set(0,scoreP1);
+//        scoreDisplay.getChildren().set(2,scoreP2);
+//    }
 
     public Scene game(){
 //        Text name1 = new Text("Test");
@@ -331,47 +332,31 @@ public class Main extends Application {
 //        arena.setStroke(Paint.valueOf("WHITE"));
 //        arena.setStrokeWidth(8);
 //        root.getChildren().addAll(arena, scoreDisplay, name1,name2);
-//
-//        Path player1 = new Path();
-//        Path player2 = new Path();
-//        player2.setStroke(p2);
-//        player2.setStrokeWidth(8);
-//        player1.setStroke(p1);
-//        player1.setStrokeWidth(8);
-//
-//        MoveTo startP1 = new MoveTo(200, 390);
-//        MoveTo startP2 = new MoveTo(600,390);
-//        LineTo start1 = new LineTo(200, 390);
-//        LineTo start2 = new LineTo(600, 390);
-//        //these lines are for you boys to play with and check for collisions
-//        player1.getElements().addAll(startP1,start1);
-//        player2.getElements().addAll(startP2,start2);
-//
-//        root.getChildren().addAll(player1,player2);
-//        //root.getChildren().add(printResults(1)); //this would be called with a collision happens, declare winner and update score
-//        //updateScoreDisplay(scoreDisplay);
-//        return new Scene(root,800,800,Paint.valueOf("BLACK"));
 
-        Scene scene = new Scene(tronPane, 800, 800);
-        scene.setOnKeyReleased(this::processKeyPress);
+        //root.getChildren().add(printResults(1)); //this would be called with a collision happens, declare winner and update score
+        //updateScoreDisplay(scoreDisplay);
+        TronPane tronPane = new TronPane(popFont,p1N,p2N,p1,p2);//main game pane class
+        Scene scene = new Scene(tronPane, 800, 800, Paint.valueOf("BLACK"));
         tronPane.requestFocus();
+        tronPane.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent e) {
+                if (e.getCode() == KeyCode.A){
+                    tronPane.setDirectionPlayerOne("l");
+                } else if (e.getCode() == KeyCode.D){
+                    tronPane.setDirectionPlayerOne("r");
+                } else if (e.getCode() == KeyCode.LEFT){
+                    tronPane.setDirectionPlayerTwo("l");
+                } else if (e.getCode() == KeyCode.RIGHT){
+                    tronPane.setDirectionPlayerTwo("r");
+                }
+            }
+        });
 
         return scene;
     }
 
-    public void processKeyPress(KeyEvent e){
 
-        if (e.getCode() == KeyCode.A){
-            tronPane.setDirectionPlayerOne("l");
-        } else if (e.getCode() == KeyCode.D){
-            tronPane.setDirectionPlayerOne("r");
-        } else if (e.getCode() == KeyCode.LEFT){
-            tronPane.setDirectionPlayerTwo("l");
-        } else if (e.getCode() == KeyCode.RIGHT){
-            tronPane.setDirectionPlayerTwo("r");
-        }
-
-    }
 
     public Text printResults(int winner){ //after this is called, winner limit would need to be checked
         Text pWinner;
@@ -390,9 +375,23 @@ public class Main extends Application {
         return pWinner;
     }
 
+    public HBox scoreDisplay(){
+        Text scoreP1 = new Text(p1S + "");
+        scoreP1.setFill(p1);
+        scoreP1.setFont(popFont);
+        Text scoreP2 = new Text(p2S + "");
+        scoreP2.setFill(p2);
+        scoreP2.setFont(popFont);
+        Text dash = new Text(" - ");
+        dash.setFill(Paint.valueOf("WHITE"));
+        dash.setFont(popFont);
+        HBox display = new HBox(5);
+        display.getChildren().addAll(scoreP1,dash,scoreP2);
+        return display;
+    }
+
     public static void main(String[] args) {
         launch(args);
-
     }
 
 }

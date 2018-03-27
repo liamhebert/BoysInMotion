@@ -3,22 +3,31 @@ package sample;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
+import javafx.scene.Group;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import java.util.ArrayList;
 
-public class TronPaneMarch25 extends Pane{
+public class TronPane extends Pane{
 
     //attributes, also makes rectangle and animation timeline object
-    private double sizeX = 5, sizeY = 5; //default size of the players
+    private double sizeX = 6, sizeY = 6; //default size of the players
 
-    private double playerOneRecLocX = 50, playerOneRecLocY = 50; //start point of player 1
-    private double playerOneDx = 0, playerOneDy = 1;//start direction of player one
+    private double playerOneRecLocX = 200, playerOneRecLocY = 390; //start point of player 1
+    private double playerOneDx = 1, playerOneDy = 0;//start direction of player one
 
-    private double playerTwoRecLocX = 750, playerTwoRecLocY = 50; //start point of player 2
-    private double playerTwoDx = 0, playerTwoDy = 1; //start direction of player two
+    private double playerTwoRecLocX = 600, playerTwoRecLocY = 390; //start point of player 2
+    private double playerTwoDx = -1, playerTwoDy = 0; //start direction of player two
 
     //player 1 rectangle
     private Rectangle playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
@@ -38,19 +47,55 @@ public class TronPaneMarch25 extends Pane{
 
     //path arraylist for player two
     private ArrayList<Rectangle> playerTwoRectPath = new ArrayList<Rectangle>();
+    private Paint p1;
+    private Paint p2;
 
     private Timeline animation;
+    private int p1S = 0;
+    private int p2S = 0;
+    private Font popFont;
+    private String p1N;
+    private String p2N;
 
+    private HBox scoreDisplay;
     //constructor sets up animation and creates rectangle
-    public TronPaneMarch25(){
+    public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2){
+        this.p1N = p1N;
+        this.p2N = p2N;
+        this.p1 = p1;
+        this.p2 = p2;
+        this.popFont = popFont;
+        Text name1 = new Text("Test");
+        name1.setFont(popFont);
+        name1.setFill(p1);
+        name1.setY(40);
+        name1.setX(150);
+        name1.setTextAlignment(TextAlignment.CENTER);
+        Text name2 = new Text("Test");
+        name2.setFont(popFont);
+        name2.setFill(p2);
+        name2.setY(40);
+        name2.setX(570);
+        name2.setTextAlignment(TextAlignment.CENTER);
 
+        scoreDisplay = scoreDisplay();
+        scoreDisplay.setLayoutX(350);
+        scoreDisplay.setLayoutY(15);
+        Path arena = new Path();
+        MoveTo topL = new MoveTo(5,60);
+        LineTo topR = new LineTo(805,60);
+        LineTo botR = new LineTo(805, 805);
+        LineTo botL = new LineTo(5,805);
+        LineTo bTopL = new LineTo(5,60);
+        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
+        arena.setStroke(Paint.valueOf("WHITE"));
+        arena.setStrokeWidth(8);
+        getChildren().addAll(arena, name1,name2, scoreDisplay);
         //sets up player one and their line
-        playerOneRect.setFill(Color.BLUE);
-        playerOneCurrRectLine.setFill(Color.BLUE);
-
-        //sets up player two and their line
-        playerTwoRect.setFill(Color.ORANGE);
-        playerTwoCurrRectLine.setFill(Color.ORANGE);
+        playerOneRect.setFill(p1);
+        playerTwoRect.setFill(p2);
+        playerOneCurrRectLine.setFill(p1);
+        playerTwoCurrRectLine.setFill(p2);
 
         //adds player one player and initial line rectangle
         getChildren().add(playerOneRect);
@@ -110,44 +155,59 @@ public class TronPaneMarch25 extends Pane{
     public void collisionCheck(){
         //FOR ANYONE EDITING
         //THIS IS WHERE SCORE UPDATING WILL PROBABLY EVENTUALLY GO
+        boolean end = false;
+
+        //did the players themselves hit eachother head on?
+        if (playerOneRect.intersects(playerTwoRect.getBoundsInLocal())){
+            pause();
+            System.out.println("Player one and player two hit eachother");
+            getChildren().add(printResults(0));
+            end = true;
+        }
 
             //did player one hit their own line?
-            for (int i = 0; i < playerOneRectPath.size() - 2; i++) {
-                if (playerOneRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())) {
-                    pause();
-                    System.out.println("Player One just crashed into their own line smh");
-                }
+        for (int i = 0; i < playerOneRectPath.size() - 2 && !end; i++) {
+            if (playerOneRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())) {
+                pause();
+                System.out.println("Player One just crashed into their own line smh");
+                getChildren().add(printResults(2));
+                end = true;
             }
+        }
 
             //did player two hit their own line?
-            for (int i = 0; i < playerTwoRectPath.size() - 2; i++){
-                if (playerTwoRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
-                    pause();
-                    System.out.println("Player Two just crashed into their own line smh");
-                }
+        for (int i = 0; i < playerTwoRectPath.size() - 2 && !end; i++){
+            if (playerTwoRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
+                pause();
+                System.out.println("Player Two just crashed into their own line smh");
+                getChildren().add(printResults(1));
+                end = true;
             }
+        }
 
             //did player two hit player one's path?
-            for (int i = 0; i < playerOneRectPath.size(); i++){
-                if (playerTwoRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())){
-                    pause();
-                    System.out.println("Player two crashed into player one's line");
-                }
+        for (int i = 0; i < playerOneRectPath.size() && !end; i++){
+            if (playerTwoRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())){
+                pause();
+                System.out.println("Player two crashed into player one's line");
+                getChildren().add(printResults(1));
+                end = true;
             }
+        }
 
             //did player one hit player two's path?
-            for (int i = 0; i < playerTwoRectPath.size(); i++){
-                if (playerOneRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
-                    pause();
-                    System.out.println("Player one crashed into player two's line");
-                }
-            }
-
-            //did the players themselves hit eachother?
-            if (playerOneRect.intersects(playerTwoRect.getBoundsInLocal())){
+        for (int i = 0; i < playerTwoRectPath.size() && !end; i++){
+            if (playerOneRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
                 pause();
-                System.out.println("Player one and player two hit eachother");
+                System.out.println("Player one crashed into player two's line");
+                getChildren().add(printResults(2));
+                end = true;
             }
+        }
+
+
+
+        updateScoreDisplay();
 
 
     }
@@ -155,17 +215,42 @@ public class TronPaneMarch25 extends Pane{
     public void changeDirectionPlayerOne(){
 
         Rectangle newRec = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), playerOneRect.getWidth(), playerOneRect.getHeight());
-        newRec.setFill(Color.BLUE);
+        newRec.setFill(p1);
         playerOneRectPath.add(newRec);
         playerOneCurrRectLine = newRec;
 
         refreshPathAsChildPlayerOne();
     }
 
+    public HBox scoreDisplay(){
+        Text scoreP1 = new Text(p1S + "");
+        scoreP1.setFill(p1);
+        scoreP1.setFont(popFont);
+        Text scoreP2 = new Text(p2S + "");
+        scoreP2.setFill(p2);
+        scoreP2.setFont(popFont);
+        Text dash = new Text(" - ");
+        dash.setFill(Paint.valueOf("WHITE"));
+        dash.setFont(popFont);
+        HBox display = new HBox(5);
+        display.getChildren().addAll(scoreP1,dash,scoreP2);
+        return display;
+    }
+    public void updateScoreDisplay(){
+        Text scoreP1 = new Text(p1S + "");
+        scoreP1.setFill(p1);
+        scoreP1.setFont(popFont);
+        Text scoreP2 = new Text(p2S + "");
+        scoreP2.setFill(p2);
+        scoreP2.setFont(popFont);
+        scoreDisplay.getChildren().set(0,scoreP1);
+        scoreDisplay.getChildren().set(2,scoreP2);
+    }
+
     public void changeDirectionPlayerTwo(){
 
         Rectangle newRec = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), playerTwoRect.getWidth(), playerTwoRect.getHeight());
-        newRec.setFill(Color.ORANGE);
+        newRec.setFill(p2);
         playerTwoRectPath.add(newRec);
         playerTwoCurrRectLine = newRec;
 
@@ -315,5 +400,32 @@ public class TronPaneMarch25 extends Pane{
 
         //flag: prints how many player one rectangles there are, for optimization testing
         System.out.println(playerOneRectPath.size());
+    }
+
+    public Text printResults(int winner){ //after this is called, winner limit would need to be checked
+        Text pWinner;
+        if (winner == 1){
+            pWinner = new Text(p1N + " Wins!");
+            p1S++;
+        }
+        else if (winner == 2){
+            pWinner = new Text(p2N + " Wins!");
+            p2S++;
+        }
+        else
+            pWinner = new Text("Tie. :(");
+        pWinner.setFont(popFont);
+        pWinner.setFill(Paint.valueOf("WHITE"));
+        pWinner.setX(350);
+        pWinner.setY(400);
+        return pWinner;
+    }
+
+
+
+
+    public void setNames(String p1N, String p2N){
+        this.p1N = p1N;
+        this.p2N = p2N;
     }
 }
