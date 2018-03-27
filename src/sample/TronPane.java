@@ -57,6 +57,8 @@ public class TronPane extends Pane{
     private String p1N;
     private String p2N;
 
+    Path arena;
+
     private HBox scoreDisplay;
     //constructor sets up animation and creates rectangle
     public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2){
@@ -81,7 +83,7 @@ public class TronPane extends Pane{
         scoreDisplay = scoreDisplay();
         scoreDisplay.setLayoutX(350);
         scoreDisplay.setLayoutY(15);
-        Path arena = new Path();
+        arena = new Path();
         MoveTo topL = new MoveTo(5,60);
         LineTo topR = new LineTo(805,60);
         LineTo botR = new LineTo(805, 805);
@@ -204,7 +206,6 @@ public class TronPane extends Pane{
                 end = true;
             }
         }
-
 
 
         updateScoreDisplay();
