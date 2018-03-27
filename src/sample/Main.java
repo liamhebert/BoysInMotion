@@ -55,7 +55,7 @@ public class Main extends Application {
         //primaryStage.setScene(credits());
         primaryStage.setScene(game());
         primaryStage.show();
-        //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
+        primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
     }
     public Scene mainMenu() { //this is where the game should start. Shows the main menu and options

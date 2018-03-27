@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -403,7 +404,7 @@ public class TronPane extends Pane{
         System.out.println(playerOneRectPath.size());
     }
 
-    public Text printResults(int winner){ //after this is called, winner limit would need to be checked
+    public StackPane printResults(int winner){ //after this is called, winner limit would need to be checked
         Text pWinner;
         if (winner == 1){
             pWinner = new Text(p1N + " Wins!");
@@ -417,9 +418,14 @@ public class TronPane extends Pane{
             pWinner = new Text("Tie. :(");
         pWinner.setFont(popFont);
         pWinner.setFill(Paint.valueOf("WHITE"));
-        pWinner.setX(350);
-        pWinner.setY(400);
-        return pWinner;
+        //pWinner.setX(350);
+        //pWinner.setY(400);
+        Rectangle background = new Rectangle(300, 70); //could be better, for different name sizes
+        background.setFill(Paint.valueOf("RED"));
+        StackPane result = new StackPane(background, pWinner);
+        result.setLayoutX(250);
+        result.setLayoutY(400);
+        return result;
     }
 
 }
