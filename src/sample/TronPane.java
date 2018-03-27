@@ -3,6 +3,8 @@ package sample;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -25,10 +27,10 @@ public class TronPane extends Pane{
     private double sizeY = 6; //default size of the players
 
     private double playerOneRecLocX = 200, playerOneRecLocY = 390; //start point of player 1
-    private double playerOneDx = 0, playerOneDy = 1;//start direction of player one
+    private double playerOneDx = 1, playerOneDy = 0;//start direction of player one
 
     private double playerTwoRecLocX = 600, playerTwoRecLocY = 390; //start point of player 2
-    private double playerTwoDx = 0, playerTwoDy = -1; //start direction of player two
+    private double playerTwoDx = -1, playerTwoDy = 0; //start direction of player two
 
     //player 1 rectangle
     private Rectangle playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
@@ -119,6 +121,38 @@ public class TronPane extends Pane{
         animation.play();
     }
 
+    public void reset(){
+        playerOneRectPath.clear();
+        playerTwoRectPath.clear();
+        playerOneRecLocX = 200;
+        playerOneRecLocY = 390; //start point of player 1
+        playerOneDx = 1;
+        playerOneDy = 0;//start direction of player one
+
+        playerTwoRecLocX = 600;
+        playerTwoRecLocY = 390; //start point of player 2
+        playerTwoDx = -1;
+        playerTwoDy = 0; //start direction of player two
+
+        //player 1 rectangle
+        playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
+
+        //player 2 rectangle
+        playerTwoRect = new Rectangle(playerTwoRecLocX, playerTwoRecLocY, sizeX, sizeY);
+
+        //current line streaming from player one
+        playerOneCurrRectLine = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), playerOneRect.getWidth(), playerOneRect.getHeight());
+
+        //current line streaming from player two
+        playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), playerTwoRect.getWidth(), playerTwoRect.getHeight());
+        getChildren().set(4, playerOneRect);
+        getChildren().set(5, playerOneCurrRectLine);
+        getChildren().set(6, playerTwoRect);
+        getChildren().set(7, playerTwoCurrRectLine);
+        getChildren().remove(8, getChildren().size() - 1);
+        System.out.println("testttt");
+    }
+
     public void play(){
         animation.play();
     }
@@ -207,9 +241,10 @@ public class TronPane extends Pane{
                 end = true;
             }
         }
-
-
-        updateScoreDisplay();
+        if (end) {
+            reset(); //testing........
+            updateScoreDisplay();
+        }
 
 
     }
@@ -418,13 +453,21 @@ public class TronPane extends Pane{
             pWinner = new Text("Tie. :(");
         pWinner.setFont(popFont);
         pWinner.setFill(Paint.valueOf("WHITE"));
-        //pWinner.setX(350);
-        //pWinner.setY(400);
         Rectangle background = new Rectangle(300, 70); //could be better, for different name sizes
         background.setFill(Paint.valueOf("RED"));
         StackPane result = new StackPane(background, pWinner);
         result.setLayoutX(250);
         result.setLayoutY(400);
+        result.setOnKeyPressed(e -> { //this does not work
+            if (e.getCode() == KeyCode.C){
+                getChildren().remove(getChildren().size()-1, getChildren().size());
+                play();
+                System.out.println("boop");
+            }
+        });
+        result.requestFocus();
+
+        reset(); //for testing
         return result;
     }
 
