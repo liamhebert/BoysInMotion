@@ -91,9 +91,9 @@ public class TronPane extends Pane{
         //new arena code, as rectangles
         topArena = new Rectangle(5, 60, 800, 8);
         topArena.setFill(Color.WHITE);
-        bottomArena = new Rectangle(5, 805, 800, 8);
+        bottomArena = new Rectangle(5, 795, 800, 8);
         bottomArena.setFill(Color.WHITE);
-        rightArena = new Rectangle(805, 60, 8, 800);
+        rightArena = new Rectangle(795, 60, 8, 800);
         rightArena.setFill(Color.WHITE);
         leftArena = new Rectangle(5, 60, 8, 800);
         leftArena.setFill(Color.WHITE);
@@ -117,7 +117,7 @@ public class TronPane extends Pane{
         playerOneRectPath.add(playerOneCurrRectLine);
         playerTwoRectPath.add(playerTwoCurrRectLine);
         animation = new Timeline(
-                new KeyFrame(Duration.millis(10), e -> movePlayer())
+                new KeyFrame(Duration.millis(5), e -> movePlayer())
         );
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();

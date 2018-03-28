@@ -38,7 +38,7 @@ public class Main extends Application {
     private static String p1N = "Player 1";
     private static String p2N = "Player 2";
     private Stage stage;
-
+    private static Color[] allColors = {Color.rgb(255,0,0), Color.rgb(255,252,25), Color.rgb(20,133,204), Color.rgb(178,24,95), Color.rgb(25,255,40) };
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
@@ -46,18 +46,18 @@ public class Main extends Application {
         subTitle = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),42.6666667 * 1.5);
         popFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),30);
         //these two variables here are for testing purpose only, will be assigned during the customize screen
-        p1 = Color.rgb(25,255,40);
-        p2 = Color.rgb(255,252,25);
+        p1 = allColors[3];
+        p2 = allColors[2];
         primaryStage.setTitle("Loading...");
         primaryStage.setResizable(false);
         this.stage = primaryStage;
         //following block is for testing purposes only. Normally, game would start on the main menu.
-        primaryStage.setScene(customizeBike());
+        //primaryStage.setScene(customizeBike());
 
         //primaryStage.setScene(results());
         //primaryStage.setScene(credits());
         //primaryStage.setScene(game());
-        //primaryStage.setScene(mainMenu());
+        primaryStage.setScene(mainMenu());
         primaryStage.show();
         //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
@@ -203,10 +203,8 @@ public class Main extends Application {
         inputAndColor.getChildren().add(p1NameInput);
 
         HBox colors = new HBox(10);
-        Color[] allColors = {Color.rgb(255,0,0), Color.rgb(255,252,25), Color.rgb(20,133,204), Color.rgb(255,120,0), Color.rgb(25,255,40) };
+        //Color[] allColors = {Color.rgb(255,0,0), Color.rgb(255,252,25), Color.rgb(20,133,204), Color.rgb(255,120,0), Color.rgb(25,255,40) };
         //testing purposes, will be reassigned based on selection
-        p1 = allColors[1];
-        p2 = allColors[4];
         Rectangle color1 = new Rectangle(50,50);
         color1.setFill(allColors[0]);
         Rectangle color2 = new Rectangle(50,50);
