@@ -83,22 +83,22 @@ public class Main extends Application {
         StackPane op1S = new StackPane(op1, option1);
         StackPane op2S = new StackPane(op2, option2);
         StackPane op3S = new StackPane(op3, option3);
-        op1S.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        op1S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when start is clicked
             @Override
             public void handle(MouseEvent event) {
-                stage.setScene(customizeBike());
+                stage.setScene(customizeBike());//go to customize screen
             }
         });
-        op2S.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        op2S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when credits is clicked
             @Override
             public void handle(MouseEvent event) {
-                stage.setScene(credits());
+                stage.setScene(credits());//go to credits scene
             }
         });
-        op3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        op3.setOnMouseClicked(new EventHandler<MouseEvent>() {//when quit is clicked
             @Override
             public void handle(MouseEvent event) {
-                Platform.exit();
+                Platform.exit();//quit
             }
         });
         VBox optionsLayout = new VBox(5); //contains the text options
@@ -266,6 +266,18 @@ public class Main extends Application {
         Rectangle option2 = new Rectangle(80,50, Paint.valueOf("BLACK"));
         StackPane op1S = new StackPane(option1, yes);
         StackPane op2S = new StackPane(option2,no);
+        op1S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when yes is clicked
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setScene(customizeBike());//go to customize screen
+            }
+        });
+        op2S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when no is clicked
+            @Override
+            public void handle(MouseEvent event) {//go to main menu
+                stage.setScene(mainMenu());
+            }
+        });
 
 
         options.getChildren().addAll(op1S, op2S);
