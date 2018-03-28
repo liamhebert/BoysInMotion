@@ -10,9 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -304,10 +302,19 @@ public class Main extends Application {
 
     public Scene game(){
 
-        Group test = new Group();
+        //so the tronPane needs a group to assign to a scene. Stage didn't like it when tron pane was pushed directly to a scene
+        //so I gave it to a group
+        //this caused problems because it was ignoring key inputs
+        //resolved this by making the keyinputs part of the scene instead of the tronPane
+        //this fixed the issue because there is no barrier between the stage and the tronPane since the scene processes the inputs
+        //(the group was blocking this)
+
+        Group root = new Group();//contains tron pane
         TronPane tronPane = new TronPane(popFont,p1N,p2N,p1,p2);//main game pane class
-        tronPane.requestFocus();
-        tronPane.setOnKeyReleased(e -> { //lambda, oooooof. This does the same thing as new EventHandler(KeyEvent e)
+        root.getChildren().add(tronPane);
+        Scene display = new Scene(root, 800, 800, Paint.valueOf("BLACK")); //scene needs to be built before adding keyinputs
+        display.setOnKeyReleased(e -> { //lambda, oooooof. This does the same thing as new EventHandler(KeyEvent e) //attached directly to the scene
+            //the key inputs directly affect the tronPane through the Scene, direct route
             if (e.getCode() == KeyCode.A){
                 tronPane.setDirectionPlayerOne("l");
             } else if (e.getCode() == KeyCode.D){
@@ -318,8 +325,7 @@ public class Main extends Application {
                 tronPane.setDirectionPlayerTwo("r");
             }
         });
-        test.getChildren().add(tronPane);
-        return new Scene(test, 800, 800, Paint.valueOf("BLACK"));
+        return display;
     }
 
     public HBox scoreDisplay(){

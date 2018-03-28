@@ -10,9 +10,7 @@ import javafx.scene.layout.StackPane;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
+
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -61,7 +59,6 @@ public class TronPane extends Pane{
     private String p2N;
 
     private Rectangle topArena, leftArena, bottomArena, rightArena;
-    Path arena;
 
     private HBox scoreDisplay;
     //constructor sets up animation and creates rectangle
@@ -91,19 +88,6 @@ public class TronPane extends Pane{
         scoreDisplay.setLayoutX(350);
         scoreDisplay.setLayoutY(15);
 
-        //Old arena code, as a path not rectangles
-
-
-//        arena = new Path();
-//        MoveTo topL = new MoveTo(5,60);
-//        LineTo topR = new LineTo(805,60);
-//        LineTo botR = new LineTo(805, 805);
-//        LineTo botL = new LineTo(5,805);
-//        LineTo bTopL = new LineTo(5,60);
-//        arena.getElements().addAll(topL,topR,botR,botL,bTopL);
-//        arena.setStroke(Paint.valueOf("WHITE"));
-//        arena.setStrokeWidth(8);
-
         //new arena code, as rectangles
         topArena = new Rectangle(5, 60, 800, 8);
         topArena.setFill(Color.WHITE);
@@ -132,7 +116,6 @@ public class TronPane extends Pane{
         //adds the initial lines to the path arraylists
         playerOneRectPath.add(playerOneCurrRectLine);
         playerTwoRectPath.add(playerTwoCurrRectLine);
-
         animation = new Timeline(
                 new KeyFrame(Duration.millis(10), e -> movePlayer())
         );
