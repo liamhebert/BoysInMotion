@@ -3,6 +3,9 @@ package sample;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -31,16 +34,16 @@ public class TronPane extends Pane{
     private double playerTwoDx = -1, playerTwoDy = 0; //start direction of player two
 
     //player 1 rectangle
-    private Rectangle playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
+    private Rectangle playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY); //two for the front hit box, prevents weird situations
 
     //player 2 rectangle
     private Rectangle playerTwoRect = new Rectangle(playerTwoRecLocX, playerTwoRecLocY, sizeX, sizeY);
 
     //current line streaming from player one
-    private Rectangle playerOneCurrRectLine = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), playerOneRect.getWidth(), playerOneRect.getHeight());
+    private Rectangle playerOneCurrRectLine = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), sizeX, playerOneRect.getHeight());
 
     //current line streaming from player two
-    private Rectangle playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), playerTwoRect.getWidth(), playerTwoRect.getHeight());
+    private Rectangle playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), sizeX, playerTwoRect.getHeight());
 
 
     //this is our "path" of rectangles, in the form of an arraylist
@@ -57,6 +60,7 @@ public class TronPane extends Pane{
     private Font popFont;
     private String p1N;
     private String p2N;
+    private int flicks;
 
     private Rectangle topArena, leftArena, bottomArena, rightArena;
 
@@ -160,15 +164,14 @@ public class TronPane extends Pane{
     }
 
     public void collisionCheck(){
-        //FOR ANYONE EDITING
-        //THIS IS WHERE SCORE UPDATING WILL PROBABLY EVENTUALLY GO
         boolean end = false;
-
+        int boomP = 0;
+        Timeline explosion;
         //did the players themselves hit eachother head on?
         if (playerOneRect.intersects(playerTwoRect.getBoundsInLocal())){
             pause();
             System.out.println("Player one and player two hit eachother");
-            getChildren().add(printResults(0));
+            boomP = 3;
             end = true;
         }
 
@@ -177,7 +180,7 @@ public class TronPane extends Pane{
             if (playerOneRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())) {
                 pause();
                 System.out.println("Player One just crashed into their own line smh");
-                getChildren().add(printResults(2));
+                boomP = 1;
                 end = true;
             }
         }
@@ -187,7 +190,7 @@ public class TronPane extends Pane{
             if (playerTwoRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
                 pause();
                 System.out.println("Player Two just crashed into their own line smh");
-                getChildren().add(printResults(1));
+                boomP = 2;
                 end = true;
             }
         }
@@ -197,7 +200,7 @@ public class TronPane extends Pane{
             if (playerTwoRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())){
                 pause();
                 System.out.println("Player two crashed into player one's line");
-                getChildren().add(printResults(1));
+                boomP = 2;
                 end = true;
             }
         }
@@ -207,7 +210,7 @@ public class TronPane extends Pane{
             if (playerOneRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
                 pause();
                 System.out.println("Player one crashed into player two's line");
-                getChildren().add(printResults(2));
+                boomP = 1;
                 end = true;
             }
         }
@@ -215,55 +218,152 @@ public class TronPane extends Pane{
         if (playerOneRect.intersects(topArena.getBoundsInLocal())){
             pause();
             System.out.println("Player one hit the arena wall");
-            getChildren().add(printResults(2));
+            boomP = 1;
             end = true;
         }
         if (playerOneRect.intersects(bottomArena.getBoundsInLocal())){
             pause();
             System.out.println("Player one hit the arena wall");
-            getChildren().add(printResults(2));
+            boomP = 1;
             end = true;
         }
         if (playerOneRect.intersects(rightArena.getBoundsInLocal())){
             pause();
             System.out.println("Player one hit the arena wall");
-            getChildren().add(printResults(2));
+            boomP = 1;
             end = true;
         }
         if (playerOneRect.intersects(leftArena.getBoundsInLocal())){
             pause();
             System.out.println("Player one hit the arena wall");
-            getChildren().add(printResults(2));
+            boomP = 1;
             end = true;
         }
 
         if (playerTwoRect.intersects(topArena.getBoundsInLocal())){
             pause();
             System.out.println("Player two hit the arena wall");
-            getChildren().add(printResults(1));
+            boomP = 2;
             end = true;
         }
         if (playerTwoRect.intersects(bottomArena.getBoundsInLocal())){
             pause();
             System.out.println("Player two hit the arena wall");
-            getChildren().add(printResults(1));
+            boomP = 2;
             end = true;
         }
         if (playerTwoRect.intersects(rightArena.getBoundsInLocal())){
             pause();
             System.out.println("Player two hit the arena wall");
-            getChildren().add(printResults(1));
+            boomP = 2;
             end = true;
         }
         if (playerTwoRect.intersects(leftArena.getBoundsInLocal())){
             pause();
             System.out.println("Player two hit the arena wall");
-            getChildren().add(printResults(1));
+            boomP = 2;
             end = true;
         }
-        updateScoreDisplay();
 
+        if (end) {
+            if (boomP == 1){
+                explosion = new Timeline(new KeyFrame(Duration.millis(100), e -> crash(1)));
+                explosion.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        getChildren().add(printResults(2));
+                        updateScoreDisplay();
+                    }
+                });
+            }
+            else if (boomP == 2){
+                explosion = new Timeline(new KeyFrame(Duration.millis(100), e -> crash(2)));
+                explosion.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        getChildren().add(printResults(1));
+                        updateScoreDisplay();
+                    }
+                });
+            }
+            else {
+                explosion = new Timeline(new KeyFrame(Duration.millis(100), e -> crash(3)));
+                explosion.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        getChildren().add(printResults(3));
+                        updateScoreDisplay();
+                    }
+                });
+            }
+            explosion.setCycleCount(10);
+            explosion.play();
+        }
 
+    }
+
+    private void crash(int player){
+        double startX;
+        double startY;
+        if (player == 1){
+            startX = playerOneRecLocX;
+            startY = playerOneRecLocY;
+        }
+        else if (player == 2){
+            startX = playerTwoRecLocX;
+            startY = playerTwoRecLocY;
+        }
+        else {
+            startX = (playerOneRecLocX + playerTwoRecLocX) / 2;
+            startY = (playerOneRecLocY + playerTwoRecLocY) / 2;
+        }
+        Group root;
+        if (flicks % 2 == 0) {
+            double distance = flicks * 25;
+            /* layout
+            1 2 3
+            4   5
+            6 7 8
+             */
+            Rectangle rect1 = new Rectangle(startX - distance,startY + distance,50,50);
+            Rectangle rect2 = new Rectangle(startX,startY + distance,50,50);
+            Rectangle rect3 = new Rectangle(startX + distance,startY + distance,50,50);
+            Rectangle rect4 = new Rectangle(startX - distance,startY,50,50);
+            Rectangle rect5 = new Rectangle(startX + distance,startY,50,50);
+            Rectangle rect6 = new Rectangle(startX - distance,startY - distance,50,50);
+            Rectangle rect7 = new Rectangle(startX,startY - distance,50,50);
+            Rectangle rect8 = new Rectangle(startX + distance,startY - distance,50,50);
+
+            //alternating colors
+            if (flicks % 4 == 0){ //every second burst
+                rect1.setFill(Paint.valueOf("YELLOW"));
+                rect2.setFill(Paint.valueOf("YELLOW"));
+                rect3.setFill(Paint.valueOf("YELLOW"));
+                rect4.setFill(Paint.valueOf("YELLOW"));
+                rect5.setFill(Paint.valueOf("YELLOW"));
+                rect6.setFill(Paint.valueOf("YELLOW"));
+                rect7.setFill(Paint.valueOf("YELLOW"));
+                rect8.setFill(Paint.valueOf("YELLOW"));
+            }
+            else {
+                rect1.setFill(Paint.valueOf("WHITE"));
+                rect2.setFill(Paint.valueOf("WHITE"));
+                rect3.setFill(Paint.valueOf("WHITE"));
+                rect4.setFill(Paint.valueOf("WHITE"));
+                rect5.setFill(Paint.valueOf("WHITE"));
+                rect6.setFill(Paint.valueOf("WHITE"));
+                rect7.setFill(Paint.valueOf("WHITE"));
+                rect8.setFill(Paint.valueOf("WHITE"));
+            }
+            root = new Group(rect1,rect2,rect3,rect4,rect5,rect6,rect7,rect8);
+        }
+        else
+            root = new Group(); //nothing
+        if (flicks == 0)
+            getChildren().add(root);
+        else
+            getChildren().set(getChildren().size() - 1, root);
+        flicks++;
     }
 
     public void changeDirectionPlayerOne(){

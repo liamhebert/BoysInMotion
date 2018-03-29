@@ -144,8 +144,8 @@ public class Main extends Application {
         selectedColorP2.setY(375);
 
         Group p1FlickRects = new Group();
-        Timeline selectP1 = new Timeline(new KeyFrame(Duration.millis(75), e -> flick(1, p1Flicks, p1FlickRects)));
-        selectP1.setCycleCount(45);
+        Timeline selectP1 = new Timeline(new KeyFrame(Duration.millis(75), e -> flick(1, p1FlickRects)));
+        selectP1.setCycleCount(8);
         selectP1.setAutoReverse(false);
         selectP1.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
@@ -158,8 +158,8 @@ public class Main extends Application {
 
 
         Group p2FlickRects = new Group();
-        Timeline selectP2 = new Timeline(new KeyFrame(Duration.millis(75), e -> flick(2, p2Flicks, p2FlickRects)));
-        selectP2.setCycleCount(45);
+        Timeline selectP2 = new Timeline(new KeyFrame(Duration.millis(75), e -> flick(2, p2FlickRects)));
+        selectP2.setCycleCount(8);
         selectP2.setAutoReverse(false);
        selectP2.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
@@ -181,7 +181,7 @@ public class Main extends Application {
         VBox inputAndColor1 = new VBox(10);
         TextField p1NameInput = new TextField("Name");
         inputAndColor1.getChildren().add(p1NameInput);
-
+        HBox.setMargin(inputAndColor1, new Insets(0,0,0,10));
         HBox p1colors = new HBox(10);
         Rectangle p1color1 = new Rectangle(50,50);
         p1color1.setFill(allColors[0]);
@@ -199,7 +199,7 @@ public class Main extends Application {
 
         //p2
         HBox player2 = new HBox(20);
-        Text p2pT = new Text("player 1 :");
+        Text p2pT = new Text("player 2 :");
         p2pT.setFont(popFont);
         p2pT.setFill(Paint.valueOf("WHITE"));
         player2.getChildren().add(p2pT);
@@ -269,10 +269,11 @@ public class Main extends Application {
         Rectangle startButton = new Rectangle(600, 125);
         startButton.setFill(Paint.valueOf("RED"));
         StackPane start = new StackPane(startButton, buttonGo);
+
+
         StackPane.setMargin(buttonGo, new Insets(10,0,0,0));
         layout.getChildren().add(start);
         root.getChildren().addAll(selectedColorP1,selectedColorP2,layout);
-        System.out.println(selectedColorP2.getY());
         start.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -286,16 +287,19 @@ public class Main extends Application {
         return new Scene(root, 800, 800, Paint.valueOf("BLACK"));
     }
 
-    private static void flick(int player, int flicks, Group container){
+    private static void flick(int player, Group container){
         int startY;
         Color tempC;
+        int flicks;
         if (player == 1) {
             startY = 250;
             tempC = allColors[2]; //this would be the static value, just testing
+            flicks = p1Flicks;
         }
         else {
             startY = 375;
             tempC = allColors[1];
+            flicks = p2Flicks;
         }
 
         Rectangle temp = new Rectangle(flicks * 125,startY, 125, 125);

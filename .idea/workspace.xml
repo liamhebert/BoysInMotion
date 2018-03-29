@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="63473816-2afb-4331-b75d-9589af5aefc2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/TronPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/TronPane.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="224" column="54" selection-start-line="224" selection-start-column="54" selection-end-line="224" selection-end-column="54" />
+            <state relative-caret-position="3407">
+              <caret line="301" column="30" selection-start-line="301" selection-start-column="30" selection-end-line="301" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4196#4197#0" expanded="true" />
@@ -29,8 +34,8 @@
                 <element signature="e#4535#4536#0" expanded="true" />
                 <element signature="e#4705#4706#0" expanded="true" />
                 <element signature="e#4758#4759#0" expanded="true" />
-                <element signature="e#10958#10959#0" expanded="true" />
-                <element signature="e#11012#11013#0" expanded="true" />
+                <element signature="e#11998#11999#0" expanded="true" />
+                <element signature="e#12052#12053#0" expanded="true" />
                 <element signature="e#15083#15084#0" expanded="true" />
                 <element signature="e#15170#15171#0" expanded="true" />
                 <element signature="e#15339#15340#0" expanded="true" />
@@ -42,13 +47,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TronPane.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TronPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1748">
-              <caret line="94" selection-start-line="94" selection-end-line="94" />
+            <state relative-caret-position="164">
+              <caret line="308" column="38" lean-forward="true" selection-start-line="308" selection-start-column="38" selection-end-line="308" selection-end-column="38" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#14307#14308#0" expanded="true" />
+                <element signature="e#14363#14364#0" expanded="true" />
+                <element signature="e#14412#14413#0" expanded="true" />
+                <element signature="e#14468#14469#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,8 +78,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/src/sample/TronPane.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/sample/TronPane.java" />
       </list>
     </option>
   </component>
@@ -212,11 +220,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14651000" />
+    <option name="totallyTimeSpent" value="20540000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -227,7 +234,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32943678" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.16414687" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.16414687" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -256,16 +263,14 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/TronPane.java</url>
-          <line>362</line>
-          <properties class="sample.TronPane">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="4" />
+          <line>301</line>
+          <properties />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="9" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -281,8 +286,8 @@
             <element signature="e#4535#4536#0" expanded="true" />
             <element signature="e#4705#4706#0" expanded="true" />
             <element signature="e#4758#4759#0" expanded="true" />
-            <element signature="e#10958#10959#0" expanded="true" />
-            <element signature="e#11012#11013#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
             <element signature="e#15083#15084#0" expanded="true" />
             <element signature="e#15170#15171#0" expanded="true" />
             <element signature="e#15339#15340#0" expanded="true" />
@@ -298,7 +303,10 @@
         <state relative-caret-position="2530">
           <caret line="110" selection-start-line="110" selection-end-line="110" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -314,8 +322,8 @@
             <element signature="e#4535#4536#0" expanded="true" />
             <element signature="e#4705#4706#0" expanded="true" />
             <element signature="e#4758#4759#0" expanded="true" />
-            <element signature="e#10958#10959#0" expanded="true" />
-            <element signature="e#11012#11013#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
             <element signature="e#15083#15084#0" expanded="true" />
             <element signature="e#15170#15171#0" expanded="true" />
             <element signature="e#15339#15340#0" expanded="true" />
@@ -331,7 +339,10 @@
         <state relative-caret-position="5198">
           <caret line="226" column="69" selection-start-line="226" selection-start-column="69" selection-end-line="226" selection-end-column="69" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -347,8 +358,8 @@
             <element signature="e#4535#4536#0" expanded="true" />
             <element signature="e#4705#4706#0" expanded="true" />
             <element signature="e#4758#4759#0" expanded="true" />
-            <element signature="e#10958#10959#0" expanded="true" />
-            <element signature="e#11012#11013#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
             <element signature="e#15083#15084#0" expanded="true" />
             <element signature="e#15170#15171#0" expanded="true" />
             <element signature="e#15339#15340#0" expanded="true" />
@@ -364,7 +375,10 @@
         <state relative-caret-position="92">
           <caret line="4" selection-start-line="4" selection-end-line="4" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -380,8 +394,8 @@
             <element signature="e#4535#4536#0" expanded="true" />
             <element signature="e#4705#4706#0" expanded="true" />
             <element signature="e#4758#4759#0" expanded="true" />
-            <element signature="e#10958#10959#0" expanded="true" />
-            <element signature="e#11012#11013#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
             <element signature="e#15083#15084#0" expanded="true" />
             <element signature="e#15170#15171#0" expanded="true" />
             <element signature="e#15339#15340#0" expanded="true" />
@@ -404,7 +418,10 @@
         <state relative-caret-position="2139">
           <caret line="111" column="44" lean-forward="true" selection-start-line="111" selection-start-column="44" selection-end-line="111" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -421,8 +438,8 @@
             <element signature="e#4535#4536#0" expanded="true" />
             <element signature="e#4705#4706#0" expanded="true" />
             <element signature="e#4758#4759#0" expanded="true" />
-            <element signature="e#10958#10959#0" expanded="true" />
-            <element signature="e#11012#11013#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
             <element signature="e#15083#15084#0" expanded="true" />
             <element signature="e#15170#15171#0" expanded="true" />
             <element signature="e#15339#15340#0" expanded="true" />
@@ -438,7 +455,10 @@
         <state relative-caret-position="2300">
           <caret line="118" column="34" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -464,8 +484,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="224" column="54" selection-start-line="224" selection-start-column="54" selection-end-line="224" selection-end-column="54" />
+        <state relative-caret-position="4600">
+          <caret line="283" column="34" lean-forward="true" selection-start-line="283" selection-start-column="34" selection-end-line="283" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4196#4197#0" expanded="true" />
@@ -474,8 +494,8 @@
             <element signature="e#4535#4536#0" expanded="true" />
             <element signature="e#4705#4706#0" expanded="true" />
             <element signature="e#4758#4759#0" expanded="true" />
-            <element signature="e#10958#10959#0" expanded="true" />
-            <element signature="e#11012#11013#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
             <element signature="e#15083#15084#0" expanded="true" />
             <element signature="e#15170#15171#0" expanded="true" />
             <element signature="e#15339#15340#0" expanded="true" />
@@ -491,7 +511,255 @@
         <state relative-caret-position="1748">
           <caret line="94" selection-start-line="94" selection-end-line="94" />
           <folding>
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2300">
+          <caret line="100" column="21" lean-forward="true" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
+          <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4196#4197#0" expanded="true" />
+            <element signature="e#4283#4284#0" expanded="true" />
+            <element signature="e#4457#4458#0" expanded="true" />
+            <element signature="e#4535#4536#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4758#4759#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
+            <element signature="e#15083#15084#0" expanded="true" />
+            <element signature="e#15170#15171#0" expanded="true" />
+            <element signature="e#15339#15340#0" expanded="true" />
+            <element signature="e#15414#15415#0" expanded="true" />
+            <element signature="e#17304#17305#0" expanded="true" />
+            <element signature="e#17332#17333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2530">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+          <folding>
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4196#4197#0" expanded="true" />
+            <element signature="e#4283#4284#0" expanded="true" />
+            <element signature="e#4457#4458#0" expanded="true" />
+            <element signature="e#4535#4536#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4758#4759#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
+            <element signature="e#15083#15084#0" expanded="true" />
+            <element signature="e#15170#15171#0" expanded="true" />
+            <element signature="e#15339#15340#0" expanded="true" />
+            <element signature="e#15414#15415#0" expanded="true" />
+            <element signature="e#17304#17305#0" expanded="true" />
+            <element signature="e#17332#17333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5198">
+          <caret line="226" column="69" selection-start-line="226" selection-start-column="69" selection-end-line="226" selection-end-column="69" />
+          <folding>
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4196#4197#0" expanded="true" />
+            <element signature="e#4283#4284#0" expanded="true" />
+            <element signature="e#4457#4458#0" expanded="true" />
+            <element signature="e#4535#4536#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4758#4759#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
+            <element signature="e#15083#15084#0" expanded="true" />
+            <element signature="e#15170#15171#0" expanded="true" />
+            <element signature="e#15339#15340#0" expanded="true" />
+            <element signature="e#15414#15415#0" expanded="true" />
+            <element signature="e#17304#17305#0" expanded="true" />
+            <element signature="e#17332#17333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4196#4197#0" expanded="true" />
+            <element signature="e#4283#4284#0" expanded="true" />
+            <element signature="e#4457#4458#0" expanded="true" />
+            <element signature="e#4535#4536#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4758#4759#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
+            <element signature="e#15083#15084#0" expanded="true" />
+            <element signature="e#15170#15171#0" expanded="true" />
+            <element signature="e#15339#15340#0" expanded="true" />
+            <element signature="e#15414#15415#0" expanded="true" />
+            <element signature="e#17304#17305#0" expanded="true" />
+            <element signature="e#17332#17333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2139">
+          <caret line="111" column="44" lean-forward="true" selection-start-line="111" selection-start-column="44" selection-end-line="111" selection-end-column="44" />
+          <folding>
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1311">
+          <caret line="57" column="8" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4196#4197#0" expanded="true" />
+            <element signature="e#4283#4284#0" expanded="true" />
+            <element signature="e#4457#4458#0" expanded="true" />
+            <element signature="e#4535#4536#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4758#4759#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
+            <element signature="e#15083#15084#0" expanded="true" />
+            <element signature="e#15170#15171#0" expanded="true" />
+            <element signature="e#15339#15340#0" expanded="true" />
+            <element signature="e#15414#15415#0" expanded="true" />
+            <element signature="e#17304#17305#0" expanded="true" />
+            <element signature="e#17332#17333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2300">
+          <caret line="118" column="34" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="34" />
+          <folding>
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4209" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3407">
+          <caret line="301" column="30" selection-start-line="301" selection-start-column="30" selection-end-line="301" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4196#4197#0" expanded="true" />
+            <element signature="e#4283#4284#0" expanded="true" />
+            <element signature="e#4457#4458#0" expanded="true" />
+            <element signature="e#4535#4536#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4758#4759#0" expanded="true" />
+            <element signature="e#11998#11999#0" expanded="true" />
+            <element signature="e#12052#12053#0" expanded="true" />
+            <element signature="e#15083#15084#0" expanded="true" />
+            <element signature="e#15170#15171#0" expanded="true" />
+            <element signature="e#15339#15340#0" expanded="true" />
+            <element signature="e#15414#15415#0" expanded="true" />
+            <element signature="e#17304#17305#0" expanded="true" />
+            <element signature="e#17332#17333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="308" column="38" lean-forward="true" selection-start-line="308" selection-start-column="38" selection-end-line="308" selection-end-column="38" />
+          <folding>
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14363#14364#0" expanded="true" />
+            <element signature="e#14412#14413#0" expanded="true" />
+            <element signature="e#14468#14469#0" expanded="true" />
           </folding>
         </state>
       </provider>
