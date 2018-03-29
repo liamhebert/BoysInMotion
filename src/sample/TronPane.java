@@ -319,20 +319,20 @@ public class TronPane extends Pane{
         }
         Group root;
         if (flicks % 2 == 0) {
-            double distance = flicks * 25;
+            double distance = flicks * (35/2);
             /* layout
             1 2 3
             4   5
             6 7 8
              */
-            Rectangle rect1 = new Rectangle(startX - distance,startY + distance,50,50);
-            Rectangle rect2 = new Rectangle(startX,startY + distance,50,50);
-            Rectangle rect3 = new Rectangle(startX + distance,startY + distance,50,50);
-            Rectangle rect4 = new Rectangle(startX - distance,startY,50,50);
-            Rectangle rect5 = new Rectangle(startX + distance,startY,50,50);
-            Rectangle rect6 = new Rectangle(startX - distance,startY - distance,50,50);
-            Rectangle rect7 = new Rectangle(startX,startY - distance,50,50);
-            Rectangle rect8 = new Rectangle(startX + distance,startY - distance,50,50);
+            Rectangle rect1 = new Rectangle(startX - distance,startY + distance,35,35);
+            Rectangle rect2 = new Rectangle(startX,startY + distance,35,35);
+            Rectangle rect3 = new Rectangle(startX + distance,startY + distance,35,35);
+            Rectangle rect4 = new Rectangle(startX - distance,startY,35,35);
+            Rectangle rect5 = new Rectangle(startX + distance,startY,35,35);
+            Rectangle rect6 = new Rectangle(startX - distance,startY - distance,35,35);
+            Rectangle rect7 = new Rectangle(startX,startY - distance,35,35);
+            Rectangle rect8 = new Rectangle(startX + distance,startY - distance,35,35);
 
             //alternating colors
             if (flicks % 4 == 0){ //every second burst
