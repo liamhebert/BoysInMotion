@@ -38,8 +38,7 @@ public class Main extends Application {
     private static final Font smallFont = new Font ("Consolas", 30);
 
     //these four static variables contain the customizable aspect of the game and the score. Things that change often
-    private static Color p1;
-    private static Color p2;
+
 
     private static int p1S;
     private static int p2S;
@@ -49,25 +48,25 @@ public class Main extends Application {
     private static int p1Flicks = 0;
     private static int p2Flicks = 0;
     private static Color[] allColors = {Color.rgb(255,0,0), Color.valueOf("ORANGE"), Color.rgb(20,133,204), Color.rgb(178,24,95), Color.rgb(25,255,40) };
+    private static Color p1 = allColors[0];
+    private static Color p2 = allColors[1];
+
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
         titleFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),106.66667 * 1.5);
         subTitle = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),42.6666667 * 1.5);
         popFont = Font.loadFont(new FileInputStream("resources/LeagueSpartan.ttf"),30);
-        //these two variables here are for testing purpose only, will be assigned during the customize screen
-        p1 = allColors[3];
-        p2 = allColors[4];
         primaryStage.setTitle("Loading...");
         primaryStage.setResizable(false);
         this.stage = primaryStage;
         //following block is for testing purposes only. Normally, game would start on the main menu.
-        primaryStage.setScene(customizeBike());
+        //primaryStage.setScene(customizeBike());
 
         //primaryStage.setScene(results());
         //primaryStage.setScene(credits());
         //primaryStage.setScene(game());
-        //primaryStage.setScene(mainMenu());
+        primaryStage.setScene(mainMenu());
         primaryStage.show();
         //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
         primaryStage.setTitle("results");
@@ -133,6 +132,12 @@ public class Main extends Application {
         title.setFill(Paint.valueOf("WHITE"));
         layout.getChildren().add(title);
 
+        Text buttonGo = new Text("GO!");
+        buttonGo.setFont(subTitle);
+        buttonGo.setFill(Paint.valueOf("WHITE"));
+        Rectangle startButton = new Rectangle(600, 125);
+        startButton.setFill(Paint.valueOf("RED"));
+        StackPane start = new StackPane(startButton, buttonGo);
         Rectangle selectedColorP1 = new Rectangle(812,375 - 250);
         selectedColorP1.setFill(p1);
         selectedColorP1.setY(250);
@@ -144,28 +149,28 @@ public class Main extends Application {
         selectedColorP2.setY(375);
 
         Group p1FlickRects = new Group();
-        Timeline selectP1 = new Timeline(new KeyFrame(Duration.millis(75), e -> flick(1, p1FlickRects)));
-        selectP1.setCycleCount(8);
+        Timeline selectP1 = new Timeline(new KeyFrame(Duration.millis(20), e -> flick(1, p1FlickRects)));
+        selectP1.setCycleCount(32);
         selectP1.setAutoReverse(false);
         selectP1.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 p1Flicks = 0;
-                selectedColorP1.setFill(allColors[2]);
+                selectedColorP1.setFill(p1);
                 p1FlickRects.getChildren().clear();
             }
         });
 
 
         Group p2FlickRects = new Group();
-        Timeline selectP2 = new Timeline(new KeyFrame(Duration.millis(75), e -> flick(2, p2FlickRects)));
-        selectP2.setCycleCount(8);
+        Timeline selectP2 = new Timeline(new KeyFrame(Duration.millis(20), e -> flick(2, p2FlickRects)));
+        selectP2.setCycleCount(32);
         selectP2.setAutoReverse(false);
        selectP2.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 p2Flicks = 0;
-                selectedColorP2.setFill(allColors[1]);
+                selectedColorP2.setFill(p2);
                 p2FlickRects.getChildren().clear();
             }
         });
@@ -180,19 +185,44 @@ public class Main extends Application {
 
         VBox inputAndColor1 = new VBox(10);
         TextField p1NameInput = new TextField("Name");
+        p1NameInput.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                p1N = p1NameInput.getText();
+            }
+        });
         inputAndColor1.getChildren().add(p1NameInput);
         HBox.setMargin(inputAndColor1, new Insets(0,0,0,10));
         HBox p1colors = new HBox(10);
         Rectangle p1color1 = new Rectangle(50,50);
         p1color1.setFill(allColors[0]);
+        p1color1.setOnMouseClicked(e -> {
+            p1 = allColors[0];
+            selectP1.play();
+        });
         Rectangle p1color2 = new Rectangle(50,50);
         p1color2.setFill(allColors[1]);
+        p1color2.setOnMouseClicked(e -> {
+            p1 = allColors[1];
+            selectP1.play();
+        });
         Rectangle p1color3 = new Rectangle(50,50);
         p1color3.setFill(allColors[2]);
+        p1color3.setOnMouseClicked(e -> {
+            p1 = allColors[2];
+            selectP1.play();
+        });
         Rectangle p1color4 = new Rectangle(50, 50);
         p1color4.setFill(allColors[3]);
+        p1color4.setOnMouseClicked(e -> {
+            p1 = allColors[3];
+            selectP1.play();
+        });
         Rectangle p1color5 = new Rectangle(50, 50);
         p1color5.setFill(allColors[4]);
+        p1color5.setOnMouseClicked(e -> {
+            p1 = allColors[4];
+            selectP1.play();
+        });
         p1colors.getChildren().addAll(p1color1,p1color2,p1color3,p1color4,p1color5);
         inputAndColor1.getChildren().add(p1colors);
         player1.getChildren().add(inputAndColor1);
@@ -211,14 +241,34 @@ public class Main extends Application {
         HBox p2colors = new HBox(10);
         Rectangle p2color1 = new Rectangle(50,50);
         p2color1.setFill(allColors[0]);
+        p2color1.setOnMouseClicked(e -> {
+            p2 = allColors[0];
+            selectP2.play();
+        });
         Rectangle p2color2 = new Rectangle(50,50);
         p2color2.setFill(allColors[1]);
+        p2color2.setOnMouseClicked(e -> {
+            p2 = allColors[1];
+            selectP2.play();
+        });
         Rectangle p2color3 = new Rectangle(50,50);
         p2color3.setFill(allColors[2]);
+        p2color3.setOnMouseClicked(e -> {
+            p2 = allColors[2];
+            selectP2.play();
+        });
         Rectangle p2color4 = new Rectangle(50, 50);
         p2color4.setFill(allColors[3]);
+        p2color4.setOnMouseClicked(e -> {
+            p2 = allColors[3];
+            selectP2.play();
+        });
         Rectangle p2color5 = new Rectangle(50, 50);
         p2color5.setFill(allColors[4]);
+        p2color5.setOnMouseClicked(e -> {
+            p2 = allColors[4];
+            selectP2.play();
+        });
         p2colors.getChildren().addAll(p2color1,p2color2,p2color3,p2color4,p2color5);
         inputAndColor2.getChildren().add(p2colors);
         player2.getChildren().add(inputAndColor2);
@@ -263,12 +313,7 @@ public class Main extends Application {
         HBox.setMargin(rects, new Insets(0,0,0,54));
         roundSelection.getChildren().add(rects);
 
-        Text buttonGo = new Text("GO!");
-        buttonGo.setFont(subTitle);
-        buttonGo.setFill(Paint.valueOf("WHITE"));
-        Rectangle startButton = new Rectangle(600, 125);
-        startButton.setFill(Paint.valueOf("RED"));
-        StackPane start = new StackPane(startButton, buttonGo);
+
 
 
         StackPane.setMargin(buttonGo, new Insets(10,0,0,0));
@@ -282,8 +327,8 @@ public class Main extends Application {
         });
         root.getChildren().add(2, p1FlickRects);
         root.getChildren().add(2, p2FlickRects);
-        selectP1.play(); //testing
-        selectP2.play(); //testing
+        //selectP1.play(); //testing
+        //selectP2.play(); //testing
         return new Scene(root, 800, 800, Paint.valueOf("BLACK"));
     }
 
@@ -293,16 +338,16 @@ public class Main extends Application {
         int flicks;
         if (player == 1) {
             startY = 250;
-            tempC = allColors[2]; //this would be the static value, just testing
+            tempC = p1; //this would be the static value, just testing
             flicks = p1Flicks;
         }
         else {
             startY = 375;
-            tempC = allColors[1];
+            tempC = p2;
             flicks = p2Flicks;
         }
 
-        Rectangle temp = new Rectangle(flicks * 125,startY, 125, 125);
+        Rectangle temp = new Rectangle(flicks * 25,startY, 25, 125);
         temp.setFill(tempC);
         container.getChildren().add(temp);
         if (player == 1)

@@ -73,7 +73,7 @@ public class TronPane extends Pane{
         this.p2 = p2;
         this.popFont = popFont;
 
-        Text name1 = new Text("Player 1");
+        Text name1 = new Text(p1N);
 
         name1.setFont(popFont);
         name1.setFill(p1);
@@ -81,7 +81,7 @@ public class TronPane extends Pane{
         name1.setX(150);
         name1.setTextAlignment(TextAlignment.CENTER);
 
-        Text name2 = new Text("Player 2");
+        Text name2 = new Text(p2N);
         name2.setFont(popFont);
         name2.setFill(p2);
         name2.setY(40);
@@ -267,7 +267,7 @@ public class TronPane extends Pane{
 
         if (end) {
             if (boomP == 1){
-                explosion = new Timeline(new KeyFrame(Duration.millis(100), e -> crash(1)));
+                explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(1)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -277,7 +277,7 @@ public class TronPane extends Pane{
                 });
             }
             else if (boomP == 2){
-                explosion = new Timeline(new KeyFrame(Duration.millis(100), e -> crash(2)));
+                explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(2)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -287,7 +287,7 @@ public class TronPane extends Pane{
                 });
             }
             else {
-                explosion = new Timeline(new KeyFrame(Duration.millis(100), e -> crash(3)));
+                explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(3)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -296,7 +296,7 @@ public class TronPane extends Pane{
                     }
                 });
             }
-            explosion.setCycleCount(10);
+            explosion.setCycleCount(8);
             explosion.play();
         }
 
