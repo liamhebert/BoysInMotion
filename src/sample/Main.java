@@ -98,18 +98,43 @@ public class Main extends Application {
                 stage.setScene(customizeBike());//go to customize screen
             }
         });
+        op1S.setOnMouseEntered(new EventHandler<MouseEvent>() {//when button is moused over
+            @Override
+            public void handle(MouseEvent event) {op1.setFill(Paint.valueOf("BLUE"));}
+        });
+        op1S.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {op1.setFill(Paint.valueOf("RED"));}
+        });
         op2S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when credits is clicked
             @Override
             public void handle(MouseEvent event) {
                 stage.setScene(credits());//go to credits scene
             }
         });
-        op3.setOnMouseClicked(new EventHandler<MouseEvent>() {//when quit is clicked
+        op2S.setOnMouseEntered(new EventHandler<MouseEvent>() {//when button is moused over
+            @Override
+            public void handle(MouseEvent event) {op2.setFill(Paint.valueOf("BLUE"));}
+        });
+        op2S.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {op2.setFill(Paint.valueOf("PURPLE")); }
+        });
+        op3S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when quit is clicked
             @Override
             public void handle(MouseEvent event) {
                 Platform.exit();//quit
             }
         });
+        op3S.setOnMouseEntered(new EventHandler<MouseEvent>() {//When button is moused over
+            @Override
+            public void handle(MouseEvent event) {op3.setFill(Paint.valueOf("BLUE"));}
+        });
+        op3S.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {op3.setFill(Paint.valueOf("ORANGE"));}
+        });
+
         VBox optionsLayout = new VBox(5); //contains the text options
         VBox layout = new VBox(15); //overall layout
         optionsLayout.getChildren().addAll(op1S, op2S, op3S);
