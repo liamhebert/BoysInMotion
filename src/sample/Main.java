@@ -65,7 +65,7 @@ public class Main extends Application {
 
         //primaryStage.setScene(results());
         //primaryStage.setScene(credits());
-        //primaryStage.setScene(game());
+        // primaryStage.setScene(game());
         primaryStage.setScene(mainMenu());
         primaryStage.show();
         //primaryStage.setFullScreen(true); //testing purpose only for lower rez screens
@@ -86,9 +86,9 @@ public class Main extends Application {
         option3.setFont(popFont);
         option3.setFill(Paint.valueOf("WHITE"));
         //normally black, selected would have color
-        Rectangle op1 = new Rectangle(450, 70, Paint.valueOf("RED"));
-        Rectangle op2 = new Rectangle(450, 70, Paint.valueOf("PURPLE"));
-        Rectangle op3 = new Rectangle(450, 70, Paint.valueOf("ORANGE"));
+        Rectangle op1 = new Rectangle(450, 70, Paint.valueOf("BLACK"));
+        Rectangle op2 = new Rectangle(450, 70, Paint.valueOf("BLACK"));
+        Rectangle op3 = new Rectangle(450, 70, Paint.valueOf("BLACK"));
         StackPane op1S = new StackPane(op1, option1);
         StackPane op2S = new StackPane(op2, option2);
         StackPane op3S = new StackPane(op3, option3);
@@ -100,11 +100,11 @@ public class Main extends Application {
         });
         op1S.setOnMouseEntered(new EventHandler<MouseEvent>() {//when button is moused over
             @Override
-            public void handle(MouseEvent event) {op1.setFill(Paint.valueOf("BLUE"));}
+            public void handle(MouseEvent event) {op1.setFill(Paint.valueOf("RED"));}
         });
         op1S.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event) {op1.setFill(Paint.valueOf("RED"));}
+            public void handle(MouseEvent event) {op1.setFill(Paint.valueOf("BLACK"));}
         });
         op2S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when credits is clicked
             @Override
@@ -114,11 +114,11 @@ public class Main extends Application {
         });
         op2S.setOnMouseEntered(new EventHandler<MouseEvent>() {//when button is moused over
             @Override
-            public void handle(MouseEvent event) {op2.setFill(Paint.valueOf("BLUE"));}
+            public void handle(MouseEvent event) {op2.setFill(Paint.valueOf("PURPLE"));}
         });
         op2S.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event) {op2.setFill(Paint.valueOf("PURPLE")); }
+            public void handle(MouseEvent event) {op2.setFill(Paint.valueOf("BLACK")); }
         });
         op3S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when quit is clicked
             @Override
@@ -128,11 +128,11 @@ public class Main extends Application {
         });
         op3S.setOnMouseEntered(new EventHandler<MouseEvent>() {//When button is moused over
             @Override
-            public void handle(MouseEvent event) {op3.setFill(Paint.valueOf("BLUE"));}
+            public void handle(MouseEvent event) {op3.setFill(Paint.valueOf("ORANGE"));}
         });
         op3S.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event) {op3.setFill(Paint.valueOf("ORANGE"));}
+            public void handle(MouseEvent event) {op3.setFill(Paint.valueOf("BLACK"));}
         });
 
         VBox optionsLayout = new VBox(5); //contains the text options
