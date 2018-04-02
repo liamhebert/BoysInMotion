@@ -81,6 +81,8 @@ public class TronPane extends Pane{
         name1.setX(150);
         name1.setTextAlignment(TextAlignment.CENTER);
 
+
+
         Text name2 = new Text(p2N);
         name2.setFont(popFont);
         name2.setFill(p2);

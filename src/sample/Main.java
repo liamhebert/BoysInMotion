@@ -51,6 +51,8 @@ public class Main extends Application {
     private static Color p1 = allColors[0];
     private static Color p2 = allColors[1];
 
+    private static int gamerounds=0;
+
 
     public void start(Stage primaryStage) throws Exception{
         //since exceptions have to be handled, have to be assigned here
@@ -209,7 +211,7 @@ public class Main extends Application {
         player1.getChildren().add(p1pT);
 
         VBox inputAndColor1 = new VBox(10);
-        TextField p1NameInput = new TextField("Name");
+        TextField p1NameInput = new TextField("Enter Name and Press Enter");
         p1NameInput.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) {
                 p1N = p1NameInput.getText();
@@ -221,32 +223,62 @@ public class Main extends Application {
         Rectangle p1color1 = new Rectangle(50,50);
         p1color1.setFill(allColors[0]);
         p1color1.setOnMouseClicked(e -> {
-            p1 = allColors[0];
-            selectP1.play();
+            if(!p2.equals(allColors[0])) {
+                p1 = allColors[0];
+                selectP1.play();
+            } else {
+                p1=p1;
+            }
+            /*p1 = allColors[0];
+            selectP1.play();*/
         });
         Rectangle p1color2 = new Rectangle(50,50);
         p1color2.setFill(allColors[1]);
         p1color2.setOnMouseClicked(e -> {
-            p1 = allColors[1];
-            selectP1.play();
+            if(!p2.equals(allColors[1])) {
+                p1 = allColors[1];
+                selectP1.play();
+            } else {
+                p1=p1;
+            }
+            /*p1 = allColors[1];
+            selectP1.play();*/
         });
         Rectangle p1color3 = new Rectangle(50,50);
         p1color3.setFill(allColors[2]);
         p1color3.setOnMouseClicked(e -> {
-            p1 = allColors[2];
-            selectP1.play();
+            if(!p2.equals(allColors[2])) {
+                p1 = allColors[2];
+                selectP1.play();
+            } else {
+                p1=p1;
+            }
+            /*p1 = allColors[2];
+            selectP1.play();*/
         });
         Rectangle p1color4 = new Rectangle(50, 50);
         p1color4.setFill(allColors[3]);
         p1color4.setOnMouseClicked(e -> {
-            p1 = allColors[3];
-            selectP1.play();
+            if(!p2.equals(allColors[3])) {
+                p1 = allColors[3];
+                selectP1.play();
+            } else {
+                p1=p1;
+            }
+            /*p1 = allColors[3];
+            selectP1.play();*/
         });
         Rectangle p1color5 = new Rectangle(50, 50);
         p1color5.setFill(allColors[4]);
         p1color5.setOnMouseClicked(e -> {
-            p1 = allColors[4];
-            selectP1.play();
+            if(!p2.equals(allColors[4])) {
+                p1 = allColors[4];
+                selectP1.play();
+            } else {
+                p1=p1;
+            }
+            /*p1 = allColors[4];
+            selectP1.play();*/
         });
         p1colors.getChildren().addAll(p1color1,p1color2,p1color3,p1color4,p1color5);
         inputAndColor1.getChildren().add(p1colors);
@@ -259,45 +291,87 @@ public class Main extends Application {
         p2pT.setFill(Paint.valueOf("WHITE"));
         player2.getChildren().add(p2pT);
 
+        //Allows player 2 to input their name and have it displayed
         VBox inputAndColor2 = new VBox(10);
-        TextField p2NameInput = new TextField("Name");
+        TextField p2NameInput = new TextField("Enter Name and Press Enter");
         inputAndColor2.getChildren().add(p2NameInput);
+        p2NameInput.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                p2N = p2NameInput.getText();
+            }
+        });
 
         HBox p2colors = new HBox(10);
         Rectangle p2color1 = new Rectangle(50,50);
         p2color1.setFill(allColors[0]);
-        p2color1.setOnMouseClicked(e -> {
-            p2 = allColors[0];
-            selectP2.play();
-        });
+
+            p2color1.setOnMouseClicked(e -> {
+                if(!p1.equals(allColors[0])) {
+                    p2 = allColors[0];
+                    selectP2.play();
+                } else {
+                    p2=p2;
+                }
+            });
+
+
         Rectangle p2color2 = new Rectangle(50,50);
         p2color2.setFill(allColors[1]);
         p2color2.setOnMouseClicked(e -> {
-            p2 = allColors[1];
-            selectP2.play();
+            if(!p1.equals(allColors[1])) {
+                p2 = allColors[1];
+                selectP2.play();
+            } else {
+                p2=p2;
+            }
+            /*p2 = allColors[1];
+            selectP2.play();*/
         });
         Rectangle p2color3 = new Rectangle(50,50);
         p2color3.setFill(allColors[2]);
         p2color3.setOnMouseClicked(e -> {
-            p2 = allColors[2];
-            selectP2.play();
+            if(!p1.equals(allColors[2])) {
+                p2 = allColors[2];
+                selectP2.play();
+            } else {
+                p2=p2;
+            }
+            /*p2 = allColors[2];
+            selectP2.play();*/
         });
+
+
         Rectangle p2color4 = new Rectangle(50, 50);
         p2color4.setFill(allColors[3]);
         p2color4.setOnMouseClicked(e -> {
-            p2 = allColors[3];
-            selectP2.play();
+            if(!p1.equals(allColors[3])) {
+                p2 = allColors[3];
+                selectP2.play();
+            } else {
+                p2=p2;
+            }
+            /*p2 = allColors[3];
+            selectP2.play();*/
         });
+
+
         Rectangle p2color5 = new Rectangle(50, 50);
         p2color5.setFill(allColors[4]);
         p2color5.setOnMouseClicked(e -> {
-            p2 = allColors[4];
-            selectP2.play();
+            if(!p1.equals(allColors[4])) {
+                p2 = allColors[4];
+                selectP2.play();
+            } else {
+                p2=p2;
+            }
+            /*p2 = allColors[4];
+            selectP2.play();*/
         });
         p2colors.getChildren().addAll(p2color1,p2color2,p2color3,p2color4,p2color5);
         inputAndColor2.getChildren().add(p2colors);
         player2.getChildren().add(inputAndColor2);
         layout.getChildren().addAll(player1, player2);
+
 
         HBox roundSelection = new HBox(15);
         layout.getChildren().add(3,roundSelection);
@@ -332,7 +406,72 @@ public class Main extends Application {
         option3T.setFill(Color.valueOf("WHITE"));
         option5T.setFill(Color.valueOf("WHITE"));
         option7T.setFill(Color.valueOf("WHITE"));
-        option2.setFill(Paint.valueOf("GREEN")); //selected option, I want to fix this
+
+        //Next options change the color of the amount of rounds to be played.
+        //Slightly long but if one color is chosen others will revert back to red.
+        //This will do it for every option of the amount of rounds the player wants to play
+        //It also sets the static variable gamerouds to the amount selected.
+        option1.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("GREEN"));
+            option2.setFill(Paint.valueOf("RED"));
+            option3.setFill(Paint.valueOf("RED"));
+            option4.setFill(Paint.valueOf("RED"));
+            gamerounds=1;
+        });
+        option1T.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("GREEN"));
+            option2.setFill(Paint.valueOf("RED"));
+            option3.setFill(Paint.valueOf("RED"));
+            option4.setFill(Paint.valueOf("RED"));
+            gamerounds=1;
+        });
+
+        option2.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("RED"));
+            option2.setFill(Paint.valueOf("GREEN"));
+            option3.setFill(Paint.valueOf("RED"));
+            option4.setFill(Paint.valueOf("RED"));
+            gamerounds=3;
+        });
+        option3T.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("RED"));
+            option2.setFill(Paint.valueOf("GREEN"));
+            option3.setFill(Paint.valueOf("RED"));
+            option4.setFill(Paint.valueOf("RED"));
+            gamerounds=3;
+        });
+
+        option3.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("RED"));
+            option2.setFill(Paint.valueOf("RED"));
+            option3.setFill(Paint.valueOf("GREEN"));
+            option4.setFill(Paint.valueOf("RED"));
+            gamerounds=5;
+        });
+        option5T.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("RED"));
+            option2.setFill(Paint.valueOf("RED"));
+            option3.setFill(Paint.valueOf("GREEN"));
+            option4.setFill(Paint.valueOf("RED"));
+            gamerounds=5;
+        });
+
+        option4.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("RED"));
+            option2.setFill(Paint.valueOf("RED"));
+            option3.setFill(Paint.valueOf("RED"));
+            option4.setFill(Paint.valueOf("GREEN"));
+            gamerounds=7;
+        });
+        option7T.setOnMouseClicked(e -> {
+            option1.setFill(Paint.valueOf("RED"));
+            option2.setFill(Paint.valueOf("RED"));
+            option3.setFill(Paint.valueOf("RED"));
+            option4.setFill(Paint.valueOf("GREEN"));
+            gamerounds=7;
+        });
+
+
 
         rects.getChildren().addAll(option1S, option3S, option5S, option7S);
         HBox.setMargin(rects, new Insets(0,0,0,54));
