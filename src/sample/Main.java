@@ -226,8 +226,6 @@ public class Main extends Application {
             if(!p2.equals(allColors[0])) {
                 p1 = allColors[0];
                 selectP1.play();
-            } else {
-                p1=p1;
             }
             /*p1 = allColors[0];
             selectP1.play();*/
@@ -238,8 +236,6 @@ public class Main extends Application {
             if(!p2.equals(allColors[1])) {
                 p1 = allColors[1];
                 selectP1.play();
-            } else {
-                p1=p1;
             }
             /*p1 = allColors[1];
             selectP1.play();*/
@@ -250,8 +246,6 @@ public class Main extends Application {
             if(!p2.equals(allColors[2])) {
                 p1 = allColors[2];
                 selectP1.play();
-            } else {
-                p1=p1;
             }
             /*p1 = allColors[2];
             selectP1.play();*/
@@ -262,8 +256,6 @@ public class Main extends Application {
             if(!p2.equals(allColors[3])) {
                 p1 = allColors[3];
                 selectP1.play();
-            } else {
-                p1=p1;
             }
             /*p1 = allColors[3];
             selectP1.play();*/
@@ -274,8 +266,6 @@ public class Main extends Application {
             if(!p2.equals(allColors[4])) {
                 p1 = allColors[4];
                 selectP1.play();
-            } else {
-                p1=p1;
             }
             /*p1 = allColors[4];
             selectP1.play();*/
@@ -309,8 +299,6 @@ public class Main extends Application {
                 if(!p1.equals(allColors[0])) {
                     p2 = allColors[0];
                     selectP2.play();
-                } else {
-                    p2=p2;
                 }
             });
 
@@ -321,8 +309,6 @@ public class Main extends Application {
             if(!p1.equals(allColors[1])) {
                 p2 = allColors[1];
                 selectP2.play();
-            } else {
-                p2=p2;
             }
             /*p2 = allColors[1];
             selectP2.play();*/
@@ -333,8 +319,6 @@ public class Main extends Application {
             if(!p1.equals(allColors[2])) {
                 p2 = allColors[2];
                 selectP2.play();
-            } else {
-                p2=p2;
             }
             /*p2 = allColors[2];
             selectP2.play();*/
@@ -347,8 +331,6 @@ public class Main extends Application {
             if(!p1.equals(allColors[3])) {
                 p2 = allColors[3];
                 selectP2.play();
-            } else {
-                p2=p2;
             }
             /*p2 = allColors[3];
             selectP2.play();*/
@@ -361,8 +343,6 @@ public class Main extends Application {
             if(!p1.equals(allColors[4])) {
                 p2 = allColors[4];
                 selectP2.play();
-            } else {
-                p2=p2;
             }
             /*p2 = allColors[4];
             selectP2.play();*/
@@ -409,67 +389,37 @@ public class Main extends Application {
 
         //Next options change the color of the amount of rounds to be played.
         //Slightly long but if one color is chosen others will revert back to red.
-        //This will do it for every option of the amount of rounds the player wants to play
-        //It also sets the static variable gamerouds to the amount selected.
-        option1.setOnMouseClicked(e -> {
+        //This will do it for every option of the amount of rounds the player wants to play         //side note
+        //It also sets the static variable gamerouds to the amount selected.                        //this could be done by having an arrayList with each rectangle to reduce redundancy, but this works too :)
+        option1S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("GREEN"));
             option2.setFill(Paint.valueOf("RED"));
             option3.setFill(Paint.valueOf("RED"));
             option4.setFill(Paint.valueOf("RED"));
             gamerounds=1;
         });
-        option1T.setOnMouseClicked(e -> {
-            option1.setFill(Paint.valueOf("GREEN"));
-            option2.setFill(Paint.valueOf("RED"));
-            option3.setFill(Paint.valueOf("RED"));
-            option4.setFill(Paint.valueOf("RED"));
-            gamerounds=1;
-        });
-
-        option2.setOnMouseClicked(e -> {
+        option3S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("RED"));
             option2.setFill(Paint.valueOf("GREEN"));
             option3.setFill(Paint.valueOf("RED"));
             option4.setFill(Paint.valueOf("RED"));
             gamerounds=3;
         });
-        option3T.setOnMouseClicked(e -> {
-            option1.setFill(Paint.valueOf("RED"));
-            option2.setFill(Paint.valueOf("GREEN"));
-            option3.setFill(Paint.valueOf("RED"));
-            option4.setFill(Paint.valueOf("RED"));
-            gamerounds=3;
-        });
-
-        option3.setOnMouseClicked(e -> {
+        option5S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("RED"));
             option2.setFill(Paint.valueOf("RED"));
             option3.setFill(Paint.valueOf("GREEN"));
             option4.setFill(Paint.valueOf("RED"));
             gamerounds=5;
         });
-        option5T.setOnMouseClicked(e -> {
+        option7S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("RED"));
             option2.setFill(Paint.valueOf("RED"));
-            option3.setFill(Paint.valueOf("GREEN"));
-            option4.setFill(Paint.valueOf("RED"));
-            gamerounds=5;
+            option3.setFill(Paint.valueOf("RED"));
+            option4.setFill(Paint.valueOf("GREEN"));
+            gamerounds=7;
         });
 
-        option4.setOnMouseClicked(e -> {
-            option1.setFill(Paint.valueOf("RED"));
-            option2.setFill(Paint.valueOf("RED"));
-            option3.setFill(Paint.valueOf("RED"));
-            option4.setFill(Paint.valueOf("GREEN"));
-            gamerounds=7;
-        });
-        option7T.setOnMouseClicked(e -> {
-            option1.setFill(Paint.valueOf("RED"));
-            option2.setFill(Paint.valueOf("RED"));
-            option3.setFill(Paint.valueOf("RED"));
-            option4.setFill(Paint.valueOf("GREEN"));
-            gamerounds=7;
-        });
 
 
 
