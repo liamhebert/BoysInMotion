@@ -19,13 +19,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+
 import java.util.ArrayList;
 
-public class TronPane extends Pane{
+public class TronPane extends Pane {
 
     //attributes, also makes rectangle and animation timeline object
     private final double sizeX = 6;
     private double sizeY = 6; //default size of the players
+
+    private int gamerounds;
 
     private double playerOneRecLocX = 200, playerOneRecLocY = 390; //start point of player 1
     private double playerOneDx = 1, playerOneDy = 0;//start direction of player one
@@ -61,17 +64,20 @@ public class TronPane extends Pane{
     private String p1N;
     private String p2N;
     private int flicks;
+    private int roundTrack = 0;
 
     private Rectangle topArena, leftArena, bottomArena, rightArena;
 
     private HBox scoreDisplay;
+
     //constructor sets up animation and creates rectangle
-    public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2){
+    public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2, int r) {
         this.p1N = p1N;
         this.p2N = p2N;
         this.p1 = p1;
         this.p2 = p2;
         this.popFont = popFont;
+        this.gamerounds = r;
 
         Text name1 = new Text(p1N);
 
@@ -80,7 +86,6 @@ public class TronPane extends Pane{
         name1.setY(40);
         name1.setX(150);
         name1.setTextAlignment(TextAlignment.CENTER);
-
 
 
         Text name2 = new Text(p2N);
@@ -104,7 +109,7 @@ public class TronPane extends Pane{
         leftArena = new Rectangle(5, 60, 8, 800);
         leftArena.setFill(Color.WHITE);
 
-        getChildren().addAll(topArena, bottomArena, leftArena, rightArena, name1,name2, scoreDisplay);
+        getChildren().addAll(topArena, bottomArena, leftArena, rightArena, name1, name2, scoreDisplay);
         //sets up player one and their line
         playerOneRect.setFill(p1);
         playerTwoRect.setFill(p2);
@@ -129,55 +134,55 @@ public class TronPane extends Pane{
         animation.play();
     }
 
-    public void play(){
+    public void play() {
         animation.play();
     }
 
-    public void pause(){
+    public void pause() {
         animation.pause();
     }
 
-    public void addAPixelToPath(){
+    public void addAPixelToPath() {
 
-        if (playerOneDx == 1){
+        if (playerOneDx == 1) {
             playerOneCurrRectLine.setWidth(playerOneCurrRectLine.getWidth() + 1);
-        }else if (playerOneDx == -1){
+        } else if (playerOneDx == -1) {
             playerOneCurrRectLine.setWidth(playerOneCurrRectLine.getWidth() + 1);
             playerOneCurrRectLine.setX(playerOneCurrRectLine.getX() - 1);
-        }else if (playerOneDy == 1){
+        } else if (playerOneDy == 1) {
             playerOneCurrRectLine.setHeight(playerOneCurrRectLine.getHeight() + 1);
-        }else if (playerOneDy == -1) {
+        } else if (playerOneDy == -1) {
             playerOneCurrRectLine.setHeight(playerOneCurrRectLine.getHeight() + 1);
             playerOneCurrRectLine.setY(playerOneCurrRectLine.getY() - 1);
         }
 
-        if (playerTwoDx == 1){
+        if (playerTwoDx == 1) {
             playerTwoCurrRectLine.setWidth(playerTwoCurrRectLine.getWidth() + 1);
-        }else if (playerTwoDx == -1){
+        } else if (playerTwoDx == -1) {
             playerTwoCurrRectLine.setWidth(playerTwoCurrRectLine.getWidth() + 1);
             playerTwoCurrRectLine.setX(playerTwoCurrRectLine.getX() - 1);
-        }else if (playerTwoDy == 1){
+        } else if (playerTwoDy == 1) {
             playerTwoCurrRectLine.setHeight(playerTwoCurrRectLine.getHeight() + 1);
-        }else if (playerTwoDy == -1) {
+        } else if (playerTwoDy == -1) {
             playerTwoCurrRectLine.setHeight(playerTwoCurrRectLine.getHeight() + 1);
             playerTwoCurrRectLine.setY(playerTwoCurrRectLine.getY() - 1);
         }
 
     }
 
-    public void collisionCheck(){
+    public void collisionCheck() {
         boolean end = false;
         int boomP = 0;
         Timeline explosion;
         //did the players themselves hit eachother head on?
-        if (playerOneRect.intersects(playerTwoRect.getBoundsInLocal())){
+        if (playerOneRect.intersects(playerTwoRect.getBoundsInLocal())) {
             pause();
             System.out.println("Player one and player two hit eachother");
             boomP = 3;
             end = true;
         }
 
-            //did player one hit their own line?
+        //did player one hit their own line?
         for (int i = 0; i < playerOneRectPath.size() - 2 && !end; i++) {
             if (playerOneRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())) {
                 pause();
@@ -187,9 +192,9 @@ public class TronPane extends Pane{
             }
         }
 
-            //did player two hit their own line?
-        for (int i = 0; i < playerTwoRectPath.size() - 2 && !end; i++){
-            if (playerTwoRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
+        //did player two hit their own line?
+        for (int i = 0; i < playerTwoRectPath.size() - 2 && !end; i++) {
+            if (playerTwoRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())) {
                 pause();
                 System.out.println("Player Two just crashed into their own line smh");
                 boomP = 2;
@@ -197,9 +202,9 @@ public class TronPane extends Pane{
             }
         }
 
-            //did player two hit player one's path?
-        for (int i = 0; i < playerOneRectPath.size() && !end; i++){
-            if (playerTwoRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())){
+        //did player two hit player one's path?
+        for (int i = 0; i < playerOneRectPath.size() && !end; i++) {
+            if (playerTwoRect.intersects(playerOneRectPath.get(i).getBoundsInLocal())) {
                 pause();
                 System.out.println("Player two crashed into player one's line");
                 boomP = 2;
@@ -207,9 +212,9 @@ public class TronPane extends Pane{
             }
         }
 
-            //did player one hit player two's path?
-        for (int i = 0; i < playerTwoRectPath.size() && !end; i++){
-            if (playerOneRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())){
+        //did player one hit player two's path?
+        for (int i = 0; i < playerTwoRectPath.size() && !end; i++) {
+            if (playerOneRect.intersects(playerTwoRectPath.get(i).getBoundsInLocal())) {
                 pause();
                 System.out.println("Player one crashed into player two's line");
                 boomP = 1;
@@ -217,50 +222,50 @@ public class TronPane extends Pane{
             }
         }
 
-        if (playerOneRect.intersects(topArena.getBoundsInLocal())){
+        if (playerOneRect.intersects(topArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player one hit the arena wall");
             boomP = 1;
             end = true;
         }
-        if (playerOneRect.intersects(bottomArena.getBoundsInLocal())){
+        if (playerOneRect.intersects(bottomArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player one hit the arena wall");
             boomP = 1;
             end = true;
         }
-        if (playerOneRect.intersects(rightArena.getBoundsInLocal())){
+        if (playerOneRect.intersects(rightArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player one hit the arena wall");
             boomP = 1;
             end = true;
         }
-        if (playerOneRect.intersects(leftArena.getBoundsInLocal())){
+        if (playerOneRect.intersects(leftArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player one hit the arena wall");
             boomP = 1;
             end = true;
         }
 
-        if (playerTwoRect.intersects(topArena.getBoundsInLocal())){
+        if (playerTwoRect.intersects(topArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player two hit the arena wall");
             boomP = 2;
             end = true;
         }
-        if (playerTwoRect.intersects(bottomArena.getBoundsInLocal())){
+        if (playerTwoRect.intersects(bottomArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player two hit the arena wall");
             boomP = 2;
             end = true;
         }
-        if (playerTwoRect.intersects(rightArena.getBoundsInLocal())){
+        if (playerTwoRect.intersects(rightArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player two hit the arena wall");
             boomP = 2;
             end = true;
         }
-        if (playerTwoRect.intersects(leftArena.getBoundsInLocal())){
+        if (playerTwoRect.intersects(leftArena.getBoundsInLocal())) {
             pause();
             System.out.println("Player two hit the arena wall");
             boomP = 2;
@@ -268,7 +273,7 @@ public class TronPane extends Pane{
         }
 
         if (end) {
-            if (boomP == 1){
+            if (boomP == 1) {
                 explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(1)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
@@ -277,8 +282,7 @@ public class TronPane extends Pane{
                         updateScoreDisplay();
                     }
                 });
-            }
-            else if (boomP == 2){
+            } else if (boomP == 2) {
                 explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(2)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
@@ -287,8 +291,7 @@ public class TronPane extends Pane{
                         updateScoreDisplay();
                     }
                 });
-            }
-            else {
+            } else {
                 explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(3)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
@@ -304,40 +307,38 @@ public class TronPane extends Pane{
 
     }
 
-    private void crash(int player){
+    private void crash(int player) {
         double startX;
         double startY;
-        if (player == 1){
+        if (player == 1) {
             startX = playerOneRecLocX;
             startY = playerOneRecLocY;
-        }
-        else if (player == 2){
+        } else if (player == 2) {
             startX = playerTwoRecLocX;
             startY = playerTwoRecLocY;
-        }
-        else {
+        } else {
             startX = (playerOneRecLocX + playerTwoRecLocX) / 2;
             startY = (playerOneRecLocY + playerTwoRecLocY) / 2;
         }
         Group root;
         if (flicks % 2 == 0) {
-            double distance = flicks * (35/2);
+            double distance = flicks * (35 / 2);
             /* layout
             1 2 3
             4   5
             6 7 8
              */
-            Rectangle rect1 = new Rectangle(startX - distance,startY + distance,35,35);
-            Rectangle rect2 = new Rectangle(startX,startY + distance,35,35);
-            Rectangle rect3 = new Rectangle(startX + distance,startY + distance,35,35);
-            Rectangle rect4 = new Rectangle(startX - distance,startY,35,35);
-            Rectangle rect5 = new Rectangle(startX + distance,startY,35,35);
-            Rectangle rect6 = new Rectangle(startX - distance,startY - distance,35,35);
-            Rectangle rect7 = new Rectangle(startX,startY - distance,35,35);
-            Rectangle rect8 = new Rectangle(startX + distance,startY - distance,35,35);
+            Rectangle rect1 = new Rectangle(startX - distance, startY + distance, 35, 35);
+            Rectangle rect2 = new Rectangle(startX, startY + distance, 35, 35);
+            Rectangle rect3 = new Rectangle(startX + distance, startY + distance, 35, 35);
+            Rectangle rect4 = new Rectangle(startX - distance, startY, 35, 35);
+            Rectangle rect5 = new Rectangle(startX + distance, startY, 35, 35);
+            Rectangle rect6 = new Rectangle(startX - distance, startY - distance, 35, 35);
+            Rectangle rect7 = new Rectangle(startX, startY - distance, 35, 35);
+            Rectangle rect8 = new Rectangle(startX + distance, startY - distance, 35, 35);
 
             //alternating colors
-            if (flicks % 4 == 0){ //every second burst
+            if (flicks % 4 == 0) { //every second burst
                 rect1.setFill(Paint.valueOf("YELLOW"));
                 rect2.setFill(Paint.valueOf("YELLOW"));
                 rect3.setFill(Paint.valueOf("YELLOW"));
@@ -346,8 +347,7 @@ public class TronPane extends Pane{
                 rect6.setFill(Paint.valueOf("YELLOW"));
                 rect7.setFill(Paint.valueOf("YELLOW"));
                 rect8.setFill(Paint.valueOf("YELLOW"));
-            }
-            else {
+            } else {
                 rect1.setFill(Paint.valueOf("WHITE"));
                 rect2.setFill(Paint.valueOf("WHITE"));
                 rect3.setFill(Paint.valueOf("WHITE"));
@@ -357,9 +357,8 @@ public class TronPane extends Pane{
                 rect7.setFill(Paint.valueOf("WHITE"));
                 rect8.setFill(Paint.valueOf("WHITE"));
             }
-            root = new Group(rect1,rect2,rect3,rect4,rect5,rect6,rect7,rect8);
-        }
-        else
+            root = new Group(rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8);
+        } else
             root = new Group(); //nothing
         if (flicks == 0)
             getChildren().add(root);
@@ -368,7 +367,7 @@ public class TronPane extends Pane{
         flicks++;
     }
 
-    public void changeDirectionPlayerOne(){
+    public void changeDirectionPlayerOne() {
 
         Rectangle newRec = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), playerOneRect.getWidth(), playerOneRect.getHeight());
         newRec.setFill(p1);
@@ -378,7 +377,7 @@ public class TronPane extends Pane{
         refreshPathAsChildPlayerOne();
     }
 
-    public HBox scoreDisplay(){
+    public HBox scoreDisplay() {
         Text scoreP1 = new Text(p1S + "");
         scoreP1.setFill(p1);
         scoreP1.setFont(popFont);
@@ -389,21 +388,22 @@ public class TronPane extends Pane{
         dash.setFill(Paint.valueOf("WHITE"));
         dash.setFont(popFont);
         HBox display = new HBox(5);
-        display.getChildren().addAll(scoreP1,dash,scoreP2);
+        display.getChildren().addAll(scoreP1, dash, scoreP2);
         return display;
     }
-    public void updateScoreDisplay(){
+
+    public void updateScoreDisplay() {
         Text scoreP1 = new Text(p1S + "");
         scoreP1.setFill(p1);
         scoreP1.setFont(popFont);
         Text scoreP2 = new Text(p2S + "");
         scoreP2.setFill(p2);
         scoreP2.setFont(popFont);
-        scoreDisplay.getChildren().set(0,scoreP1);
-        scoreDisplay.getChildren().set(2,scoreP2);
+        scoreDisplay.getChildren().set(0, scoreP1);
+        scoreDisplay.getChildren().set(2, scoreP2);
     }
 
-    public void changeDirectionPlayerTwo(){
+    public void changeDirectionPlayerTwo() {
 
         Rectangle newRec = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), playerTwoRect.getWidth(), playerTwoRect.getHeight());
         newRec.setFill(p2);
@@ -421,57 +421,57 @@ public class TronPane extends Pane{
         getChildren().add(playerTwoCurrRectLine);
     }
 
-    public void setDirectionPlayerOne(String d){
+    public void setDirectionPlayerOne(String d) {
 
         changeDirectionPlayerOne();
         //going left relative
-        if (d.equals("l")){
+        if (d.equals("l")) {
 
             //going right rn
-            if (playerOneDx == 1 && playerOneDy == 0){
+            if (playerOneDx == 1 && playerOneDy == 0) {
                 playerOneDx = 0;
                 playerOneDy = -1;
                 //relative left = go up
 
                 //going left rn
-            } else if (playerOneDx == -1 && playerOneDy == 0){
+            } else if (playerOneDx == -1 && playerOneDy == 0) {
                 playerOneDx = 0;
                 playerOneDy = 1;
                 //relative left = go down
 
                 //going down rn
-            } else if (playerOneDx == 0 && playerOneDy == 1){
+            } else if (playerOneDx == 0 && playerOneDy == 1) {
                 playerOneDx = 1;
                 playerOneDy = 0;
                 //relative left = go right
 
                 //going up rn
-            } else if (playerOneDx == 0 && playerOneDy == -1){
+            } else if (playerOneDx == 0 && playerOneDy == -1) {
                 playerOneDx = -1;
                 playerOneDy = 0;
                 //relative left = go left
             }
-        } else if (d.equals("r")){
+        } else if (d.equals("r")) {
 
             //going right rn
-            if (playerOneDx == 1 && playerOneDy == 0){
+            if (playerOneDx == 1 && playerOneDy == 0) {
                 playerOneDx = 0;
                 playerOneDy = 1;
                 //relative right = go down
                 //going left rn
-            } else if (playerOneDx == -1 && playerOneDy == 0){
+            } else if (playerOneDx == -1 && playerOneDy == 0) {
                 playerOneDx = 0;
                 playerOneDy = -1;
                 //relative right = go up
 
                 //going down rn
-            } else if (playerOneDx == 0 && playerOneDy == 1){
+            } else if (playerOneDx == 0 && playerOneDy == 1) {
                 playerOneDx = -1;
                 playerOneDy = 0;
                 //relative right = go left
 
                 //going up rn
-            } else if (playerOneDx == 0 && playerOneDy == -1){
+            } else if (playerOneDx == 0 && playerOneDy == -1) {
                 playerOneDx = 1;
                 playerOneDy = 0;
                 //relative right = go right
@@ -479,57 +479,57 @@ public class TronPane extends Pane{
         }
     }
 
-    public void setDirectionPlayerTwo(String d){
+    public void setDirectionPlayerTwo(String d) {
 
         changeDirectionPlayerTwo();
         //going left relative
-        if (d.equals("l")){
+        if (d.equals("l")) {
 
             //going right rn
-            if (playerTwoDx == 1 && playerTwoDy == 0){
+            if (playerTwoDx == 1 && playerTwoDy == 0) {
                 playerTwoDx = 0;
                 playerTwoDy = -1;
                 //relative left = go up
 
                 //going left rn
-            } else if (playerTwoDx == -1 && playerTwoDy == 0){
+            } else if (playerTwoDx == -1 && playerTwoDy == 0) {
                 playerTwoDx = 0;
                 playerTwoDy = 1;
                 //relative left = go down
 
                 //going down rn
-            } else if (playerTwoDx == 0 && playerTwoDy == 1){
+            } else if (playerTwoDx == 0 && playerTwoDy == 1) {
                 playerTwoDx = 1;
                 playerTwoDy = 0;
                 //relative left = go right
 
                 //going up rn
-            } else if (playerTwoDx == 0 && playerTwoDy == -1){
+            } else if (playerTwoDx == 0 && playerTwoDy == -1) {
                 playerTwoDx = -1;
                 playerTwoDy = 0;
                 //relative left = go left
             }
-        } else if (d.equals("r")){
+        } else if (d.equals("r")) {
 
             //going right rn
-            if (playerTwoDx == 1 && playerTwoDy == 0){
+            if (playerTwoDx == 1 && playerTwoDy == 0) {
                 playerTwoDx = 0;
                 playerTwoDy = 1;
                 //relative right = go down
                 //going left rn
-            } else if (playerTwoDx == -1 && playerTwoDy == 0){
+            } else if (playerTwoDx == -1 && playerTwoDy == 0) {
                 playerTwoDx = 0;
                 playerTwoDy = -1;
                 //relative right = go up
 
                 //going down rn
-            } else if (playerTwoDx == 0 && playerTwoDy == 1){
+            } else if (playerTwoDx == 0 && playerTwoDy == 1) {
                 playerTwoDx = -1;
                 playerTwoDy = 0;
                 //relative right = go left
 
                 //going up rn
-            } else if (playerTwoDx == 0 && playerTwoDy == -1){
+            } else if (playerTwoDx == 0 && playerTwoDy == -1) {
                 playerTwoDx = 1;
                 playerTwoDy = 0;
                 //relative right = go right
@@ -537,7 +537,7 @@ public class TronPane extends Pane{
         }
     }
 
-    protected void movePlayer(){
+    protected void movePlayer() {
 
         //increments the positions of players 1 and 2 (first the variable, then the actual rectangle is updated)
         playerOneRecLocX += playerOneDx;
@@ -558,28 +558,38 @@ public class TronPane extends Pane{
         System.out.println(playerOneRectPath.size());
     }
 
-    public StackPane printResults(int winner){ //after this is called, winner limit would need to be checked
+    public StackPane printResults(int winner) { //after this is called, winner limit would need to be checked
+        roundTrack++;
         Text pWinner;
-        if (winner == 1){
-            pWinner = new Text(p1N + " Wins!");
+        Text resetMsg;
+        if (winner == 1) {
+            pWinner = new Text(p1N + " Wins\n\nPress Spacebar to play again");
             p1S++;
+
         }
-        else if (winner == 2){
-            pWinner = new Text(p2N + " Wins!");
+
+        else if (winner == 2) {
+            pWinner = new Text(p2N + " Wins!\n\nPress Spacebar to play again");
             p2S++;
+
         }
+
         else
-            pWinner = new Text("Tie. :(");
+            pWinner = new Text("Tie. :(\n\nPress Spacebar to play again");
         pWinner.setFont(popFont);
-        pWinner.setFill(Paint.valueOf("WHITE"));
+        pWinner.setFill(Paint.valueOf("BLACK"));
         //pWinner.setX(350);
         //pWinner.setY(400);
-        Rectangle background = new Rectangle(300, 70); //could be better, for different name sizes
-        background.setFill(Paint.valueOf("RED"));
+        Rectangle background = new Rectangle(500, 150); //could be better, for different name sizes
+        background.setFill(Paint.valueOf("WHITE"));
         StackPane result = new StackPane(background, pWinner);
-        result.setLayoutX(250);
+        result.setLayoutX(155);
         result.setLayoutY(400);
+
+
         return result;
+
+
     }
 
 }
