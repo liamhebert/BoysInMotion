@@ -19,13 +19,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class TronPane extends Pane{
 
     //attributes, also makes rectangle and animation timeline object
     private final double sizeX = 6;
-    private double sizeY = 6; //default size of the players
+    private final double sizeY = 6; //default size of the players
 
     private double playerOneRecLocX = 200, playerOneRecLocY = 390; //start point of player 1
     private double playerOneDx = 1, playerOneDy = 0;//start direction of player one
@@ -55,6 +57,7 @@ public class TronPane extends Pane{
     private Paint p2;
 
     private Timeline animation;
+    private Timeline resetLine;
     private int p1S = 0;
     private int p2S = 0;
     private Font popFont;
@@ -374,7 +377,6 @@ public class TronPane extends Pane{
         newRec.setFill(p1);
         playerOneRectPath.add(newRec);
         playerOneCurrRectLine = newRec;
-
         refreshPathAsChildPlayerOne();
     }
 
@@ -558,17 +560,15 @@ public class TronPane extends Pane{
         System.out.println(playerOneRectPath.size());
     }
 
-    public StackPane printResults(int winner){ //after this is called, winner limit would need to be checked
+    public StackPane printResults(int winner) { //after this is called, winner limit would need to be checked
         Text pWinner;
-        if (winner == 1){
+        if (winner == 1) {
             pWinner = new Text(p1N + " Wins!");
             p1S++;
-        }
-        else if (winner == 2){
+        } else if (winner == 2) {
             pWinner = new Text(p2N + " Wins!");
             p2S++;
-        }
-        else
+        } else
             pWinner = new Text("Tie. :(");
         pWinner.setFont(popFont);
         pWinner.setFill(Paint.valueOf("WHITE"));
@@ -579,7 +579,59 @@ public class TronPane extends Pane{
         StackPane result = new StackPane(background, pWinner);
         result.setLayoutX(250);
         result.setLayoutY(400);
+        //on space bar press and game is not done, result would be removed
+        resetLine = new Timeline(new KeyFrame(Duration.millis(20), e -> lineReset()));
+        resetLine.setCycleCount(Timeline.INDEFINITE); //pauses when its done reseting
+
+        resetLine.setOnFinished(e -> {
+            //if this works when .stop() is called...
+            //game should restart here
+            playerOneRecLocX = 200;
+            playerOneRecLocY = 390; //start point of player 1
+            playerOneDx = 1;
+            playerOneDy = 0;//start direction of player one
+
+            playerTwoRecLocX = 600;
+            playerTwoRecLocY = 390; //start point of player 2
+            playerTwoDx = -1;
+            playerTwoDy = 0; //start direction of player two
+
+            playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY); //two for the front hit box, prevents weird situations
+
+            //player 2 rectangle
+            playerTwoRect = new Rectangle(playerTwoRecLocX, playerTwoRecLocY, sizeX, sizeY);
+
+            //current line streaming from player one
+            playerOneCurrRectLine = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), sizeX, playerOneRect.getHeight());
+
+            //current line streaming from player two
+            playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), sizeX, playerTwoRect.getHeight());
+
+            playerOneRect.setFill(p1);
+            playerTwoRect.setFill(p2);
+            playerOneCurrRectLine.setFill(p1);
+            playerTwoCurrRectLine.setFill(p2);
+
+
+
+            animation.play(); //start the game again?
+            //I feel like I'm missing some of the variables to reset.
+
+        });
         return result;
+    }
+
+    public void lineReset(){
+        if (playerOneRectPath.size() != 0) {
+            playerOneRectPath.remove(playerOneRectPath.size() - 1);
+        }
+        if (playerTwoRectPath.size() != 0){
+            playerTwoRectPath.remove(playerTwoRectPath.size() - 1);
+        }
+        if (playerTwoRectPath.size() == 0 && playerOneRectPath.size() == 0){ //when both lines are empty
+            //pause animation
+            resetLine.stop();
+        }
     }
 
 }

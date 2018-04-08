@@ -1,8 +1,6 @@
 package sample;
 
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -588,6 +586,10 @@ public class Main extends Application {
                 tronPane.setDirectionPlayerTwo("l");
             } else if (e.getCode() == KeyCode.RIGHT){
                 tronPane.setDirectionPlayerTwo("r");
+            }
+            else if (e.getCode() == KeyCode.SPACE){
+
+
             }
         });
         return display;
