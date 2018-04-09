@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import org.w3c.dom.css.Rect;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -63,19 +64,20 @@ public class TronPane extends Pane{
     private Font popFont;
     private String p1N;
     private String p2N;
-    private int flicks;
 
+    private int gameRounds;
+    private boolean printResultsOnScreen = false;
     private Rectangle topArena, leftArena, bottomArena, rightArena;
 
     private HBox scoreDisplay;
     //constructor sets up animation and creates rectangle
-    public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2){
+    public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2, int gameRounds){
         this.p1N = p1N;
         this.p2N = p2N;
         this.p1 = p1;
         this.p2 = p2;
         this.popFont = popFont;
-
+        this.gameRounds = gameRounds;
         Text name1 = new Text(p1N);
 
         name1.setFont(popFont);
@@ -139,7 +141,10 @@ public class TronPane extends Pane{
     public void pause(){
         animation.pause();
     }
-
+    public boolean isGameOver() {return (p1S + p2S == gameRounds);}
+    public boolean isPrintResultsOnScreen() {return printResultsOnScreen;}
+    public int getP1S() {return p1S;}
+    public int getP2S() {return p2S;}
     public void addAPixelToPath(){
 
         if (playerOneDx == 1){
@@ -306,7 +311,7 @@ public class TronPane extends Pane{
         }
 
     }
-
+    private int flicks;
     private void crash(int player){
         double startX;
         double startY;
@@ -364,8 +369,9 @@ public class TronPane extends Pane{
         }
         else
             root = new Group(); //nothing
-        if (flicks == 0)
+        if (flicks == 0) {
             getChildren().add(root);
+        }
         else
             getChildren().set(getChildren().size() - 1, root);
         flicks++;
@@ -411,7 +417,6 @@ public class TronPane extends Pane{
         newRec.setFill(p2);
         playerTwoRectPath.add(newRec);
         playerTwoCurrRectLine = newRec;
-
         refreshPathAsChildPlayerTwo();
     }
 
@@ -556,8 +561,8 @@ public class TronPane extends Pane{
         addAPixelToPath();
         collisionCheck();
 
-        //flag: prints how many player one rectangles there are, for optimization testing
-        System.out.println(playerOneRectPath.size());
+        //flag: prints how many rectangles there are, for optimization testing
+        System.out.println(playerOneRectPath.size() + playerTwoRectPath.size());
     }
 
     public StackPane printResults(int winner) { //after this is called, winner limit would need to be checked
@@ -579,59 +584,100 @@ public class TronPane extends Pane{
         StackPane result = new StackPane(background, pWinner);
         result.setLayoutX(250);
         result.setLayoutY(400);
-        //on space bar press and game is not done, result would be removed
-        resetLine = new Timeline(new KeyFrame(Duration.millis(20), e -> lineReset()));
-        resetLine.setCycleCount(Timeline.INDEFINITE); //pauses when its done reseting
-
-        resetLine.setOnFinished(e -> {
-            //if this works when .stop() is called...
-            //game should restart here
-            playerOneRecLocX = 200;
-            playerOneRecLocY = 390; //start point of player 1
-            playerOneDx = 1;
-            playerOneDy = 0;//start direction of player one
-
-            playerTwoRecLocX = 600;
-            playerTwoRecLocY = 390; //start point of player 2
-            playerTwoDx = -1;
-            playerTwoDy = 0; //start direction of player two
-
-            playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY); //two for the front hit box, prevents weird situations
-
-            //player 2 rectangle
-            playerTwoRect = new Rectangle(playerTwoRecLocX, playerTwoRecLocY, sizeX, sizeY);
-
-            //current line streaming from player one
-            playerOneCurrRectLine = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), sizeX, playerOneRect.getHeight());
-
-            //current line streaming from player two
-            playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), sizeX, playerTwoRect.getHeight());
-
-            playerOneRect.setFill(p1);
-            playerTwoRect.setFill(p2);
-            playerOneCurrRectLine.setFill(p1);
-            playerTwoCurrRectLine.setFill(p2);
-
-
-
-            animation.play(); //start the game again?
-            //I feel like I'm missing some of the variables to reset.
-
-        });
+        printResultsOnScreen = true;
         return result;
     }
 
-    public void lineReset(){
-        if (playerOneRectPath.size() != 0) {
-            playerOneRectPath.remove(playerOneRectPath.size() - 1);
-        }
-        if (playerTwoRectPath.size() != 0){
-            playerTwoRectPath.remove(playerTwoRectPath.size() - 1);
-        }
-        if (playerTwoRectPath.size() == 0 && playerOneRectPath.size() == 0){ //when both lines are empty
-            //pause animation
-            resetLine.stop();
-        }
+    private int count = 3; //this has to be static since countdown is being reused as an animation
+    public void countDown(){
+        StackPane countdown = new StackPane();
+        Rectangle countR = new Rectangle(60, 60, Color.RED);
+        Text countP = new Text(count + "");
+
+        countP.setFont(popFont);
+        countP.setFill(Color.WHITE);
+        System.out.println("print");
+        countdown.getChildren().addAll(countR, countP);
+        countdown.setLayoutX(370);
+        countdown.setLayoutY(370);
+        getChildren().set(getChildren().size() - 1, countdown);
+        count--;
     }
+    public void resetGame() { //resets the game with an animation and countdown. Only activate when the game keeps going on
+        //on space bar press and game is not done, result would be removed
+        while (getChildren().get(getChildren().size() - 1) != scoreDisplay){ //removes popup and all the lines
+            System.out.println("boop");
+            getChildren().remove(getChildren().size() - 1);
+        }
+        printResultsOnScreen = false;
+        //game should restart here
+        playerOneRecLocX = 200;
+        playerOneRecLocY = 390; //start point of player 1
+        playerOneDx = 1;
+        playerOneDy = 0;//start direction of player one
+        playerTwoRecLocX = 600;
+        playerTwoRecLocY = 390; //start point of player 2
+        playerTwoDx = -1;
+        playerTwoDy = 0; //start direction of player two
+        playerTwoRectPath.clear();
+        playerOneRectPath.clear();
+        playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY); //two for the front hit box, prevents weird situations
+        //player 2 rectangle
+        playerTwoRect = new Rectangle(playerTwoRecLocX, playerTwoRecLocY, sizeX, sizeY);
+        //current line streaming from player one
+        playerOneCurrRectLine = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), sizeX, playerOneRect.getHeight());
+        //current line streaming from player two
+        playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), sizeX, playerTwoRect.getHeight());
+
+        playerOneRect.setFill(p1);
+        playerTwoRect.setFill(p2);
+        playerOneCurrRectLine.setFill(p1);
+        playerTwoCurrRectLine.setFill(p2);
+        playerOneRectPath.add(playerOneCurrRectLine);
+        playerTwoRectPath.add(playerTwoCurrRectLine);
+        getChildren().addAll(playerOneRect, playerTwoRect, playerTwoCurrRectLine, playerOneCurrRectLine);
+
+
+        Timeline countdown = new Timeline(new KeyFrame(Duration.millis(1000), e -> countDown()));
+
+        countdown.setCycleCount(3);
+        countdown.setOnFinished(e -> {
+            getChildren().remove(getChildren().size() - 1); //remove the countdown
+            count = 3; //gets the countdown ready for another countdown
+            animation.play();
+        });
+        Text temp = new Text("");
+        getChildren().add(temp);
+        countdown.play();
+    }
+    //public void lineReset(){ //erases the line in a cool rewind way
+//        if (getChildren().get(getChildren().size() - 1) != scoreDisplay) {
+//            getChildren().remove(getChildren().size() - 1);
+//        }
+//        else {
+//            playerTwoRectPath.clear();
+//            playerOneRectPath.clear();
+//            resetLine.stop();
+//            System.out.println(getChildren());
+//        }
+//        if (p1RectSize == -1){
+//            p1RectSize = playerOneRectPath.size();
+//            p2RectSize = playerOneRectPath.size();
+//        }
+//        if (p1RectSize != 0) {
+//            getChildren().remove(playerOneRectPath.get(p1RectSize - 1));
+//            p1RectSize--;
+//        }
+//        if (p2RectSize != 0) {
+//            getChildren().remove(playerTwoRectPath.get(p2RectSize - 1));
+//            p2RectSize--;
+//        }
+//        if (p2RectSize == 0 && p1RectSize == 0) {
+//            getChildren().remove(p);
+//            System.out.println(getChildren());
+//            p1RectSize = -1;
+//            p2RectSize = -1;
+//        }
+    //}
 
 }

@@ -389,12 +389,14 @@ public class Main extends Application {
         //Slightly long but if one color is chosen others will revert back to red.
         //This will do it for every option of the amount of rounds the player wants to play         //side note
         //It also sets the static variable gamerouds to the amount selected.                        //this could be done by having an arrayList with each rectangle to reduce redundancy, but this works too :)
+        start.setVisible(false);
         option1S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("GREEN"));
             option2.setFill(Paint.valueOf("RED"));
             option3.setFill(Paint.valueOf("RED"));
             option4.setFill(Paint.valueOf("RED"));
             gamerounds=1;
+            start.setVisible(true);
         });
         option3S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("RED"));
@@ -402,6 +404,7 @@ public class Main extends Application {
             option3.setFill(Paint.valueOf("RED"));
             option4.setFill(Paint.valueOf("RED"));
             gamerounds=3;
+            start.setVisible(true);
         });
         option5S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("RED"));
@@ -409,6 +412,7 @@ public class Main extends Application {
             option3.setFill(Paint.valueOf("GREEN"));
             option4.setFill(Paint.valueOf("RED"));
             gamerounds=5;
+            start.setVisible(true);
         });
         option7S.setOnMouseClicked(e -> {
             option1.setFill(Paint.valueOf("RED"));
@@ -416,6 +420,7 @@ public class Main extends Application {
             option3.setFill(Paint.valueOf("RED"));
             option4.setFill(Paint.valueOf("GREEN"));
             gamerounds=7;
+            start.setVisible(true);
         });
 
 
@@ -495,10 +500,6 @@ public class Main extends Application {
         winner.setFont(subTitle);
         winner.setFill(Paint.valueOf("WHITE"));
         display.getChildren().add(winner);
-        //for demo purposes, will make this smarter in the future
-        p1S = 2;
-        p2S = 3;
-        //end
         HBox score = scoreDisplay();
         display.getChildren().add(score);
 
@@ -528,7 +529,7 @@ public class Main extends Application {
         op2S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when no is clicked
             @Override
             public void handle(MouseEvent event) {//go to main menu
-                stage.setScene(mainMenu());
+                stage.setScene(credits());
             }
         });
 
@@ -573,7 +574,7 @@ public class Main extends Application {
         //(the group was blocking this)
 
         Group root = new Group();//contains tron pane
-        TronPane tronPane = new TronPane(popFont,p1N,p2N,p1,p2);//main game pane class
+        TronPane tronPane = new TronPane(popFont,p1N,p2N,p1,p2, gamerounds);//main game pane class
         root.getChildren().add(tronPane);
         Scene display = new Scene(root, 800, 800, Paint.valueOf("BLACK")); //scene needs to be built before adding keyinputs
         display.setOnKeyReleased(e -> { //lambda, oooooof. This does the same thing as new EventHandler(KeyEvent e) //attached directly to the scene
@@ -588,8 +589,18 @@ public class Main extends Application {
                 tronPane.setDirectionPlayerTwo("r");
             }
             else if (e.getCode() == KeyCode.SPACE){
-
-
+                if (tronPane.isPrintResultsOnScreen()){
+                    if (tronPane.isGameOver()) {
+                        //needs to get the scores to display them in the results screen
+                        root.getChildren().remove(tronPane); //to save some memory, not sure if this is needed or not.
+                        p1S = tronPane.getP1S();
+                        p2S = tronPane.getP2S();
+                        stage.setScene(results());
+                    }
+                    else
+                        tronPane.resetGame(); //count down and resets game
+                }
+                //else, ignore. no reason for space bar you silly goof
             }
         });
         return display;
