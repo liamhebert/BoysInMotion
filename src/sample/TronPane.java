@@ -1,27 +1,30 @@
 package sample;
 
+//animation
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.util.Duration;
 
+//event handlers
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
+//layout
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
 import javafx.scene.layout.StackPane;
 
+//colors
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+//shapes and fonts
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.util.Duration;
-import org.w3c.dom.css.Rect;
 
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class TronPane extends Pane{
@@ -48,28 +51,32 @@ public class TronPane extends Pane{
     //current line streaming from player two
     private Rectangle playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), sizeX, playerTwoRect.getHeight());
 
+    private Rectangle topArena, leftArena, bottomArena, rightArena;
+    private HBox scoreDisplay;
 
     //this is our "path" of rectangles, in the form of an arraylist
     private ArrayList<Rectangle> playerOneRectPath = new ArrayList<>();
 
     //path arraylist for player two
     private ArrayList<Rectangle> playerTwoRectPath = new ArrayList<>();
-    private Paint p1;
-    private Paint p2;
 
+    private Font popFont;
     private Timeline animation;
-    private Timeline resetLine;
+
+    //keeping track of scores
     private int p1S = 0;
     private int p2S = 0;
-    private Font popFont;
+
+    //custom variables
+    private Paint p1;
+    private Paint p2;
     private String p1N;
     private String p2N;
-
     private int gameRounds;
-    private boolean printResultsOnScreen = false;
-    private Rectangle topArena, leftArena, bottomArena, rightArena;
 
-    private HBox scoreDisplay;
+    private boolean printResultsOnScreen = false; //used for methods
+
+
     //constructor sets up animation and creates rectangle
     public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2, int gameRounds){
         this.p1N = p1N;
@@ -283,6 +290,7 @@ public class TronPane extends Pane{
                     public void handle(ActionEvent event) {
                         getChildren().add(printResults(2));
                         updateScoreDisplay();
+                        flicks = 0;
                     }
                 });
             }
@@ -293,6 +301,7 @@ public class TronPane extends Pane{
                     public void handle(ActionEvent event) {
                         getChildren().add(printResults(1));
                         updateScoreDisplay();
+                        flicks = 0;
                     }
                 });
             }
@@ -303,14 +312,15 @@ public class TronPane extends Pane{
                     public void handle(ActionEvent event) {
                         getChildren().add(printResults(3));
                         updateScoreDisplay();
+                        flicks = 0;
                     }
                 });
             }
             explosion.setCycleCount(8);
             explosion.play();
         }
-
     }
+
     private int flicks;
     private void crash(int player){
         double startX;
@@ -329,7 +339,7 @@ public class TronPane extends Pane{
         }
         Group root;
         if (flicks % 2 == 0) {
-            double distance = flicks * (35/2);
+            double distance = flicks * (17);
             /* layout
             1 2 3
             4   5
@@ -369,12 +379,14 @@ public class TronPane extends Pane{
         }
         else
             root = new Group(); //nothing
-        if (flicks == 0) {
-            getChildren().add(root);
+        if (flicks == 8) {
+            getChildren().remove(getChildren().size() - 1);
         }
-        else
+        else {
             getChildren().set(getChildren().size() - 1, root);
-        flicks++;
+            flicks++;
+        }
+        System.out.println("Boom: " + flicks);
     }
 
     public void changeDirectionPlayerOne(){
@@ -407,6 +419,7 @@ public class TronPane extends Pane{
         Text scoreP2 = new Text(p2S + "");
         scoreP2.setFill(p2);
         scoreP2.setFont(popFont);
+        //replaces score display
         scoreDisplay.getChildren().set(0,scoreP1);
         scoreDisplay.getChildren().set(2,scoreP2);
     }
@@ -607,7 +620,7 @@ public class TronPane extends Pane{
         //on space bar press and game is not done, result would be removed
         while (getChildren().get(getChildren().size() - 1) != scoreDisplay){ //removes popup and all the lines
             System.out.println("boop");
-            getChildren().remove(getChildren().size() - 1);
+            getChildren().remove(getChildren().size() - 1); //this might be bugged
         }
         printResultsOnScreen = false;
         //game should restart here
@@ -640,7 +653,7 @@ public class TronPane extends Pane{
 
         Timeline countdown = new Timeline(new KeyFrame(Duration.millis(1000), e -> countDown()));
 
-        countdown.setCycleCount(3);
+        countdown.setCycleCount(4);
         countdown.setOnFinished(e -> {
             getChildren().remove(getChildren().size() - 1); //remove the countdown
             count = 3; //gets the countdown ready for another countdown
@@ -650,34 +663,4 @@ public class TronPane extends Pane{
         getChildren().add(temp);
         countdown.play();
     }
-    //public void lineReset(){ //erases the line in a cool rewind way
-//        if (getChildren().get(getChildren().size() - 1) != scoreDisplay) {
-//            getChildren().remove(getChildren().size() - 1);
-//        }
-//        else {
-//            playerTwoRectPath.clear();
-//            playerOneRectPath.clear();
-//            resetLine.stop();
-//            System.out.println(getChildren());
-//        }
-//        if (p1RectSize == -1){
-//            p1RectSize = playerOneRectPath.size();
-//            p2RectSize = playerOneRectPath.size();
-//        }
-//        if (p1RectSize != 0) {
-//            getChildren().remove(playerOneRectPath.get(p1RectSize - 1));
-//            p1RectSize--;
-//        }
-//        if (p2RectSize != 0) {
-//            getChildren().remove(playerTwoRectPath.get(p2RectSize - 1));
-//            p2RectSize--;
-//        }
-//        if (p2RectSize == 0 && p1RectSize == 0) {
-//            getChildren().remove(p);
-//            System.out.println(getChildren());
-//            p1RectSize = -1;
-//            p2RectSize = -1;
-//        }
-    //}
-
 }
