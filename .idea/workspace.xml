@@ -6,6 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3af5df51-66f8-4217-8f5f-48948eefb846" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BoysInMotion/sample/TronPane.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/TronPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/TronPane.java" afterDir="false" />
     </list>
@@ -18,12 +28,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="673" selection-start-line="673" selection-end-line="673" />
+            <state relative-caret-position="10143">
+              <caret line="530" selection-start-line="530" selection-end-line="530" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4508#4509#0" expanded="true" />
@@ -32,14 +42,8 @@
                 <element signature="e#5255#5256#0" expanded="true" />
                 <element signature="e#5832#5833#0" expanded="true" />
                 <element signature="e#5885#5886#0" expanded="true" />
-                <element signature="e#17881#17882#0" expanded="true" />
-                <element signature="e#17935#17936#0" expanded="true" />
-                <element signature="e#21128#21129#0" expanded="true" />
-                <element signature="e#21215#21216#0" expanded="true" />
-                <element signature="e#21384#21385#0" expanded="true" />
-                <element signature="e#21458#21459#0" expanded="true" />
-                <element signature="e#25258#25259#0" expanded="true" />
-                <element signature="e#25286#25287#0" expanded="true" />
+                <element signature="e#25430#25431#0" expanded="true" />
+                <element signature="e#25458#25459#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,8 +52,8 @@
       <file leaf-file-name="TronPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-184">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="253">
+              <caret line="158" column="60" selection-start-line="158" selection-start-column="60" selection-end-line="158" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -97,9 +101,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -134,6 +135,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -236,11 +240,12 @@
       <workItem from="1522965693563" duration="24000" />
       <workItem from="1523034836357" duration="655000" />
       <workItem from="1523290281876" duration="17518000" />
+      <workItem from="1523416128365" duration="4650000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37516000" />
+    <option name="totallyTimeSpent" value="42166000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -255,7 +260,7 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.15213946" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.15097402" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="3" />
@@ -277,34 +282,34 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.140625" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32907802" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13323572" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.18344156" />
-      <window_info id="Learn" order="6" />
-      <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info id="Capture Tool" order="7" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32907802" />
-      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info id="Learn" order="6" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +326,34 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15479">
+          <caret line="673" selection-start-line="673" selection-end-line="673" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4508#4509#0" expanded="true" />
+            <element signature="e#4595#4596#0" expanded="true" />
+            <element signature="e#5177#5178#0" expanded="true" />
+            <element signature="e#5255#5256#0" expanded="true" />
+            <element signature="e#5832#5833#0" expanded="true" />
+            <element signature="e#5885#5886#0" expanded="true" />
+            <element signature="e#25430#25431#0" expanded="true" />
+            <element signature="e#25458#25459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1196">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
           <folding>
@@ -331,14 +364,8 @@
             <element signature="e#5255#5256#0" expanded="true" />
             <element signature="e#5832#5833#0" expanded="true" />
             <element signature="e#5885#5886#0" expanded="true" />
-            <element signature="e#17881#17882#0" expanded="true" />
-            <element signature="e#17935#17936#0" expanded="true" />
-            <element signature="e#21128#21129#0" expanded="true" />
-            <element signature="e#21215#21216#0" expanded="true" />
-            <element signature="e#21384#21385#0" expanded="true" />
-            <element signature="e#21458#21459#0" expanded="true" />
-            <element signature="e#25258#25259#0" expanded="true" />
-            <element signature="e#25286#25287#0" expanded="true" />
+            <element signature="e#25430#25431#0" expanded="true" />
+            <element signature="e#25458#25459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -425,8 +452,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="673" selection-start-line="673" selection-end-line="673" />
+        <state relative-caret-position="10143">
+          <caret line="530" selection-start-line="530" selection-end-line="530" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4508#4509#0" expanded="true" />
@@ -435,22 +462,16 @@
             <element signature="e#5255#5256#0" expanded="true" />
             <element signature="e#5832#5833#0" expanded="true" />
             <element signature="e#5885#5886#0" expanded="true" />
-            <element signature="e#17881#17882#0" expanded="true" />
-            <element signature="e#17935#17936#0" expanded="true" />
-            <element signature="e#21128#21129#0" expanded="true" />
-            <element signature="e#21215#21216#0" expanded="true" />
-            <element signature="e#21384#21385#0" expanded="true" />
-            <element signature="e#21458#21459#0" expanded="true" />
-            <element signature="e#25258#25259#0" expanded="true" />
-            <element signature="e#25286#25287#0" expanded="true" />
+            <element signature="e#25430#25431#0" expanded="true" />
+            <element signature="e#25458#25459#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/TronPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-184">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="253">
+          <caret line="158" column="60" selection-start-line="158" selection-start-column="60" selection-end-line="158" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

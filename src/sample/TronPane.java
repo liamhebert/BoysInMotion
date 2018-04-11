@@ -60,40 +60,42 @@ public class TronPane extends Pane{
     //path arraylist for player two
     private ArrayList<Rectangle> playerTwoRectPath = new ArrayList<>();
 
-    private Font popFont;
-    private Timeline animation;
+
 
     //keeping track of scores
     private int p1S = 0;
     private int p2S = 0;
 
     //custom variables
-    private Paint p1;
+    private Paint p1; //color of lines
     private Paint p2;
-    private String p1N;
+    private String p1N; //names
     private String p2N;
-    private int gameRounds;
+    private int gameRounds; //max rounds
 
-    private boolean printResultsOnScreen = false; //used for methods
-
+    //misc
+    private Font popFont;
+    private Timeline animation;
+    private boolean popUpOnScreen = false; //used for methods
+    private Timeline countdown = new Timeline(new KeyFrame(Duration.millis(1000), e -> countDown()));
 
     //constructor sets up animation and creates rectangle
     public TronPane(Font popFont, String p1N, String p2N, Paint p1, Paint p2, int gameRounds){
+        //assigning the custom variables
         this.p1N = p1N;
         this.p2N = p2N;
         this.p1 = p1;
         this.p2 = p2;
-        this.popFont = popFont;
         this.gameRounds = gameRounds;
-        Text name1 = new Text(p1N);
 
+        this.popFont = popFont;
+
+        Text name1 = new Text(p1N);
         name1.setFont(popFont);
         name1.setFill(p1);
         name1.setY(40);
         name1.setX(150);
         name1.setTextAlignment(TextAlignment.CENTER);
-
-
 
         Text name2 = new Text(p2N);
         name2.setFont(popFont);
@@ -102,11 +104,11 @@ public class TronPane extends Pane{
         name2.setX(570);
         name2.setTextAlignment(TextAlignment.CENTER);
 
-        scoreDisplay = scoreDisplay();
+        scoreDisplay = scoreDisplay(); //builds the score
         scoreDisplay.setLayoutX(350);
         scoreDisplay.setLayoutY(15);
 
-        //new arena code, as rectangles
+        //building the arena
         topArena = new Rectangle(5, 60, 800, 8);
         topArena.setFill(Color.WHITE);
         bottomArena = new Rectangle(5, 795, 800, 8);
@@ -116,7 +118,9 @@ public class TronPane extends Pane{
         leftArena = new Rectangle(5, 60, 8, 800);
         leftArena.setFill(Color.WHITE);
 
+        //adding elements
         getChildren().addAll(topArena, bottomArena, leftArena, rightArena, name1,name2, scoreDisplay);
+
         //sets up player one and their line
         playerOneRect.setFill(p1);
         playerTwoRect.setFill(p2);
@@ -134,11 +138,26 @@ public class TronPane extends Pane{
         //adds the initial lines to the path arraylists
         playerOneRectPath.add(playerOneCurrRectLine);
         playerTwoRectPath.add(playerTwoCurrRectLine);
+
+        //moving the line
         animation = new Timeline(
                 new KeyFrame(Duration.millis(5), e -> movePlayer())
         );
         animation.setCycleCount(Timeline.INDEFINITE);
-        animation.play();
+
+        //countdown animation
+        countdown.setCycleCount(4);
+        countdown.setOnFinished(e -> {
+            getChildren().remove(getChildren().size() - 1); //remove the countdown
+            count = 3; //gets the countdown ready for another countdown
+            play();
+            popUpOnScreen = false;
+        });
+        Text temp = new Text(""); //replaceable text for the countdown
+        getChildren().add(temp);
+
+        popUpOnScreen = true; //ensures no unwanted controls
+        countdown.play(); //starts the game with a countdown
     }
 
     public void play(){
@@ -149,31 +168,32 @@ public class TronPane extends Pane{
         animation.pause();
     }
     public boolean isGameOver() {return (p1S + p2S == gameRounds);}
-    public boolean isPrintResultsOnScreen() {return printResultsOnScreen;}
+    public boolean isPopUpOnScreen() {return popUpOnScreen;}
     public int getP1S() {return p1S;}
     public int getP2S() {return p2S;}
-    public void addAPixelToPath(){
 
-        if (playerOneDx == 1){
+    private void addAPixelToPath(){
+        if (playerOneDx == 1)
             playerOneCurrRectLine.setWidth(playerOneCurrRectLine.getWidth() + 1);
-        }else if (playerOneDx == -1){
+        else if (playerOneDx == -1){
             playerOneCurrRectLine.setWidth(playerOneCurrRectLine.getWidth() + 1);
             playerOneCurrRectLine.setX(playerOneCurrRectLine.getX() - 1);
-        }else if (playerOneDy == 1){
+        }
+        else if (playerOneDy == 1)
             playerOneCurrRectLine.setHeight(playerOneCurrRectLine.getHeight() + 1);
-        }else if (playerOneDy == -1) {
+        else if (playerOneDy == -1) {
             playerOneCurrRectLine.setHeight(playerOneCurrRectLine.getHeight() + 1);
             playerOneCurrRectLine.setY(playerOneCurrRectLine.getY() - 1);
         }
 
-        if (playerTwoDx == 1){
+        if (playerTwoDx == 1)
             playerTwoCurrRectLine.setWidth(playerTwoCurrRectLine.getWidth() + 1);
-        }else if (playerTwoDx == -1){
+        else if (playerTwoDx == -1){
             playerTwoCurrRectLine.setWidth(playerTwoCurrRectLine.getWidth() + 1);
             playerTwoCurrRectLine.setX(playerTwoCurrRectLine.getX() - 1);
-        }else if (playerTwoDy == 1){
+        }else if (playerTwoDy == 1)
             playerTwoCurrRectLine.setHeight(playerTwoCurrRectLine.getHeight() + 1);
-        }else if (playerTwoDy == -1) {
+        else if (playerTwoDy == -1) {
             playerTwoCurrRectLine.setHeight(playerTwoCurrRectLine.getHeight() + 1);
             playerTwoCurrRectLine.setY(playerTwoCurrRectLine.getY() - 1);
         }
@@ -182,8 +202,9 @@ public class TronPane extends Pane{
 
     public void collisionCheck(){
         boolean end = false;
-        int boomP = 0;
+        int boomP = 0; //is set to which player crashed. 3 means tie
         Timeline explosion;
+
         //did the players themselves hit eachother head on?
         if (playerOneRect.intersects(playerTwoRect.getBoundsInLocal())){
             pause();
@@ -232,6 +253,7 @@ public class TronPane extends Pane{
             }
         }
 
+        //checking the area walls
         if (playerOneRect.intersects(topArena.getBoundsInLocal())){
             pause();
             System.out.println("Player one hit the arena wall");
@@ -282,49 +304,51 @@ public class TronPane extends Pane{
             end = true;
         }
 
-        if (end) {
-            if (boomP == 1){
+        if (end) { //collision is detected
+            if (boomP == 1){ //player one crashed
                 explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(1)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        getChildren().add(printResults(2));
-                        updateScoreDisplay();
-                        flicks = 0;
+                        getChildren().add(printResults(2)); //displays score popup with player two as winner
+                        updateScoreDisplay(); //refresh popup
+                        ticks = 0; //resets explosion animation
                     }
                 });
             }
-            else if (boomP == 2){
+            else if (boomP == 2){ //player two crashed
                 explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(2)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        getChildren().add(printResults(1));
+                        getChildren().add(printResults(1)); //player one wins
                         updateScoreDisplay();
-                        flicks = 0;
+                        ticks = 0;
                     }
                 });
             }
-            else {
+            else { //tied / head-on
                 explosion = new Timeline(new KeyFrame(Duration.millis(50), e -> crash(3)));
                 explosion.setOnFinished(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        getChildren().add(printResults(3));
+                        getChildren().add(printResults(3)); //nobody wins
                         updateScoreDisplay();
-                        flicks = 0;
+                        ticks = 0;
                     }
                 });
             }
             explosion.setCycleCount(8);
+            getChildren().add(new Group()); //node to replace in the explosion animation
             explosion.play();
         }
     }
 
-    private int flicks;
-    private void crash(int player){
+    private int ticks; //contains how big the explosion is
+    private void crash(int player){ //explosion animation
         double startX;
         double startY;
+        //ifs to decide where the explosion originates
         if (player == 1){
             startX = playerOneRecLocX;
             startY = playerOneRecLocY;
@@ -333,13 +357,15 @@ public class TronPane extends Pane{
             startX = playerTwoRecLocX;
             startY = playerTwoRecLocY;
         }
-        else {
+        else { //during a tie, in the middle of both lines
             startX = (playerOneRecLocX + playerTwoRecLocX) / 2;
             startY = (playerOneRecLocY + playerTwoRecLocY) / 2;
         }
-        Group root;
-        if (flicks % 2 == 0) {
-            double distance = flicks * (17);
+
+        Group root; //contains the explosion rectangles
+        if (ticks % 2 == 0) { //every even tick, display an explosion
+            double distance = ticks * (17); //distances out the rectangles with every tick
+
             /* layout
             1 2 3
             4   5
@@ -355,7 +381,7 @@ public class TronPane extends Pane{
             Rectangle rect8 = new Rectangle(startX + distance,startY - distance,35,35);
 
             //alternating colors
-            if (flicks % 4 == 0){ //every second burst
+            if (ticks % 4 == 0){ //every second burst, 4th and 8th tick
                 rect1.setFill(Paint.valueOf("YELLOW"));
                 rect2.setFill(Paint.valueOf("YELLOW"));
                 rect3.setFill(Paint.valueOf("YELLOW"));
@@ -365,7 +391,7 @@ public class TronPane extends Pane{
                 rect7.setFill(Paint.valueOf("YELLOW"));
                 rect8.setFill(Paint.valueOf("YELLOW"));
             }
-            else {
+            else {//2nd and 6th tick
                 rect1.setFill(Paint.valueOf("WHITE"));
                 rect2.setFill(Paint.valueOf("WHITE"));
                 rect3.setFill(Paint.valueOf("WHITE"));
@@ -375,18 +401,17 @@ public class TronPane extends Pane{
                 rect7.setFill(Paint.valueOf("WHITE"));
                 rect8.setFill(Paint.valueOf("WHITE"));
             }
-            root = new Group(rect1,rect2,rect3,rect4,rect5,rect6,rect7,rect8);
+            root = new Group(rect1,rect2,rect3,rect4,rect5,rect6,rect7,rect8); //add all the explosion
         }
         else
             root = new Group(); //nothing
-        if (flicks == 8) {
+        if (ticks == 8) { //at the end of the animation, remove the explosion
             getChildren().remove(getChildren().size() - 1);
         }
-        else {
+        else { //add animation and increase tick
             getChildren().set(getChildren().size() - 1, root);
-            flicks++;
+            ticks++;
         }
-        System.out.println("Boom: " + flicks);
     }
 
     public void changeDirectionPlayerOne(){
@@ -398,7 +423,7 @@ public class TronPane extends Pane{
         refreshPathAsChildPlayerOne();
     }
 
-    public HBox scoreDisplay(){
+    public HBox scoreDisplay(){ //displays the score
         Text scoreP1 = new Text(p1S + "");
         scoreP1.setFill(p1);
         scoreP1.setFont(popFont);
@@ -412,20 +437,20 @@ public class TronPane extends Pane{
         display.getChildren().addAll(scoreP1,dash,scoreP2);
         return display;
     }
-    public void updateScoreDisplay(){
+
+    public void updateScoreDisplay(){ //refreshes the score display with the new scores
         Text scoreP1 = new Text(p1S + "");
         scoreP1.setFill(p1);
         scoreP1.setFont(popFont);
         Text scoreP2 = new Text(p2S + "");
         scoreP2.setFill(p2);
         scoreP2.setFont(popFont);
-        //replaces score display
+        //replaces score display numbers
         scoreDisplay.getChildren().set(0,scoreP1);
         scoreDisplay.getChildren().set(2,scoreP2);
     }
 
     public void changeDirectionPlayerTwo(){
-
         Rectangle newRec = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), playerTwoRect.getWidth(), playerTwoRect.getHeight());
         newRec.setFill(p2);
         playerTwoRectPath.add(newRec);
@@ -578,38 +603,41 @@ public class TronPane extends Pane{
         System.out.println(playerOneRectPath.size() + playerTwoRectPath.size());
     }
 
-    public StackPane printResults(int winner) { //after this is called, winner limit would need to be checked
+    public StackPane printResults(int winner) { //pop up for the score and updates score ints
         Text pWinner;
         if (winner == 1) {
             pWinner = new Text(p1N + " Wins!");
             p1S++;
-        } else if (winner == 2) {
+        }
+        else if (winner == 2) {
             pWinner = new Text(p2N + " Wins!");
             p2S++;
-        } else
+        }
+        else
             pWinner = new Text("Tie. :(");
         pWinner.setFont(popFont);
         pWinner.setFill(Paint.valueOf("WHITE"));
-        //pWinner.setX(350);
-        //pWinner.setY(400);
-        Rectangle background = new Rectangle(300, 70); //could be better, for different name sizes
+
+        Rectangle background = new Rectangle(300, 70);
         background.setFill(Paint.valueOf("RED"));
         StackPane result = new StackPane(background, pWinner);
         result.setLayoutX(250);
         result.setLayoutY(400);
-        printResultsOnScreen = true;
+
+        popUpOnScreen = true; //allows spacebar to work
         return result;
     }
 
     private int count = 3; //this has to be static since countdown is being reused as an animation
-    public void countDown(){
+
+    public void countDown(){ //ticks down through a popup
+        popUpOnScreen = true;
         StackPane countdown = new StackPane();
         Rectangle countR = new Rectangle(60, 60, Color.RED);
         Text countP = new Text(count + "");
 
         countP.setFont(popFont);
         countP.setFill(Color.WHITE);
-        System.out.println("print");
         countdown.getChildren().addAll(countR, countP);
         countdown.setLayoutX(370);
         countdown.setLayoutY(370);
@@ -622,8 +650,8 @@ public class TronPane extends Pane{
             System.out.println("boop");
             getChildren().remove(getChildren().size() - 1); //this might be bugged
         }
-        printResultsOnScreen = false;
-        //game should restart here
+        //rebuilding all the starting rectangles and directions
+        //initial variables
         playerOneRecLocX = 200;
         playerOneRecLocY = 390; //start point of player 1
         playerOneDx = 1;
@@ -632,9 +660,11 @@ public class TronPane extends Pane{
         playerTwoRecLocY = 390; //start point of player 2
         playerTwoDx = -1;
         playerTwoDy = 0; //start direction of player two
+
         playerTwoRectPath.clear();
         playerOneRectPath.clear();
-        playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY); //two for the front hit box, prevents weird situations
+
+        playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
         //player 2 rectangle
         playerTwoRect = new Rectangle(playerTwoRecLocX, playerTwoRecLocY, sizeX, sizeY);
         //current line streaming from player one
@@ -642,24 +672,18 @@ public class TronPane extends Pane{
         //current line streaming from player two
         playerTwoCurrRectLine = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), sizeX, playerTwoRect.getHeight());
 
+        //colors
         playerOneRect.setFill(p1);
         playerTwoRect.setFill(p2);
         playerOneCurrRectLine.setFill(p1);
         playerTwoCurrRectLine.setFill(p2);
+
+        //adding elements
         playerOneRectPath.add(playerOneCurrRectLine);
         playerTwoRectPath.add(playerTwoCurrRectLine);
         getChildren().addAll(playerOneRect, playerTwoRect, playerTwoCurrRectLine, playerOneCurrRectLine);
 
-
-        Timeline countdown = new Timeline(new KeyFrame(Duration.millis(1000), e -> countDown()));
-
-        countdown.setCycleCount(4);
-        countdown.setOnFinished(e -> {
-            getChildren().remove(getChildren().size() - 1); //remove the countdown
-            count = 3; //gets the countdown ready for another countdown
-            animation.play();
-        });
-        Text temp = new Text("");
+        Text temp = new Text(""); //replaceable text for the countdown
         getChildren().add(temp);
         countdown.play();
     }

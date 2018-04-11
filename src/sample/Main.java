@@ -10,6 +10,7 @@ package sample;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.application.Platform;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 //animations
@@ -56,7 +57,7 @@ public class Main extends Application {
             Color.rgb(25,255,40) };
 
     // *customizable aspects*
-    // score
+    //score
     private static int p1S;
     private static int p2S;
     //names
@@ -93,7 +94,6 @@ public class Main extends Application {
     }
     public Scene mainMenu() { //this is where the game should start. Shows the main menu and options
         stage.setTitle("Main Menu");
-
         //title
         Text title = new Text("Tron.");
         title.setFont(titleFont);
@@ -530,14 +530,20 @@ public class Main extends Application {
         root.getChildren().add(display);
 
         Rectangle colorWinner = new Rectangle(0,0,810,280); //little bigger then the bounds since the
-        root.getChildren().add(colorWinner);
+        root.getChildren().add(0,  colorWinner);
+
 
         Color winnerC; //color of the top square
         Color loserC; //color of the buttons
         Text winner = new Text(); //who wins
         winner.setFont(subTitle);
         winner.setFill(Paint.valueOf("WHITE"));
-        display.getChildren().add(winner);
+
+        //when no name is chosen
+//        if (p1N.equals(""))
+//            p1N = "Player 1";
+//        if (p2N.equals(""))
+//            p2N = "Player 2";
 
         //determines which color and name to show
         if (p1S > p2S) {
@@ -551,6 +557,7 @@ public class Main extends Application {
             loserC = p1;
         }
         colorWinner.setFill(winnerC);
+        display.getChildren().add(winner);
 
         HBox score = scoreDisplay(); //displays the scores
         display.getChildren().add(score);
@@ -616,7 +623,7 @@ public class Main extends Application {
         theBoys.setFill(Paint.valueOf("WHITE"));
         theBoys.setFont(popFont);
 
-        Text fontUsed = new Text("Title Font: League Spartan - The League of Moveable Type");
+        Text fontUsed = new Text("Font: League Spartan - The League of Moveable Type");
         fontUsed.setFill(Paint.valueOf("WHITE"));
         fontUsed.setFont(popFont);
 
@@ -634,17 +641,19 @@ public class Main extends Application {
         Scene display = new Scene(root, 800, 800, Paint.valueOf("BLACK")); //scene needs to be built before adding keyinputs
         display.setOnKeyReleased(e -> { //controls the direction of the lines and next round
             //directions
-            if (e.getCode() == KeyCode.A)  //go left p1
-                tronPane.setDirectionPlayerOne("l");
-            else if (e.getCode() == KeyCode.D) //go right p1
-                tronPane.setDirectionPlayerOne("r");
-            else if (e.getCode() == KeyCode.LEFT)//go left p2
-                tronPane.setDirectionPlayerTwo("l");
-            else if (e.getCode() == KeyCode.RIGHT) //go right p2
-                tronPane.setDirectionPlayerTwo("r");
+            if (!tronPane.isPopUpOnScreen()) { //no popups
+                if (e.getCode() == KeyCode.A)  //go left p1
+                    tronPane.setDirectionPlayerOne("l");
+                else if (e.getCode() == KeyCode.D) //go right p1
+                    tronPane.setDirectionPlayerOne("r");
+                else if (e.getCode() == KeyCode.LEFT)//go left p2
+                    tronPane.setDirectionPlayerTwo("l");
+                else if (e.getCode() == KeyCode.RIGHT) //go right p2
+                    tronPane.setDirectionPlayerTwo("r");
+            }
 
             else if (e.getCode() == KeyCode.SPACE){
-                if (tronPane.isPrintResultsOnScreen()){
+                if (tronPane.isPopUpOnScreen()){
                     if (tronPane.isGameOver()) {
                         root.getChildren().remove(tronPane);
                         p1S = tronPane.getP1S(); //gets the score of the game
