@@ -1,4 +1,3 @@
-package sample;
 
 /*
 * CSCI 1101 - Final Project (Tron) - Boys In Motion
@@ -10,7 +9,6 @@ package sample;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.application.Platform;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 //animations

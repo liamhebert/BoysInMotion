@@ -1,5 +1,3 @@
-package sample;
-
 
 /*
  * CSCI 1101 - Final Project (Tron) - Boys In Motion
@@ -220,7 +218,7 @@ public class TronPane extends Pane{
 
     }
 
-    public void collisionCheck(){
+    public void collisionCheck(){ //checks for collisions
         boolean end = false;
         int boomP = 0; //is set to which player crashed. 3 means tie
         Timeline explosion;
@@ -435,7 +433,7 @@ public class TronPane extends Pane{
         }
     }
 
-    //method calls when the player switches direction
+    //method calls when player one switches direction
     public void changeDirectionPlayerOne(){
 
         //new rectangle is made at position of player 1
@@ -475,7 +473,7 @@ public class TronPane extends Pane{
         scoreDisplay.getChildren().set(2,scoreP2);
     }
 
-    //method calls when the player switches direction
+    //method calls when player two switches direction
     public void changeDirectionPlayerTwo(){
 
         //new rectangle is made at position of player 2
@@ -498,6 +496,7 @@ public class TronPane extends Pane{
         getChildren().add(playerTwoCurrRectLine);
     }
 
+    //sets the direction of player one (passed in through keypresses)
     public void setDirectionPlayerOne(String d){
 
         changeDirectionPlayerOne();
@@ -556,6 +555,7 @@ public class TronPane extends Pane{
         }
     }
 
+    //sets the direction of player two (passed in through keypresses)
     public void setDirectionPlayerTwo(String d){
 
         changeDirectionPlayerTwo();
