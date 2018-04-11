@@ -1,5 +1,19 @@
 package sample;
 
+
+/*
+ * CSCI 1101 - Final Project (Tron) - Boys In Motion
+ * This program uses JavaFx to have a customizable Tron game. This game is two player and uses A D and Left Right for controls
+ * The features of this program can be found in the report.
+ *
+ * This class specifically extends the JavaFX pane class, to make a pane with our game elements.
+ * All game logic, collisions, animations and displays are handled in this class
+ * Key presses will be passed into the TronPane object in the "Main" class, and the responses are handled in this class
+ */
+
+//imports
+
+
 //animation
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -160,19 +174,25 @@ public class TronPane extends Pane{
         countdown.play(); //starts the game with a countdown
     }
 
+    //methods play/pause the animation
     public void play(){
         animation.play();
     }
-
     public void pause(){
         animation.pause();
     }
+
+    //accessors
     public boolean isGameOver() {return (p1S + p2S == gameRounds);}
     public boolean isPopUpOnScreen() {return popUpOnScreen;}
     public int getP1S() {return p1S;}
     public int getP2S() {return p2S;}
 
+
+    //method adds a "pixel" in the form of a 6x6 rectangle to the path
     private void addAPixelToPath(){
+
+        //if player 1 is going right or left, add width to the current rectanlge line and move it accordingly (i.e. move it if they're going left)
         if (playerOneDx == 1)
             playerOneCurrRectLine.setWidth(playerOneCurrRectLine.getWidth() + 1);
         else if (playerOneDx == -1){
@@ -279,6 +299,7 @@ public class TronPane extends Pane{
             end = true;
         }
 
+        //checking area wall collisions for player 2
         if (playerTwoRect.intersects(topArena.getBoundsInLocal())){
             pause();
             System.out.println("Player two hit the arena wall");
@@ -414,11 +435,15 @@ public class TronPane extends Pane{
         }
     }
 
+    //method calls when the player switches direction
     public void changeDirectionPlayerOne(){
 
+        //new rectangle is made at position of player 1
         Rectangle newRec = new Rectangle(playerOneRect.getX(), playerOneRect.getY(), playerOneRect.getWidth(), playerOneRect.getHeight());
         newRec.setFill(p1);
         playerOneRectPath.add(newRec);
+
+        //sets the current rectangle to the new rectangle and refreshes it to be added to the scene
         playerOneCurrRectLine = newRec;
         refreshPathAsChildPlayerOne();
     }
@@ -450,18 +475,25 @@ public class TronPane extends Pane{
         scoreDisplay.getChildren().set(2,scoreP2);
     }
 
+    //method calls when the player switches direction
     public void changeDirectionPlayerTwo(){
+
+        //new rectangle is made at position of player 2
         Rectangle newRec = new Rectangle(playerTwoRect.getX(), playerTwoRect.getY(), playerTwoRect.getWidth(), playerTwoRect.getHeight());
         newRec.setFill(p2);
         playerTwoRectPath.add(newRec);
+
+        //sets the current rectangle to the new rectangle and refreshes it to be added to the scene
         playerTwoCurrRectLine = newRec;
         refreshPathAsChildPlayerTwo();
     }
 
+    //adds current rectangle variable to the scene
     public void refreshPathAsChildPlayerOne() {
         getChildren().add(playerOneCurrRectLine);
     }
 
+    //adds current rectangle variable to the scene (player 2)
     public void refreshPathAsChildPlayerTwo() {
         getChildren().add(playerTwoCurrRectLine);
     }
@@ -663,6 +695,7 @@ public class TronPane extends Pane{
 
         playerTwoRectPath.clear();
         playerOneRectPath.clear();
+        //clears the arraylists of rectangle paths
 
         playerOneRect = new Rectangle(playerOneRecLocX, playerOneRecLocY, sizeX, sizeY);
         //player 2 rectangle
