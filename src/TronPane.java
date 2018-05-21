@@ -153,7 +153,7 @@ public class TronPane extends Pane{
 
         //moving the line
         animation = new Timeline(
-                new KeyFrame(Duration.millis(5), e -> movePlayer())
+                new KeyFrame(Duration.millis(2), e -> movePlayer())
         );
         animation.setCycleCount(Timeline.INDEFINITE);
 

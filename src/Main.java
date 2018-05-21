@@ -7,6 +7,7 @@
 
 //essential javaFx imports
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -18,7 +19,7 @@ import javafx.util.Duration;
 
 //input output and handlers
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.event.EventHandler.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import java.io.FileInputStream;
@@ -88,7 +89,7 @@ public class Main extends Application {
 
         primaryStage.setScene(mainMenu());
         primaryStage.show();
-        //primaryStage.setFullScreen(true); //testing purpose only for lower res screens
+        primaryStage.setFullScreen(true); //testing purpose only for lower res screens
     }
     public Scene mainMenu() { //this is where the game should start. Shows the main menu and options
         stage.setTitle("Main Menu");
@@ -581,8 +582,7 @@ public class Main extends Application {
         StackPane op2S = new StackPane(option2,no);
 
         //click handlers for the buttons
-        op1S.setOnMouseClicked(new EventHandler<MouseEvent>() {//when yes is clicked
-            @Override
+        op1S.setOnMouseClicked(new EventHandler<MouseEvent>() { //when yes is clicked
             public void handle(MouseEvent event) {
                 stage.setScene(customizeBike());//go to customize screen
             }
